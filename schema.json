@@ -456,16 +456,41 @@
                 "name": "color"
               },
               "optional": true
-            },
-            "baseColor": {
-              "type": "objectAttribute",
-              "value": {
-                "type": "inline",
-                "name": "color"
-              },
-              "optional": true
             }
           }
+        },
+        "optional": true
+      },
+      "baseColor": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "#ffffff"
+            },
+            {
+              "type": "string",
+              "value": "##fafafa"
+            },
+            {
+              "type": "string",
+              "value": "#f3f2f1"
+            },
+            {
+              "type": "string",
+              "value": "#000000"
+            },
+            {
+              "type": "string",
+              "value": "#0c0d0d"
+            },
+            {
+              "type": "string",
+              "value": "#0f0f10"
+            }
+          ]
         },
         "optional": true
       },

@@ -90,8 +90,8 @@ export type GeneralConfig = {
   eventColors?: {
     primaryColor?: Color;
     secondaryColor?: Color;
-    baseColor?: Color;
   };
+  baseColor?: "#ffffff" | "##fafafa" | "#f3f2f1" | "#000000" | "#0c0d0d" | "#0f0f10";
   roundingOfComponents?: "square" | "rounded" | "pill";
 };
 
@@ -397,7 +397,7 @@ export type POST_QUERYResult = {
   } | null;
 } | null;
 // Variable: GENERAL_CONFIG_QUERY
-// Query: *[_type == "generalConfig"][0]{  eventName,   logo,  description,  eventColors,  roundingOfComponents}
+// Query: *[_type == "generalConfig"][0]{  eventName,   logo,  description,  eventColors,  roundingOfComponents,  baseColor}
 export type GENERAL_CONFIG_QUERYResult = {
   eventName: string | null;
   logo: {
@@ -415,9 +415,9 @@ export type GENERAL_CONFIG_QUERYResult = {
   eventColors: {
     primaryColor?: Color;
     secondaryColor?: Color;
-    baseColor?: Color;
   } | null;
   roundingOfComponents: "pill" | "rounded" | "square" | null;
+  baseColor: "##fafafa" | "#000000" | "#0c0d0d" | "#0f0f10" | "#f3f2f1" | "#ffffff" | null;
 } | null;
 
 // Query TypeMap
@@ -426,6 +426,6 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage\n}": POST_QUERYResult;
-    "*[_type == \"generalConfig\"][0]{\n  eventName, \n  logo,\n  description,\n  eventColors,\n  roundingOfComponents\n}": GENERAL_CONFIG_QUERYResult;
+    "*[_type == \"generalConfig\"][0]{\n  eventName, \n  logo,\n  description,\n  eventColors,\n  roundingOfComponents,\n  baseColor\n}": GENERAL_CONFIG_QUERYResult;
   }
 }

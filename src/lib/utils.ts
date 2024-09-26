@@ -58,16 +58,17 @@ async function generateTWColors() {
   })
 
   return {
-    colors: generalConfig?.eventColors,
+    eventColors: generalConfig?.eventColors,
+    baseColor: generalConfig?.baseColor,
     radius: generalConfig?.roundingOfComponents,
   }
 }
 
 export const generateStyleObject = async () => {
-  const { colors, radius } = await generateTWColors()
-  const base = hexToHsl(colors?.baseColor?.hex!)
-  const primary = hexToHsl(colors?.primaryColor?.hex!)
-  const secondary = hexToHsl(colors?.secondaryColor?.hex!)
+  const { eventColors, radius, baseColor } = await generateTWColors()
+  const base = hexToHsl(baseColor!)
+  const primary = hexToHsl(eventColors?.primaryColor?.hex!)
+  const secondary = hexToHsl(eventColors?.secondaryColor?.hex!)
   const borderRadius = radius!
 
   const textMap: Record<typeof borderRadius, string> = {

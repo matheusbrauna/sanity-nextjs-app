@@ -1,11 +1,11 @@
-import { DocumentTextIcon } from '@sanity/icons'
-import { defineArrayMember, defineField, defineType } from 'sanity'
+import { CogIcon } from '@sanity/icons'
+import { defineField, defineType } from 'sanity'
 
 export const generalConfig = defineType({
   name: 'generalConfig',
   title: 'Configurações gerais',
   type: 'document',
-  icon: DocumentTextIcon,
+  icon: CogIcon,
   fields: [
     defineField({
       name: 'eventName',
@@ -29,30 +29,28 @@ export const generalConfig = defineType({
       fields: [
         { name: 'primaryColor', type: 'color', title: 'Cor primária' },
         { name: 'secondaryColor', type: 'color', title: 'Cor secundária' },
-        {
-          name: 'baseColor',
-          type: 'color',
-          title: 'Cor base',
-          options: {
-            colorList: [
-              { h: 0, s: 0, l: 100, a: 1 },
-              { h: 0, s: 0, l: 98, a: 1 },
-              { h: 30, s: 8, l: 95, a: 1 },
-              { h: 0, s: 0, l: 0, a: 1 },
-              { h: 180, s: 4, l: 5, a: 1 },
-              { h: 240, s: 3, l: 6, a: 1 },
-              { h: 240, s: 3, l: 6, a: 1 },
-              { h: 240, s: 7, l: 8, a: 1 },
-            ],
-            disableAlpha: true,
-          },
-        },
       ],
     }),
     defineField({
-      name: 'roundingOfComponents',
-      title: 'Arredondamento dos components',
+      name: 'baseColor',
       type: 'string',
+      title: 'Cor base',
+      initialValue: '#ffffff',
+      options: {
+        list: [
+          { title: 'Branco', value: '#ffffff' },
+          { title: 'Cinza (claro)', value: '#fafafa' },
+          { title: 'Acinzentado (claro)', value: '#f3f2f1' },
+          { title: 'Preto', value: '#000000' },
+          { title: 'Cinza (escuro)', value: '#0c0d0d' },
+          { title: 'Acinzentado (escuro)', value: '#0f0f10' },
+        ],
+      },
+    }),
+    defineField({
+      name: 'roundingOfComponents',
+      type: 'string',
+      title: 'Arredondamento dos components',
       initialValue: 'rounded',
       options: {
         list: [
