@@ -6,7 +6,7 @@ export default function HeroSection() {
       <div className="container grid items-center gap-6 px-6 md:px-28 lg:grid-cols-2 lg:gap-10">
         <div className="space-y-4">
           <div className="space-y-6">
-            <h1 className="text-7xl font-semibold tracking-tighter leading-tight">
+            <h1 className="text-5xl xl:text-7xl font-semibold tracking-tighter leading-tight">
               Write a Title Here. Click to Add and Edit Title Text.
             </h1>
             <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
