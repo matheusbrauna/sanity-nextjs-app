@@ -10,7 +10,7 @@ export const POST_QUERY = defineQuery(`*[_type == "post" && slug.current == $slu
 
 export const GENERAL_CONFIG_QUERY = defineQuery(`*[_type == "generalConfig"][0]{
   eventName, 
-  logo,
+  'logo':logo.asset->url,
   description,
   eventColors,
   roundingOfComponents,

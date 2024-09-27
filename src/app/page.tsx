@@ -1,4 +1,5 @@
-import { Button } from '@/components/ui/button'
+import Header from '@/components/sections/header'
+import HeroSection from '@/components/sections/hero'
 import { sanityFetch } from '@/sanity/lib/client'
 import { GENERAL_CONFIG_QUERY } from '@/sanity/lib/queries'
 import { notFound } from 'next/navigation'
@@ -12,5 +13,12 @@ export default async function Page() {
     return notFound()
   }
 
-  return <Button>Clica aqui {generalConfig.eventName}</Button>
+  return (
+    <div className="flex flex-col justify-center">
+      <Header />
+      <main className='flex justify-center'>
+        <HeroSection />
+      </main>
+    </div>
+  )
 }
