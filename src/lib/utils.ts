@@ -88,9 +88,11 @@ export const generateStyleObject = async () => {
 
     '--primary': `${primary.h} ${primary.s}% ${primary.l}%`,
 
-    '--secondary': `${secondary.h} ${secondary.s}% ${secondary.l}%`,
-    '--muted': `${secondary.h} ${secondary.s}% ${secondary.l}%`,
-    '--accent': `${secondary.h} ${secondary.s}% ${secondary.l}%`,
+    '--muted-foreground': `${text.h} ${text.s}% 45%`,
+
+    '--secondary': `${secondary.h} ${secondary.s}% 93%`,
+    '--muted': `${secondary.h} ${secondary.s}% 93%`,
+    '--accent': `${secondary.h} ${secondary.s}% 93%`,
 
     '--foreground': `${text.h} ${text.s}% ${text.l}%`,
     '--card-foreground': `${text.h} ${text.s}% ${text.l}%`,

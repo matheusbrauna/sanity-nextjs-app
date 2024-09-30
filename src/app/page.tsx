@@ -1,5 +1,6 @@
 import AboutSection from '@/components/sections/about'
 import FaqSection from '@/components/sections/faq'
+import { Footer } from '@/components/sections/footer'
 import Header from '@/components/sections/header'
 import HeroSection from '@/components/sections/hero'
 import ResourceSection from '@/components/sections/resource'
@@ -14,6 +15,7 @@ export default async function Page() {
         <ResourceSection />
         <FaqSection />
       </main>
+      <Footer />
     </div>
   )
 }

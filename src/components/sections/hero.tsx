@@ -1,3 +1,5 @@
+import Image from 'next/image'
+import { AspectRatio } from '../ui/aspect-ratio'
 import { Button } from '../ui/button'
 
 export default function HeroSection() {
@@ -16,13 +18,14 @@ export default function HeroSection() {
           </div>
           <Button type="button">Learn More</Button>
         </div>
-        <img
-          src="https://placehold.co/600x600"
-          width="600"
-          height="600"
-          alt="Description"
-          className="aspect-square overflow-hidden object-cover"
-        />
+        <AspectRatio ratio={600 / 600}>
+          <Image
+            src="https://placehold.co/600x600"
+            alt="Description"
+            fill
+            className="absolute inset-0 object-cover object-center rounded-md"
+          />
+        </AspectRatio>
       </div>
     </section>
   )

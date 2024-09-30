@@ -1,4 +1,14 @@
+import Image from 'next/image'
 import { Button } from '../ui/button'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '../ui/card'
+import { AspectRatio } from '../ui/aspect-ratio'
 
 export default function ResourceSection() {
   return (
@@ -10,78 +20,81 @@ export default function ResourceSection() {
           </h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="w-full md:w-fit border-2">
-            <div className="space-y-4 p-6">
-              <div className="overflow-hidden h-48">
-                <img
+          <Card>
+            <CardHeader className="space-y-4">
+              <AspectRatio ratio={365 / 200}>
+                <Image
                   src="https://placehold.co/365x200"
-                  width="365"
-                  height="200"
                   alt="Description"
-                  className="object-cover object-center"
+                  fill
+                  className="absolute inset-0 object-cover object-center rounded-md"
                 />
-              </div>
-              <h3 className="text-2xl font-normal tracking-normal">
+              </AspectRatio>
+              <CardTitle className="text-2xl font-medium">
                 Article Title
-              </h3>
-              <p className="text-muted-foreground text-base">
+              </CardTitle>
+              <CardDescription className="text-muted-foreground text-base">
                 Use this space to promote the business, its products or its
                 services. Help people become familiar with the business and its
                 offerings, creating a sense of connection and trust. Focus on
                 what makes the business unique and how users can benefit from
                 choosing it.
-              </p>
+              </CardDescription>
+            </CardHeader>
+            <CardFooter>
               <Button>Learn More</Button>
-            </div>
-          </div>
-          <div className="w-full md:w-fit border-2">
-            <div className="space-y-4 p-6">
-              <div className="overflow-hidden h-48">
-                <img
+            </CardFooter>
+          </Card>
+          <Card>
+            <CardHeader className="space-y-4">
+              <AspectRatio ratio={365 / 200}>
+                <Image
                   src="https://placehold.co/365x200"
-                  width="365"
-                  height="200"
                   alt="Description"
-                  className="object-cover object-center"
+                  fill
+                  className="absolute inset-0 object-cover object-center rounded-md"
                 />
-              </div>
-              <h3 className="text-2xl font-normal tracking-normal">
+              </AspectRatio>
+              <CardTitle className="text-2xl font-medium">
                 Article Title
-              </h3>
-              <p className="text-muted-foreground text-base">
+              </CardTitle>
+              <CardDescription className="text-muted-foreground text-base">
                 Use this space to promote the business, its products or its
                 services. Help people become familiar with the business and its
                 offerings, creating a sense of connection and trust. Focus on
                 what makes the business unique and how users can benefit from
                 choosing it.
-              </p>
+              </CardDescription>
+            </CardHeader>
+            <CardFooter>
               <Button>Learn More</Button>
-            </div>
-          </div>
-          <div className="w-full md:w-fit border-2">
-            <div className="space-y-4 p-6">
-              <div className="overflow-hidden h-48">
-                <img
+            </CardFooter>
+          </Card>
+          <Card>
+            <CardHeader className="space-y-4">
+              <AspectRatio ratio={365 / 200}>
+                <Image
                   src="https://placehold.co/365x200"
-                  width="365"
-                  height="200"
                   alt="Description"
-                  className="object-cover object-center"
+                  fill
+                  className="absolute inset-0 object-cover object-center rounded-md"
                 />
-              </div>
-              <h3 className="text-2xl font-normal tracking-normal">
+              </AspectRatio>
+              <CardTitle className="text-2xl font-medium">
                 Article Title
-              </h3>
-              <p className="text-muted-foreground text-base">
+              </CardTitle>
+              <CardDescription className="text-muted-foreground text-base">
                 Use this space to promote the business, its products or its
                 services. Help people become familiar with the business and its
                 offerings, creating a sense of connection and trust. Focus on
                 what makes the business unique and how users can benefit from
                 choosing it.
-              </p>
+              </CardDescription>
+            </CardHeader>
+            <CardFooter>
               <Button>Learn More</Button>
-            </div>
-          </div>
+            </CardFooter>
+          </Card>
         </div>
       </div>
     </section>
