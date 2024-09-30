@@ -411,6 +411,9 @@ export type GENERAL_CONFIG_QUERYResult = {
   baseColor: "#000000" | "#0c0d0d" | "#0f0f10" | "#f3f2f1" | "#fafafa" | "#ffffff" | null;
   textColor: "#000000" | "#0c0d0d" | "#0f0f10" | "#f3f2f1" | "#fafafa" | "#ffffff" | null;
 } | null;
+// Variable: FAQ_QUERY
+// Query: *[_type == "faq"]{  'id':_id,  question,  answer,}
+export type FAQ_QUERYResult = Array<never>;
 
 // Query TypeMap
 import "@sanity/client";
@@ -419,5 +422,6 @@ declare module "@sanity/client" {
     "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage\n}": POST_QUERYResult;
     "*[_type == \"generalConfig\"][0]{\n  eventName, \n  'logo':logo.asset->url,\n  description,\n  eventColors,\n  roundingOfComponents,\n  baseColor,\n  textColor\n}": GENERAL_CONFIG_QUERYResult;
+    "*[_type == \"faq\"]{\n  'id':_id,\n  question,\n  answer,\n}": FAQ_QUERYResult;
   }
 }
