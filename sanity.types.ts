@@ -91,7 +91,8 @@ export type GeneralConfig = {
     primaryColor?: Color;
     secondaryColor?: Color;
   };
-  baseColor?: "#ffffff" | "##fafafa" | "#f3f2f1" | "#000000" | "#0c0d0d" | "#0f0f10";
+  baseColor?: "#ffffff" | "#fafafa" | "#f3f2f1" | "#000000" | "#0c0d0d" | "#0f0f10";
+  textColor?: "#ffffff" | "#fafafa" | "#f3f2f1" | "#000000" | "#0c0d0d" | "#0f0f10";
   roundingOfComponents?: "square" | "rounded" | "pill";
 };
 
@@ -397,27 +398,18 @@ export type POST_QUERYResult = {
   } | null;
 } | null;
 // Variable: GENERAL_CONFIG_QUERY
-// Query: *[_type == "generalConfig"][0]{  eventName,   logo,  description,  eventColors,  roundingOfComponents,  baseColor}
+// Query: *[_type == "generalConfig"][0]{  eventName,   'logo':logo.asset->url,  description,  eventColors,  roundingOfComponents,  baseColor,  textColor}
 export type GENERAL_CONFIG_QUERYResult = {
   eventName: string | null;
-  logo: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  } | null;
+  logo: string | null;
   description: string | null;
   eventColors: {
     primaryColor?: Color;
     secondaryColor?: Color;
   } | null;
   roundingOfComponents: "pill" | "rounded" | "square" | null;
-  baseColor: "##fafafa" | "#000000" | "#0c0d0d" | "#0f0f10" | "#f3f2f1" | "#ffffff" | null;
+  baseColor: "#000000" | "#0c0d0d" | "#0f0f10" | "#f3f2f1" | "#fafafa" | "#ffffff" | null;
+  textColor: "#000000" | "#0c0d0d" | "#0f0f10" | "#f3f2f1" | "#fafafa" | "#ffffff" | null;
 } | null;
 
 // Query TypeMap
@@ -426,6 +418,6 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage\n}": POST_QUERYResult;
-    "*[_type == \"generalConfig\"][0]{\n  eventName, \n  logo,\n  description,\n  eventColors,\n  roundingOfComponents,\n  baseColor\n}": GENERAL_CONFIG_QUERYResult;
+    "*[_type == \"generalConfig\"][0]{\n  eventName, \n  'logo':logo.asset->url,\n  description,\n  eventColors,\n  roundingOfComponents,\n  baseColor,\n  textColor\n}": GENERAL_CONFIG_QUERYResult;
   }
 }

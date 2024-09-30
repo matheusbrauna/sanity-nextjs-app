@@ -14,7 +14,7 @@ export default function HeroSection() {
               image or video.
             </p>
           </div>
-          <Button>Learn More</Button>
+          <Button type="button">Learn More</Button>
         </div>
         <img
           src="https://placehold.co/600x600"

@@ -5,12 +5,6 @@ import { cn, generateStyleObject } from '@/lib/utils'
 import type { CSSProperties } from 'react'
 import { draftMode } from 'next/headers'
 import { VisualEditing } from 'next-sanity'
-import { sanityFetch } from '@/sanity/lib/client'
-import { GENERAL_CONFIG_QUERY } from '@/sanity/lib/queries'
-
-export const generalConfig = await sanityFetch({
-  query: GENERAL_CONFIG_QUERY,
-})
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -23,11 +17,7 @@ const geistMono = localFont({
   weight: '100 900',
 })
 
-export const metadata: Metadata = {
-  title: generalConfig?.eventName,
-  description: generalConfig?.description,
-  icons: generalConfig?.logo,
-}
+export const metadata: Metadata = {}
 
 export default async function RootLayout({
   children,

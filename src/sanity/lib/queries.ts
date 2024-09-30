@@ -14,5 +14,6 @@ export const GENERAL_CONFIG_QUERY = defineQuery(`*[_type == "generalConfig"][0]{
   description,
   eventColors,
   roundingOfComponents,
-  baseColor
+  baseColor,
+  textColor
 }`)

@@ -48,6 +48,22 @@ export const generalConfig = defineType({
       },
     }),
     defineField({
+      name: 'textColor',
+      type: 'string',
+      title: 'Cor do texto',
+      initialValue: '#ffffff',
+      options: {
+        list: [
+          { title: 'Branco', value: '#ffffff' },
+          { title: 'Cinza (claro)', value: '#fafafa' },
+          { title: 'Acinzentado (claro)', value: '#f3f2f1' },
+          { title: 'Preto', value: '#000000' },
+          { title: 'Cinza (escuro)', value: '#0c0d0d' },
+          { title: 'Acinzentado (escuro)', value: '#0f0f10' },
+        ],
+      },
+    }),
+    defineField({
       name: 'roundingOfComponents',
       type: 'string',
       title: 'Arredondamento dos components',
