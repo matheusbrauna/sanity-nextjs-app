@@ -19,7 +19,7 @@ export default function ResourceSection() {
             Resource
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <Card>
             <CardHeader className="space-y-4">
               <AspectRatio ratio={365 / 200}>
