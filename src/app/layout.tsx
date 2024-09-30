@@ -1,10 +1,12 @@
-import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
 import { cn, generateStyleObject } from '@/lib/utils'
 import type { CSSProperties } from 'react'
 import { draftMode } from 'next/headers'
 import { VisualEditing } from 'next-sanity'
+import { sanityFetch } from '@/sanity/lib/client'
+import { GENERAL_CONFIG_QUERY } from '@/sanity/lib/queries'
+import { notFound } from 'next/navigation'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -17,13 +19,19 @@ const geistMono = localFont({
   weight: '100 900',
 })
 
-export const metadata: Metadata = {}
-
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const generalConfig = await sanityFetch({
+    query: GENERAL_CONFIG_QUERY,
+  })
+
+  if (!generalConfig) {
+    return notFound()
+  }
+
   const style = (await generateStyleObject()) as CSSProperties
 
   return (
@@ -33,6 +41,11 @@ export default async function RootLayout({
       className="scroll-smooth"
       suppressHydrationWarning
     >
+      <head>
+        <title>{generalConfig.eventName}</title>
+        <link rel="icon" type="image/x-icon" href={generalConfig.logo} />
+        <meta name="description" content={generalConfig.description} />
+      </head>
       <body
         className={cn(
           'bg-background font-sans antialiased',

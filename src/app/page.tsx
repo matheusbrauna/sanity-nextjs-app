@@ -1,23 +1,18 @@
+import AboutSection from '@/components/sections/about'
+import FaqSection from '@/components/sections/faq'
 import Header from '@/components/sections/header'
 import HeroSection from '@/components/sections/hero'
-import { sanityFetch } from '@/sanity/lib/client'
-import { GENERAL_CONFIG_QUERY } from '@/sanity/lib/queries'
-import { notFound } from 'next/navigation'
+import ResourceSection from '@/components/sections/resource'
 
 export default async function Page() {
-  const generalConfig = await sanityFetch({
-    query: GENERAL_CONFIG_QUERY,
-  })
-
-  if (!generalConfig) {
-    return notFound()
-  }
-
   return (
     <div className="flex flex-col justify-center">
       <Header />
-      <main className="flex justify-center">
+      <main className="flex flex-col justify-center">
         <HeroSection />
+        <AboutSection />
+        <ResourceSection />
+        <FaqSection />
       </main>
     </div>
   )
