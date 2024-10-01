@@ -8,14 +8,8 @@ import { sanityFetch } from '@/sanity/lib/client'
 import { FAQ_QUERY } from '@/sanity/lib/queries'
 import { notFound } from 'next/navigation'
 
-interface Ifaq {
-  id: string
-  question: string
-  answer: string
-}
-
 export default async function FaqSection() {
-  const faq: Ifaq[] = await sanityFetch({
+  const faq = await sanityFetch({
     query: FAQ_QUERY,
   })
 

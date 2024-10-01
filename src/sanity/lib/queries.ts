@@ -23,3 +23,11 @@ export const FAQ_QUERY = defineQuery(`*[_type == "faq"]{
   question,
   answer,
 }`)
+
+export const HERO_QUERY = defineQuery(`*[_type == "hero"][0]{
+  'id':_id,
+  title,
+  description,
+  cta,
+  'heroImage':heroImage.asset->url,
+}`)

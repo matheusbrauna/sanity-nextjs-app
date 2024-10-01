@@ -68,6 +68,12 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
 export type GeneralConfig = {
   _id: string;
   _type: "generalConfig";
@@ -96,159 +102,37 @@ export type GeneralConfig = {
   roundingOfComponents?: "square" | "rounded" | "pill";
 };
 
-export type Post = {
+export type Faq = {
   _id: string;
-  _type: "post";
+  _type: "faq";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  question?: string;
+  answer?: string;
+};
+
+export type Hero = {
+  _id: string;
+  _type: "hero";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   title?: string;
-  slug?: Slug;
-  author?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "author";
-  };
-  mainImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  };
-  categories?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "category";
-  }>;
-  publishedAt?: string;
-  body?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-    listItem?: "bullet";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  }>;
-};
-
-export type Author = {
-  _id: string;
-  _type: "author";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  slug?: Slug;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  favoriteColor?: Color;
-  bio?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal";
-    listItem?: never;
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
-};
-
-export type Category = {
-  _id: string;
-  _type: "category";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
   description?: string;
-};
-
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
-export type BlockContent = Array<{
-  children?: Array<{
-    marks?: Array<string>;
-    text?: string;
-    _type: "span";
-    _key: string;
-  }>;
-  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-  listItem?: "bullet";
-  markDefs?: Array<{
-    href?: string;
-    _type: "link";
-    _key: string;
-  }>;
-  level?: number;
-  _type: "block";
-  _key: string;
-} | {
-  asset?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+  cta?: string;
+  heroImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
   };
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  alt?: string;
-  _type: "image";
-  _key: string;
-}>;
+};
 
 export type SanityImageCrop = {
   _type: "sanity.imageCrop";
@@ -340,63 +224,15 @@ export type HslaColor = {
   a?: number;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | GeneralConfig | Post | Author | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Color | RgbaColor | HsvaColor | HslaColor;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | GeneralConfig | Faq | Hero | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Color | RgbaColor | HsvaColor | HslaColor;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: POSTS_QUERY
 // Query: *[_type == "post" && defined(slug.current)][0...12]{  _id, title, slug}
-export type POSTS_QUERYResult = Array<{
-  _id: string;
-  title: string | null;
-  slug: Slug | null;
-}>;
+export type POSTS_QUERYResult = Array<never>;
 // Variable: POST_QUERY
 // Query: *[_type == "post" && slug.current == $slug][0]{  title, body, mainImage}
-export type POST_QUERYResult = {
-  title: string | null;
-  body: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
-    listItem?: "bullet";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  }> | null;
-  mainImage: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-  } | null;
-} | null;
+export type POST_QUERYResult = null;
 // Variable: GENERAL_CONFIG_QUERY
 // Query: *[_type == "generalConfig"][0]{  eventName,   'logo':logo.asset->url,  description,  eventColors,  roundingOfComponents,  baseColor,  textColor}
 export type GENERAL_CONFIG_QUERYResult = {
@@ -413,7 +249,20 @@ export type GENERAL_CONFIG_QUERYResult = {
 } | null;
 // Variable: FAQ_QUERY
 // Query: *[_type == "faq"]{  'id':_id,  question,  answer,}
-export type FAQ_QUERYResult = Array<never>;
+export type FAQ_QUERYResult = Array<{
+  id: string;
+  question: string | null;
+  answer: string | null;
+}>;
+// Variable: HERO_QUERY
+// Query: *[_type == "hero"][0]{  'id':_id,  title,  description,  cta,  'heroImage':heroImage.asset->url,}
+export type HERO_QUERYResult = {
+  id: string;
+  title: string | null;
+  description: string | null;
+  cta: string | null;
+  heroImage: string | null;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -423,5 +272,6 @@ declare module "@sanity/client" {
     "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage\n}": POST_QUERYResult;
     "*[_type == \"generalConfig\"][0]{\n  eventName, \n  'logo':logo.asset->url,\n  description,\n  eventColors,\n  roundingOfComponents,\n  baseColor,\n  textColor\n}": GENERAL_CONFIG_QUERYResult;
     "*[_type == \"faq\"]{\n  'id':_id,\n  question,\n  answer,\n}": FAQ_QUERYResult;
+    "*[_type == \"hero\"][0]{\n  'id':_id,\n  title,\n  description,\n  cta,\n  'heroImage':heroImage.asset->url,\n}": HERO_QUERYResult;
   }
 }
