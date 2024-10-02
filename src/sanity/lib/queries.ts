@@ -18,10 +18,15 @@ export const GENERAL_CONFIG_QUERY = defineQuery(`*[_type == "generalConfig"][0]{
   textColor
 }`)
 
-export const FAQ_QUERY = defineQuery(`*[_type == "faq"]{
-  'id':_id,
-  question,
-  answer,
+export const FAQ_QUERY = defineQuery(`*[_type == "faq"][0]{
+  'id': _id,
+  heading,
+  description,
+  faqList[]{
+    question,
+    answer,
+    'id': _key
+  }
 }`)
 
 export const HERO_QUERY = defineQuery(`*[_type == "hero"][0]{

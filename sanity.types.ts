@@ -248,12 +248,13 @@ export type GENERAL_CONFIG_QUERYResult = {
   textColor: "#000000" | "#0c0d0d" | "#0f0f10" | "#f3f2f1" | "#fafafa" | "#ffffff" | null;
 } | null;
 // Variable: FAQ_QUERY
-// Query: *[_type == "faq"]{  'id':_id,  question,  answer,}
-export type FAQ_QUERYResult = Array<{
+// Query: *[_type == "faq"][0]{  'id': _id,  heading,  description,  faqList[]{    question,    answer,    'id': _key  }}
+export type FAQ_QUERYResult = {
   id: string;
-  question: string | null;
-  answer: string | null;
-}>;
+  heading: null;
+  description: null;
+  faqList: null;
+} | null;
 // Variable: HERO_QUERY
 // Query: *[_type == "hero"][0]{  'id':_id,  title,  description,  cta,  'heroImage':heroImage.asset->url,}
 export type HERO_QUERYResult = {
@@ -271,7 +272,7 @@ declare module "@sanity/client" {
     "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage\n}": POST_QUERYResult;
     "*[_type == \"generalConfig\"][0]{\n  eventName, \n  'logo':logo.asset->url,\n  description,\n  eventColors,\n  roundingOfComponents,\n  baseColor,\n  textColor\n}": GENERAL_CONFIG_QUERYResult;
-    "*[_type == \"faq\"]{\n  'id':_id,\n  question,\n  answer,\n}": FAQ_QUERYResult;
+    "*[_type == \"faq\"][0]{\n  'id': _id,\n  heading,\n  description,\n  faqList[]{\n    question,\n    answer,\n    'id': _key\n  }\n}": FAQ_QUERYResult;
     "*[_type == \"hero\"][0]{\n  'id':_id,\n  title,\n  description,\n  cta,\n  'heroImage':heroImage.asset->url,\n}": HERO_QUERYResult;
   }
 }

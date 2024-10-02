@@ -1,5 +1,5 @@
 import { UlistIcon } from '@sanity/icons'
-import { defineField, defineType } from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const faq = defineType({
   type: 'document',
@@ -9,15 +9,42 @@ export const faq = defineType({
   fields: [
     defineField({
       type: 'string',
-      name: 'question',
-      title: 'Pergunta',
+      name: 'heading',
+      title: 'Título',
+      description: 'Título da seção',
       validation: e => e.required(),
     }),
     defineField({
-      type: 'text',
-      name: 'answer',
-      title: 'Resposta',
-      validation: e => e.required(),
+      type: 'string',
+      name: 'description',
+      title: 'Descrição',
+      description: 'Descrição opcional para esta seção',
+    }),
+    defineField({
+      name: 'faqList',
+      title: 'Lista de Perguntas',
+      description: 'Você pode alterar a ordem da lista movendo os cartões.',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'question',
+              title: 'Pergunta',
+              type: 'string',
+              validation: e => e.required(),
+            }),
+            defineField({
+              name: 'answer',
+              title: 'Resposta',
+              type: 'text',
+              validation: e => e.required(),
+            }),
+          ],
+          title: 'Pergunta e Resposta',
+        }),
+      ],
     }),
   ],
 })
