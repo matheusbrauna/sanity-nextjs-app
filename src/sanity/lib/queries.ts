@@ -36,3 +36,18 @@ export const HERO_QUERY = defineQuery(`*[_type == "hero"][0]{
   cta,
   'heroImage':heroImage.asset->url,
 }`)
+
+export const RESOURCE_QUERY = defineQuery(`*[_type == "resource"][0]{
+  'id': _id,
+  heading,
+  description,
+  cardList[]{
+    title,
+    description,
+    showCTA,
+    'ctaDescription': ctaInfo.ctaDescription,
+    'ctaLink': ctaInfo.ctaLink,
+    'id': _key,
+    'image':image.asset->url,
+  }
+}`)
