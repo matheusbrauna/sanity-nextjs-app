@@ -51,3 +51,12 @@ export const RESOURCE_QUERY = defineQuery(`*[_type == "resource"][0]{
     'image':image.asset->url,
   }
 }`)
+
+export const ABOUT_QUERY = defineQuery(`*[_type == "about"][0]{
+  'id': _id,
+  heading,
+  description,
+  'ctaDescription': ctaInfo.ctaDescription,
+  'ctaLink': ctaInfo.ctaLink,
+  'image':image.asset->url,
+}`)
