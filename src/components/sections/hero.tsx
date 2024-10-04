@@ -3,11 +3,20 @@ import { AspectRatio } from '../ui/aspect-ratio'
 import { Button } from '../ui/button'
 import { HERO_QUERY } from '@/sanity/lib/queries'
 import { sanityFetch } from '@/sanity/lib/client'
+import { notFound } from 'next/navigation'
+import { ArrowTopRightIcon } from '@sanity/icons'
+import Link from 'next/link'
 
 export default async function HeroSection() {
   const hero = await sanityFetch({
     query: HERO_QUERY,
   })
+
+  if (!hero) {
+    return notFound()
+  }
+
+  const { heading, description, ctaDescription, ctaLink, image } = hero
 
   return (
     <section className="w-full flex justify-center py-12 md:py-24 lg:py-32">
@@ -15,17 +24,24 @@ export default async function HeroSection() {
         <div className="space-y-4">
           <div className="space-y-6">
             <h1 className="text-5xl xl:text-7xl font-semibold tracking-tighter leading-tight">
-              {hero?.title}
+              {heading}
             </h1>
             <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-              {hero?.description}
+              {description}
             </p>
           </div>
-          <Button type="button">{hero?.cta}</Button>
+          {ctaLink && (
+            <Button asChild>
+              <Link href={ctaLink} target="_blank">
+                {ctaDescription}
+                <ArrowTopRightIcon style={{ fontSize: 23 }} />
+              </Link>
+            </Button>
+          )}
         </div>
         <AspectRatio ratio={600 / 600}>
           <Image
-            src={hero?.heroImage ?? ''}
+            src={image ?? ''}
             alt="Description"
             fill
             className="absolute inset-0 object-cover object-center rounded-md"

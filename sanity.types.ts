@@ -256,13 +256,14 @@ export type FAQ_QUERYResult = {
   faqList: null;
 } | null;
 // Variable: HERO_QUERY
-// Query: *[_type == "hero"][0]{  'id':_id,  title,  description,  cta,  'heroImage':heroImage.asset->url,}
+// Query: *[_type == "hero"][0]{  'id': _id,  heading,  description,  'ctaDescription': ctaInfo.ctaDescription,  'ctaLink': ctaInfo.ctaLink,  'image':heroImage.asset->url,}
 export type HERO_QUERYResult = {
   id: string;
-  title: string | null;
+  heading: null;
   description: string | null;
-  cta: string | null;
-  heroImage: string | null;
+  ctaDescription: null;
+  ctaLink: null;
+  image: string | null;
 } | null;
 // Variable: RESOURCE_QUERY
 // Query: *[_type == "resource"][0]{  'id': _id,  heading,  description,  cardList[]{    title,    description,    showCTA,    'ctaDescription': ctaInfo.ctaDescription,    'ctaLink': ctaInfo.ctaLink,    'id': _key,    'image':image.asset->url,  }}
@@ -279,7 +280,7 @@ declare module "@sanity/client" {
     "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage\n}": POST_QUERYResult;
     "*[_type == \"generalConfig\"][0]{\n  eventName, \n  'logo':logo.asset->url,\n  description,\n  eventColors,\n  roundingOfComponents,\n  baseColor,\n  textColor\n}": GENERAL_CONFIG_QUERYResult;
     "*[_type == \"faq\"][0]{\n  'id': _id,\n  heading,\n  description,\n  faqList[]{\n    question,\n    answer,\n    'id': _key\n  }\n}": FAQ_QUERYResult;
-    "*[_type == \"hero\"][0]{\n  'id':_id,\n  title,\n  description,\n  cta,\n  'heroImage':heroImage.asset->url,\n}": HERO_QUERYResult;
+    "*[_type == \"hero\"][0]{\n  'id': _id,\n  heading,\n  description,\n  'ctaDescription': ctaInfo.ctaDescription,\n  'ctaLink': ctaInfo.ctaLink,\n  'image':heroImage.asset->url,\n}": HERO_QUERYResult;
     "*[_type == \"resource\"][0]{\n  'id': _id,\n  heading,\n  description,\n  cardList[]{\n    title,\n    description,\n    showCTA,\n    'ctaDescription': ctaInfo.ctaDescription,\n    'ctaLink': ctaInfo.ctaLink,\n    'id': _key,\n    'image':image.asset->url,\n  }\n}": RESOURCE_QUERYResult;
     "*[_type == \"about\"][0]{\n  'id': _id,\n  heading,\n  description,\n  'ctaDescription': ctaInfo.ctaDescription,\n  'ctaLink': ctaInfo.ctaLink,\n  'image':image.asset->url,\n}": ABOUT_QUERYResult;
   }

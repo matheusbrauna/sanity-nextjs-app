@@ -30,11 +30,12 @@ export const FAQ_QUERY = defineQuery(`*[_type == "faq"][0]{
 }`)
 
 export const HERO_QUERY = defineQuery(`*[_type == "hero"][0]{
-  'id':_id,
-  title,
+  'id': _id,
+  heading,
   description,
-  cta,
-  'heroImage':heroImage.asset->url,
+  'ctaDescription': ctaInfo.ctaDescription,
+  'ctaLink': ctaInfo.ctaLink,
+  'image':heroImage.asset->url,
 }`)
 
 export const RESOURCE_QUERY = defineQuery(`*[_type == "resource"][0]{
