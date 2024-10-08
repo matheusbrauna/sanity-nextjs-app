@@ -4,10 +4,7 @@ export const structure: StructureResolver = S =>
   S.list()
     .title('Geral')
     .items([
-      S.documentTypeListItem('hero').title('Hero'),
-      S.documentTypeListItem('about').title('About'),
-      S.documentTypeListItem('resource').title('Resource'),
-      S.documentTypeListItem('faq').title('FAQ - Perguntas frequentes'),
+      S.documentTypeListItem('page-builder').title('Layout da Página'),
       S.divider(),
       S.documentTypeListItem('generalConfig').title('Configurações gerais'),
       S.divider(),

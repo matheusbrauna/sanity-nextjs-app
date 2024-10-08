@@ -1,7 +1,7 @@
 import { UlistIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
-export const faq = defineType({
+export const faqType = defineType({
   type: 'document',
   name: 'faq',
   title: 'Perguntas frequentes',

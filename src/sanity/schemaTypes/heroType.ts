@@ -1,11 +1,11 @@
-import { TiersIcon } from '@sanity/icons'
+import { InlineIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export const heroType = defineType({
   name: 'hero',
-  title: 'Sessão Hero',
+  title: 'Hero',
   type: 'document',
-  icon: TiersIcon,
+  icon: InlineIcon,
   fields: [
     defineField({
       name: 'heading',

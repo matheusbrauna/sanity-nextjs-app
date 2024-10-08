@@ -61,3 +61,11 @@ export const ABOUT_QUERY = defineQuery(`*[_type == "about"][0]{
   'ctaLink': ctaInfo.ctaLink,
   'image':image.asset->url,
 }`)
+
+export const PAGEBUILDER_QUERY = defineQuery(`*[_type == "page-builder"][0]{
+  title,
+    pageBuilder{
+    'id': _key,
+    'componentName':_type
+    }[]
+}`)

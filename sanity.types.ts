@@ -271,6 +271,9 @@ export type RESOURCE_QUERYResult = null;
 // Variable: ABOUT_QUERY
 // Query: *[_type == "about"][0]{  'id': _id,  heading,  description,  'ctaDescription': ctaInfo.ctaDescription,  'ctaLink': ctaInfo.ctaLink,  'image':image.asset->url,}
 export type ABOUT_QUERYResult = null;
+// Variable: PAGEBUILDER_QUERY
+// Query: *[_type == "page-builder"][0]{  title,    pageBuilder{    'id': _id,    'componentName':_type    }[]}
+export type PAGEBUILDER_QUERYResult = null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -283,5 +286,6 @@ declare module "@sanity/client" {
     "*[_type == \"hero\"][0]{\n  'id': _id,\n  heading,\n  description,\n  'ctaDescription': ctaInfo.ctaDescription,\n  'ctaLink': ctaInfo.ctaLink,\n  'image':heroImage.asset->url,\n}": HERO_QUERYResult;
     "*[_type == \"resource\"][0]{\n  'id': _id,\n  heading,\n  description,\n  cardList[]{\n    title,\n    description,\n    showCTA,\n    'ctaDescription': ctaInfo.ctaDescription,\n    'ctaLink': ctaInfo.ctaLink,\n    'id': _key,\n    'image':image.asset->url,\n  }\n}": RESOURCE_QUERYResult;
     "*[_type == \"about\"][0]{\n  'id': _id,\n  heading,\n  description,\n  'ctaDescription': ctaInfo.ctaDescription,\n  'ctaLink': ctaInfo.ctaLink,\n  'image':image.asset->url,\n}": ABOUT_QUERYResult;
+    "*[_type == \"page-builder\"][0]{\n  title,\n    pageBuilder{\n    'id': _id,\n    'componentName':_type\n    }[]\n}": PAGEBUILDER_QUERYResult;
   }
 }

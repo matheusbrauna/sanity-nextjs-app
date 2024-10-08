@@ -1,11 +1,13 @@
+import { InlineElementIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const resourceType = defineType({
   type: 'document',
   name: 'resource',
-  title: 'Resource',
+  title: 'Cartões',
+  icon: InlineElementIcon,
   description:
-    'Cartões podem ser usados para agregar informações pequenas isoladas.',
+    'Cartões podem ser usados para agregar informações pequenas e isoladas.',
   fields: [
     defineField({
       type: 'string',
