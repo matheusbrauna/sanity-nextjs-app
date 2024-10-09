@@ -248,31 +248,19 @@ export type GENERAL_CONFIG_QUERYResult = {
   textColor: "#000000" | "#0c0d0d" | "#0f0f10" | "#f3f2f1" | "#fafafa" | "#ffffff" | null;
 } | null;
 // Variable: FAQ_QUERY
-// Query: *[_type == "faq"][0]{  'id': _id,  heading,  description,  faqList[]{    question,    answer,    'id': _key  }}
-export type FAQ_QUERYResult = {
-  id: string;
-  heading: null;
-  description: null;
-  faqList: null;
-} | null;
+// Query: *[_type == "page-builder"][0]{  '':pageBuilder[_type == "faq" && _key == $key][0]{   'id': _key,  heading,  description,    faqList[]{      question,      answer,      'id': _key    }  },}
+export type FAQ_QUERYResult = null;
 // Variable: HERO_QUERY
-// Query: *[_type == "hero"][0]{  'id': _id,  heading,  description,  'ctaDescription': ctaInfo.ctaDescription,  'ctaLink': ctaInfo.ctaLink,  'image':heroImage.asset->url,}
-export type HERO_QUERYResult = {
-  id: string;
-  heading: null;
-  description: string | null;
-  ctaDescription: null;
-  ctaLink: null;
-  image: string | null;
-} | null;
+// Query: *[_type == "page-builder"][0]{  '':pageBuilder[_type == "hero"  && _key == $key][0]{    'id': _key,    heading,    description,    'ctaDescription': cta.description,    'ctaLink': cta.link,    'image':image.asset->url,    'imageAlt':image.alt  },}
+export type HERO_QUERYResult = null;
 // Variable: RESOURCE_QUERY
-// Query: *[_type == "resource"][0]{  'id': _id,  heading,  description,  cardList[]{    title,    description,    showCTA,    'ctaDescription': ctaInfo.ctaDescription,    'ctaLink': ctaInfo.ctaLink,    'id': _key,    'image':image.asset->url,  }}
+// Query: *[_type == "page-builder"][0]{  '':pageBuilder[_type == "resource" && _key == $key][0]{   'id': _key,  heading,  description,     cardList[]{       'id': _key,        title,        description,        'ctaDescription': cta.description,        'ctaLink': cta.link,        'image':image.asset->url,        'imageAlt':image.alt     }  },}
 export type RESOURCE_QUERYResult = null;
 // Variable: ABOUT_QUERY
-// Query: *[_type == "about"][0]{  'id': _id,  heading,  description,  'ctaDescription': ctaInfo.ctaDescription,  'ctaLink': ctaInfo.ctaLink,  'image':image.asset->url,}
+// Query: *[_type == "page-builder"][0]{  '':pageBuilder[_type == "about" && _key == $key][0]{    'id': _key,    heading,    description,    'ctaDescription': cta.description,    'ctaLink': cta.link,    'image':image.asset->url,    'imageAlt':image.alt  },}
 export type ABOUT_QUERYResult = null;
 // Variable: PAGEBUILDER_QUERY
-// Query: *[_type == "page-builder"][0]{  title,    pageBuilder{    'id': _id,    'componentName':_type    }[]}
+// Query: *[_type == "page-builder"][0]{  title,    pageBuilder{    'id': _key,    'componentName':_type    }[]}
 export type PAGEBUILDER_QUERYResult = null;
 
 // Query TypeMap
@@ -282,10 +270,10 @@ declare module "@sanity/client" {
     "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage\n}": POST_QUERYResult;
     "*[_type == \"generalConfig\"][0]{\n  eventName, \n  'logo':logo.asset->url,\n  description,\n  eventColors,\n  roundingOfComponents,\n  baseColor,\n  textColor\n}": GENERAL_CONFIG_QUERYResult;
-    "*[_type == \"faq\"][0]{\n  'id': _id,\n  heading,\n  description,\n  faqList[]{\n    question,\n    answer,\n    'id': _key\n  }\n}": FAQ_QUERYResult;
-    "*[_type == \"hero\"][0]{\n  'id': _id,\n  heading,\n  description,\n  'ctaDescription': ctaInfo.ctaDescription,\n  'ctaLink': ctaInfo.ctaLink,\n  'image':heroImage.asset->url,\n}": HERO_QUERYResult;
-    "*[_type == \"resource\"][0]{\n  'id': _id,\n  heading,\n  description,\n  cardList[]{\n    title,\n    description,\n    showCTA,\n    'ctaDescription': ctaInfo.ctaDescription,\n    'ctaLink': ctaInfo.ctaLink,\n    'id': _key,\n    'image':image.asset->url,\n  }\n}": RESOURCE_QUERYResult;
-    "*[_type == \"about\"][0]{\n  'id': _id,\n  heading,\n  description,\n  'ctaDescription': ctaInfo.ctaDescription,\n  'ctaLink': ctaInfo.ctaLink,\n  'image':image.asset->url,\n}": ABOUT_QUERYResult;
-    "*[_type == \"page-builder\"][0]{\n  title,\n    pageBuilder{\n    'id': _id,\n    'componentName':_type\n    }[]\n}": PAGEBUILDER_QUERYResult;
+    "*[_type == \"page-builder\"][0]{\n  '':pageBuilder[_type == \"faq\" && _key == $key][0]{\n   'id': _key,\n  heading,\n  description,\n    faqList[]{\n      question,\n      answer,\n      'id': _key\n    }\n  },\n}": FAQ_QUERYResult;
+    "*[_type == \"page-builder\"][0]{\n  '':pageBuilder[_type == \"hero\"  && _key == $key][0]{\n    'id': _key,\n    heading,\n    description,\n    'ctaDescription': cta.description,\n    'ctaLink': cta.link,\n    'image':image.asset->url,\n    'imageAlt':image.alt\n  },\n}": HERO_QUERYResult;
+    "*[_type == \"page-builder\"][0]{\n  '':pageBuilder[_type == \"resource\" && _key == $key][0]{\n   'id': _key,\n  heading,\n  description,\n     cardList[]{\n       'id': _key,\n        title,\n        description,\n        'ctaDescription': cta.description,\n        'ctaLink': cta.link,\n        'image':image.asset->url,\n        'imageAlt':image.alt\n     }\n  },\n}": RESOURCE_QUERYResult;
+    "*[_type == \"page-builder\"][0]{\n  '':pageBuilder[_type == \"about\" && _key == $key][0]{\n    'id': _key,\n    heading,\n    description,\n    'ctaDescription': cta.description,\n    'ctaLink': cta.link,\n    'image':image.asset->url,\n    'imageAlt':image.alt\n  },\n}": ABOUT_QUERYResult;
+    "*[_type == \"page-builder\"][0]{\n  title,\n    pageBuilder{\n    'id': _key,\n    'componentName':_type\n    }[]\n}": PAGEBUILDER_QUERYResult;
   }
 }

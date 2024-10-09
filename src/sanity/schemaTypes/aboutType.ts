@@ -4,7 +4,7 @@ import { defineField, defineType } from 'sanity'
 export const aboutType = defineType({
   name: 'about',
   title: 'Sobre',
-  type: 'document',
+  type: 'object',
   icon: MasterDetailIcon,
   fields: [
     defineField({
@@ -24,30 +24,19 @@ export const aboutType = defineType({
     defineField({
       name: 'image',
       type: 'image',
-      title: 'Imagem',
-    }),
-    defineField({
-      name: 'showCTA',
-      type: 'boolean',
-      title: 'Adicionar CTA?',
-    }),
-    defineField({
-      name: 'ctaInfo',
-      type: 'object',
-      title: 'Informações do Botão',
+      options: { hotspot: true },
       fields: [
         defineField({
-          name: 'ctaDescription',
+          name: 'alt',
           type: 'string',
-          title: 'CTA (Chamada para a ação)',
-        }),
-        defineField({
-          name: 'ctaLink',
-          type: 'url',
-          title: 'Url',
+          title: 'Texto alternativo',
         }),
       ],
-      hidden: ({ parent }) => !parent?.showCTA,
+    }),
+    defineField({
+      name: 'cta',
+      title: 'CTA (Chamada Para a Ação)',
+      type: 'cta',
     }),
   ],
 })

@@ -8,9 +8,14 @@ import { sanityFetch } from '@/sanity/lib/client'
 import { FAQ_QUERY } from '@/sanity/lib/queries'
 import { notFound } from 'next/navigation'
 
-export default async function FaqSection() {
+export default async function FaqSection(props: {
+  id: string
+}) {
   const faq = await sanityFetch({
     query: FAQ_QUERY,
+    params: {
+      key: props.id,
+    },
   })
 
   if (!faq) {
@@ -26,7 +31,7 @@ export default async function FaqSection() {
           <h2 className="text-5xl font-light tracking-tighter leading-tight">
             {heading}
           </h2>
-          {faq?.description && (
+          {description && (
             <p className="text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
               {description}
             </p>

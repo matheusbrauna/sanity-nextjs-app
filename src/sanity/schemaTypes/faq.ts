@@ -2,7 +2,7 @@ import { UlistIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const faqType = defineType({
-  type: 'document',
+  type: 'object',
   name: 'faq',
   title: 'Perguntas frequentes',
   icon: UlistIcon,

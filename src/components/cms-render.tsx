@@ -16,6 +16,6 @@ export default async function CMSSectionRender() {
     const { id, componentName } = section
     const Component = CMSSection[componentName]
 
-    return <Component key={id} />
+    return <Component key={id} {...section} />
   })
 }

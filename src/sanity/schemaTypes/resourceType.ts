@@ -2,7 +2,7 @@ import { InlineElementIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const resourceType = defineType({
-  type: 'document',
+  type: 'object',
   name: 'resource',
   title: 'Cartões',
   icon: InlineElementIcon,
@@ -38,7 +38,14 @@ export const resourceType = defineType({
             defineField({
               name: 'image',
               type: 'image',
-              title: 'Imagem',
+              options: { hotspot: true },
+              fields: [
+                defineField({
+                  name: 'alt',
+                  type: 'string',
+                  title: 'Texto alternativo',
+                }),
+              ],
             }),
             defineField({
               name: 'title',
@@ -56,27 +63,9 @@ export const resourceType = defineType({
                 ),
             }),
             defineField({
-              name: 'showCTA',
-              type: 'boolean',
-              title: 'Adicionar CTA?',
-            }),
-            defineField({
-              name: 'ctaInfo',
-              type: 'object',
-              title: 'Informações do Botão',
-              fields: [
-                defineField({
-                  name: 'ctaDescription',
-                  type: 'string',
-                  title: 'CTA (Chamada para a ação)',
-                }),
-                defineField({
-                  name: 'ctaLink',
-                  type: 'url',
-                  title: 'Url',
-                }),
-              ],
-              hidden: ({ parent }) => !parent?.showCTA,
+              name: 'cta',
+              title: 'CTA (Chamada Para a Ação)',
+              type: 'cta',
             }),
           ],
         }),

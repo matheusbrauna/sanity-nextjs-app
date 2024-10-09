@@ -33,23 +33,19 @@ export const pageType = defineType({
         // Sections
         defineArrayMember({
           name: 'hero',
-          type: 'reference',
-          to: { type: 'hero' },
+          type: 'hero',
         }),
         defineArrayMember({
           name: 'about',
-          type: 'reference',
-          to: { type: 'about' },
+          type: 'about',
         }),
         defineArrayMember({
           name: 'resource',
-          type: 'reference',
-          to: { type: 'resource' },
+          type: 'resource',
         }),
         defineArrayMember({
           name: 'faq',
-          type: 'reference',
-          to: { type: 'faq' },
+          type: 'faq',
         }),
       ],
     }),

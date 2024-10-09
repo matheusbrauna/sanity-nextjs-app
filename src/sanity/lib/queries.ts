@@ -18,48 +18,58 @@ export const GENERAL_CONFIG_QUERY = defineQuery(`*[_type == "generalConfig"][0]{
   textColor
 }`)
 
-export const FAQ_QUERY = defineQuery(`*[_type == "faq"][0]{
-  'id': _id,
+export const FAQ_QUERY = defineQuery(`*[_type == "page-builder"][0]{
+  '':pageBuilder[_type == "faq" && _key == $key][0]{
+   'id': _key,
   heading,
   description,
-  faqList[]{
-    question,
-    answer,
-    'id': _key
-  }
+    faqList[]{
+      question,
+      answer,
+      'id': _key
+    }
+  },
 }`)
 
-export const HERO_QUERY = defineQuery(`*[_type == "hero"][0]{
-  'id': _id,
-  heading,
-  description,
-  'ctaDescription': ctaInfo.ctaDescription,
-  'ctaLink': ctaInfo.ctaLink,
-  'image':heroImage.asset->url,
-}`)
-
-export const RESOURCE_QUERY = defineQuery(`*[_type == "resource"][0]{
-  'id': _id,
-  heading,
-  description,
-  cardList[]{
-    title,
-    description,
-    showCTA,
-    'ctaDescription': ctaInfo.ctaDescription,
-    'ctaLink': ctaInfo.ctaLink,
+export const HERO_QUERY = defineQuery(`*[_type == "page-builder"][0]{
+  '':pageBuilder[_type == "hero"  && _key == $key][0]{
     'id': _key,
+    heading,
+    description,
+    'ctaDescription': cta.description,
+    'ctaLink': cta.link,
     'image':image.asset->url,
-  }
+    'imageAlt':image.alt
+  },
 }`)
 
-export const ABOUT_QUERY = defineQuery(`*[_type == "about"][0]{
-  'id': _id,
+export const RESOURCE_QUERY = defineQuery(`*[_type == "page-builder"][0]{
+  '':pageBuilder[_type == "resource" && _key == $key][0]{
+   'id': _key,
   heading,
   description,
-  'ctaDescription': ctaInfo.ctaDescription,
-  'ctaLink': ctaInfo.ctaLink,
-  'image':image.asset->url,
+     cardList[]{
+       'id': _key,
+        title,
+        description,
+        'ctaDescription': cta.description,
+        'ctaLink': cta.link,
+        'image':image.asset->url,
+        'imageAlt':image.alt
+     }
+  },
+}`)
+
+export const ABOUT_QUERY = defineQuery(`*[_type == "page-builder"][0]{
+  '':pageBuilder[_type == "about" && _key == $key][0]{
+    'id': _key,
+    heading,
+    description,
+    'ctaDescription': cta.description,
+    'ctaLink': cta.link,
+    'image':image.asset->url,
+    'imageAlt':image.alt
+  },
 }`)
 
 export const PAGEBUILDER_QUERY = defineQuery(`*[_type == "page-builder"][0]{

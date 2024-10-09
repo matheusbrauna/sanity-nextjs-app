@@ -6,7 +6,16 @@ import { heroType } from '@/sanity/schemaTypes/heroType'
 import { resourceType } from '@/sanity/schemaTypes/resourceType'
 import { aboutType } from './aboutType'
 import { pageType } from './page-builder'
+import { ctaType } from './ctaType'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [heroType, resourceType, aboutType, faqType, generalConfig, pageType],
+  types: [
+    heroType,
+    resourceType,
+    aboutType,
+    faqType,
+    generalConfig,
+    pageType,
+    ctaType,
+  ],
 }

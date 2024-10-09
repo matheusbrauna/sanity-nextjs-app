@@ -7,23 +7,29 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowTopRightIcon } from '@sanity/icons'
 
-export default async function AboutSection() {
+export default async function AboutSection(props: {
+  id: string;
+}) {
   const about = await sanityFetch({
     query: ABOUT_QUERY,
+    params: {
+      key: props.id,
+    },
   })
 
   if (!about) {
     return notFound()
   }
 
-  const { heading, description, ctaDescription, ctaLink, image } = about
+  const { heading, description, ctaDescription, ctaLink, image, imageAlt } =
+    about
 
   return (
     <section className="w-full flex justify-center py-12">
       <div className="container">
         <div className="grid gap-6 md:gap-16 w-11/12 items-center px-6 py-6 md:px-28 lg:grid-cols-2 justify-center relative after:content-[''] after:absolute after:top-0 after:right-0 after:h-full after:w-[400%] after:bg-gray-100 after:-z-[1]">
           <AspectRatio ratio={400 / 400}>
-            <Image src={image ?? ''} alt="Description" fill />
+            <Image src={image ?? ''} alt={imageAlt} fill />
           </AspectRatio>
           <div className="space-y-4">
             <div className="space-y-6">

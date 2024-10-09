@@ -7,16 +7,22 @@ import { notFound } from 'next/navigation'
 import { ArrowTopRightIcon } from '@sanity/icons'
 import Link from 'next/link'
 
-export default async function HeroSection() {
+export default async function HeroSection(props: {
+  id: string
+}) {
   const hero = await sanityFetch({
     query: HERO_QUERY,
+    params: {
+      key: props.id,
+    },
   })
 
   if (!hero) {
     return notFound()
   }
 
-  const { heading, description, ctaDescription, ctaLink, image } = hero
+  const { heading, description, ctaDescription, ctaLink, image, imageAlt } =
+    hero
 
   return (
     <section className="w-full flex justify-center py-12 md:py-24 lg:py-32">
@@ -42,7 +48,7 @@ export default async function HeroSection() {
         <AspectRatio ratio={600 / 600}>
           <Image
             src={image ?? ''}
-            alt="Description"
+            alt={imageAlt}
             fill
             className="absolute inset-0 object-cover object-center rounded-md"
           />
