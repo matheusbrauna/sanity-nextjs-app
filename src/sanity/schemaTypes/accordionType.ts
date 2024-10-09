@@ -1,10 +1,10 @@
 import { UlistIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
-export const faqType = defineType({
+export const accordionType = defineType({
   type: 'object',
-  name: 'faq',
-  title: 'Perguntas frequentes',
+  name: 'accordion',
+  title: 'Accordion',
   icon: UlistIcon,
   fields: [
     defineField({
@@ -21,8 +21,8 @@ export const faqType = defineType({
       description: 'Descrição opcional para esta seção',
     }),
     defineField({
-      name: 'faqList',
-      title: 'Lista de Perguntas',
+      name: 'accordionList',
+      title: 'Lista de items',
       description: 'Você pode alterar a ordem da lista movendo os cartões.',
       type: 'array',
       of: [
@@ -30,19 +30,19 @@ export const faqType = defineType({
           type: 'object',
           fields: [
             defineField({
-              name: 'question',
-              title: 'Pergunta',
+              name: 'heading',
+              title: 'Título',
               type: 'string',
               validation: e => e.required(),
             }),
             defineField({
-              name: 'answer',
-              title: 'Resposta',
+              name: 'body',
+              title: 'Texto',
               type: 'text',
               validation: e => e.required(),
             }),
           ],
-          title: 'Pergunta e Resposta',
+          title: 'Corpo do accordion',
         }),
       ],
     }),

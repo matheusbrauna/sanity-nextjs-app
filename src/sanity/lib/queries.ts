@@ -18,14 +18,14 @@ export const GENERAL_CONFIG_QUERY = defineQuery(`*[_type == "generalConfig"][0]{
   textColor
 }`)
 
-export const FAQ_QUERY = defineQuery(`*[_type == "page-builder"][0]{
-  '':pageBuilder[_type == "faq" && _key == $key][0]{
+export const ACCORDION_QUERY = defineQuery(`*[_type == "page-builder"][0]{
+  '':pageBuilder[_type == "accordion" && _key == $key][0]{
    'id': _key,
   heading,
   description,
-    faqList[]{
-      question,
-      answer,
+    accordionList[]{
+      heading,
+      body,
       'id': _key
     }
   },
@@ -60,8 +60,8 @@ export const RESOURCE_QUERY = defineQuery(`*[_type == "page-builder"][0]{
   },
 }`)
 
-export const ABOUT_QUERY = defineQuery(`*[_type == "page-builder"][0]{
-  '':pageBuilder[_type == "about" && _key == $key][0]{
+export const OFFSET_QUERY = defineQuery(`*[_type == "page-builder"][0]{
+  '':pageBuilder[_type == "offset-section" && _key == $key][0]{
     'id': _key,
     heading,
     description,

@@ -2,27 +2,27 @@ import Image from 'next/image'
 import { AspectRatio } from '../ui/aspect-ratio'
 import { Button } from '../ui/button'
 import { sanityFetch } from '@/sanity/lib/client'
-import { ABOUT_QUERY } from '@/sanity/lib/queries'
+import { OFFSET_QUERY } from '@/sanity/lib/queries'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowTopRightIcon } from '@sanity/icons'
 
-export default async function AboutSection(props: {
-  id: string;
+export default async function OffsetSection(props: {
+  id: string
 }) {
-  const about = await sanityFetch({
-    query: ABOUT_QUERY,
+  const data = await sanityFetch({
+    query: OFFSET_QUERY,
     params: {
       key: props.id,
     },
   })
 
-  if (!about) {
+  if (!data) {
     return notFound()
   }
 
   const { heading, description, ctaDescription, ctaLink, image, imageAlt } =
-    about
+    data
 
   return (
     <section className="w-full flex justify-center py-12">

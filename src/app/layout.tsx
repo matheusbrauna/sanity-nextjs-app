@@ -48,7 +48,7 @@ export default async function RootLayout({
       </head>
       <body
         className={cn(
-          'bg-background font-sans antialiased',
+          'bg-background font-sans antialiased flex flex-col justify-center',
           geistSans.variable
         )}
       >

@@ -1,9 +1,9 @@
 import { MasterDetailIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
-export const aboutType = defineType({
-  name: 'about',
-  title: 'Sobre',
+export const offsetType = defineType({
+  name: 'offset-section',
+  title: 'Offset',
   type: 'object',
   icon: MasterDetailIcon,
   fields: [

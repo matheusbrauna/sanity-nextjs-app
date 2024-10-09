@@ -36,16 +36,16 @@ export const pageType = defineType({
           type: 'hero',
         }),
         defineArrayMember({
-          name: 'about',
-          type: 'about',
+          name: 'offset-section',
+          type: 'offset-section',
         }),
         defineArrayMember({
           name: 'resource',
           type: 'resource',
         }),
         defineArrayMember({
-          name: 'faq',
-          type: 'faq',
+          name: 'accordion',
+          type: 'accordion',
         }),
       ],
     }),

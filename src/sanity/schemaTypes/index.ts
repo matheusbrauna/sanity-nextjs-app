@@ -1,10 +1,10 @@
 import type { SchemaTypeDefinition } from 'sanity'
 
 import { generalConfig } from '@/sanity/schemaTypes/general-config'
-import { faqType } from '@/sanity/schemaTypes/faq'
+import { accordionType } from '@/sanity/schemaTypes/accordionType'
 import { heroType } from '@/sanity/schemaTypes/heroType'
 import { resourceType } from '@/sanity/schemaTypes/resourceType'
-import { aboutType } from './aboutType'
+import { offsetType } from './offsetType'
 import { pageType } from './page-builder'
 import { ctaType } from './ctaType'
 
@@ -12,8 +12,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     heroType,
     resourceType,
-    aboutType,
-    faqType,
+    offsetType,
+    accordionType,
     generalConfig,
     pageType,
     ctaType,

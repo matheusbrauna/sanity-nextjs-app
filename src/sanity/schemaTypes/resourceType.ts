@@ -4,10 +4,10 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 export const resourceType = defineType({
   type: 'object',
   name: 'resource',
-  title: 'Cartões',
+  title: 'Cards',
   icon: InlineElementIcon,
   description:
-    'Cartões podem ser usados para agregar informações pequenas e isoladas.',
+    'Cards podem ser usados para agregar informações pequenas e isoladas.',
   fields: [
     defineField({
       type: 'string',
@@ -24,8 +24,8 @@ export const resourceType = defineType({
     }),
     defineField({
       name: 'cardList',
-      title: 'Lista de cartões',
-      description: 'Você pode alterar a ordem dos cartões movendo-os.',
+      title: 'Lista de Cards',
+      description: 'Você pode alterar a ordem dos Cards movendo-os.',
       type: 'array',
       options: {
         layout: 'grid',

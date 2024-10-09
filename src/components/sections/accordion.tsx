@@ -5,24 +5,24 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { sanityFetch } from '@/sanity/lib/client'
-import { FAQ_QUERY } from '@/sanity/lib/queries'
+import { ACCORDION_QUERY } from '@/sanity/lib/queries'
 import { notFound } from 'next/navigation'
 
-export default async function FaqSection(props: {
+export default async function AccordionSection(props: {
   id: string
 }) {
-  const faq = await sanityFetch({
-    query: FAQ_QUERY,
+  const data = await sanityFetch({
+    query: ACCORDION_QUERY,
     params: {
       key: props.id,
     },
   })
 
-  if (!faq) {
+  if (!data) {
     return notFound()
   }
 
-  const { heading, description, faqList } = faq
+  const { heading, description, accordionList } = data
 
   return (
     <section className="w-full flex justify-center py-12 md:py-24 lg:py-32 bg-gray-100">
@@ -39,18 +39,20 @@ export default async function FaqSection(props: {
         </div>
         <div>
           <Accordion type="single" collapsible className="flex flex-col gap-4">
-            {faqList?.map(item => {
+            {accordionList?.map(item => {
+              const { id, heading, body } = item
+
               return (
                 <AccordionItem
-                  value={item.id}
+                  value={id}
                   className="bg-zinc-200 p-2 px-4"
-                  key={item.id}
+                  key={id}
                 >
                   <AccordionTrigger className="text-xl font-normal tracking-normal">
-                    {item.question}
+                    {heading}
                   </AccordionTrigger>
                   <AccordionContent className="text-muted-foreground text-base">
-                    {item.answer}
+                    {body}
                   </AccordionContent>
                 </AccordionItem>
               )
