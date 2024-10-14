@@ -23,45 +23,9 @@ export const generalConfig = defineType({
       title: 'Descrição',
     }),
     defineField({
-      name: 'eventColors',
-      type: 'object',
-      title: 'Cores do evento',
-      fields: [
-        { name: 'primaryColor', type: 'color', title: 'Cor primária' },
-        { name: 'secondaryColor', type: 'color', title: 'Cor secundária' },
-      ],
-    }),
-    defineField({
-      name: 'baseColor',
-      type: 'string',
-      title: 'Cor base',
-      initialValue: '#ffffff',
-      options: {
-        list: [
-          { title: 'Branco', value: '#ffffff' },
-          { title: 'Cinza (claro)', value: '#fafafa' },
-          { title: 'Acinzentado (claro)', value: '#f3f2f1' },
-          { title: 'Preto', value: '#000000' },
-          { title: 'Cinza (escuro)', value: '#0c0d0d' },
-          { title: 'Acinzentado (escuro)', value: '#0f0f10' },
-        ],
-      },
-    }),
-    defineField({
-      name: 'textColor',
-      type: 'string',
-      title: 'Cor do texto',
-      initialValue: '#ffffff',
-      options: {
-        list: [
-          { title: 'Branco', value: '#ffffff' },
-          { title: 'Cinza (claro)', value: '#fafafa' },
-          { title: 'Acinzentado (claro)', value: '#f3f2f1' },
-          { title: 'Preto', value: '#000000' },
-          { title: 'Cinza (escuro)', value: '#0c0d0d' },
-          { title: 'Acinzentado (escuro)', value: '#0f0f10' },
-        ],
-      },
+      name: 'primaryColor',
+      type: 'color',
+      title: 'Cor primária',
     }),
     defineField({
       name: 'roundingOfComponents',
@@ -75,6 +39,12 @@ export const generalConfig = defineType({
           { title: 'Pílula', value: 'pill' },
         ],
       },
+    }),
+    defineField({
+      name: 'darkMode',
+      type: 'boolean',
+      title: 'Habilitar modo noturno?',
+      initialValue: false,
     }),
   ],
 })

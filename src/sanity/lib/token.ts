@@ -13,5 +13,5 @@ if (!token) {
 experimental_taintUniqueValue(
   'Do not pass the Sanity API read token to the client.',
   process,
-  token,
+  token
 )
