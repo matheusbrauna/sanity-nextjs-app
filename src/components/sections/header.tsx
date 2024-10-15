@@ -11,7 +11,7 @@ export function Header() {
           <span className="sr-only">Empresa XPTO</span>
         </Link>
         <nav>
-          <ul className="flex space-x-5">
+          <ul className="flex items-center space-x-5">
             <li>
               <Link
                 href={''}
