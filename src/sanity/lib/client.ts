@@ -1,6 +1,10 @@
-import { createClient, type QueryParams } from 'next-sanity'
+import 'server-only'
+
+import { createClient, type QueryOptions, type QueryParams } from 'next-sanity'
+import { draftMode } from 'next/headers'
 
 import { apiVersion, dataset, projectId } from '../env'
+import { token } from './token'
 
 export const client = createClient({
   projectId,
@@ -24,10 +28,30 @@ export async function sanityFetch<const QueryString extends string>({
   revalidate?: number | false
   tags?: string[]
 }) {
+  const isDraftMode = draftMode().isEnabled
+
+  if (isDraftMode && !token) {
+    throw new Error('Missing environment variable SANITY_API_READ_TOKEN')
+  }
+
+  const queryOptions: QueryOptions = {}
+  let maybeRevalidate = revalidate
+
+  if (isDraftMode) {
+    queryOptions.token = token
+    queryOptions.perspective = 'previewDrafts'
+    queryOptions.stega = true
+
+    maybeRevalidate = 0 // Do not cache in Draft Mode
+  } else if (tags.length) {
+    maybeRevalidate = false // Cache indefinitely if tags supplied
+  }
+
   return client.fetch(query, params, {
+    ...queryOptions,
     next: {
-      revalidate: tags.length ? false : revalidate, // for simple, time-based revalidation
-      tags, // for tag-based revalidation
+      revalidate: maybeRevalidate,
+      tags,
     },
   })
 }

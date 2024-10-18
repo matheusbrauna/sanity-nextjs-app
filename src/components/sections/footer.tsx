@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { Icons } from '@/components/icons'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { ModeToggle } from '../mode-toggle'
 
 export function Footer() {
   return (
@@ -50,7 +49,6 @@ export function Footer() {
                 <span className="sr-only">Facebook</span>
                 <Icons.Facebook className="size-6" />
               </Link>
-              <ModeToggle />
               <Link
                 className="text-muted-foreground transition hover:text-muted-foreground/75"
                 href="#"
