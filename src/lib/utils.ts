@@ -7,7 +7,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-function hexToHsl(hex: string) {
+function hexToHsl(hex?: string | null) {
+  if (!hex) {
+    throw new Error('Invalid HEX value!')
+  }
   // Remove o símbolo '#' se presente
   const hexWithoutHash = hex.replace(/^#/, '')
 

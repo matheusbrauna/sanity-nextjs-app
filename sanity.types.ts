@@ -74,6 +74,24 @@ export type Slug = {
   source?: string;
 };
 
+export type PageBuilder = {
+  _id: string;
+  _type: "page-builder";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  pageBuilder?: Array<{
+    _key: string;
+  } & Hero | {
+    _key: string;
+  } & OffsetSection | {
+    _key: string;
+  } & Resource | {
+    _key: string;
+  } & Accordion>;
+};
+
 export type GeneralConfig = {
   _id: string;
   _type: "generalConfig";
@@ -102,26 +120,22 @@ export type GeneralConfig = {
   roundingOfComponents?: "square" | "rounded" | "pill";
 };
 
-export type Faq = {
-  _id: string;
-  _type: "faq";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  question?: string;
-  answer?: string;
+export type Accordion = {
+  _type: "accordion";
+  heading?: string;
+  description?: string;
+  accordionList?: Array<{
+    heading?: string;
+    body?: string;
+    _key: string;
+  }>;
 };
 
-export type Hero = {
-  _id: string;
-  _type: "hero";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
+export type OffsetSection = {
+  _type: "offset-section";
+  heading?: string;
   description?: string;
-  cta?: string;
-  heroImage?: {
+  image?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -130,8 +144,60 @@ export type Hero = {
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
+    alt?: string;
     _type: "image";
   };
+  cta?: Cta;
+};
+
+export type Resource = {
+  _type: "resource";
+  heading?: string;
+  description?: string;
+  cardList?: Array<{
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
+    title?: string;
+    description?: string;
+    cta?: Cta;
+    _key: string;
+  }>;
+};
+
+export type Hero = {
+  _type: "hero";
+  heading?: string;
+  description?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
+  cta?: Cta;
+};
+
+export type Cta = {
+  _type: "cta";
+  showCTA?: boolean;
+  description?: string;
+  link?: string;
 };
 
 export type SanityImageCrop = {
@@ -224,7 +290,7 @@ export type HslaColor = {
   a?: number;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | GeneralConfig | Faq | Hero | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Color | RgbaColor | HsvaColor | HslaColor;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | PageBuilder | GeneralConfig | Accordion | OffsetSection | Resource | Hero | Cta | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Color | RgbaColor | HsvaColor | HslaColor;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: POSTS_QUERY
@@ -247,21 +313,82 @@ export type GENERAL_CONFIG_QUERYResult = {
   baseColor: "#000000" | "#0c0d0d" | "#0f0f10" | "#f3f2f1" | "#fafafa" | "#ffffff" | null;
   textColor: "#000000" | "#0c0d0d" | "#0f0f10" | "#f3f2f1" | "#fafafa" | "#ffffff" | null;
 } | null;
-// Variable: FAQ_QUERY
-// Query: *[_type == "page-builder"][0]{  '':pageBuilder[_type == "faq" && _key == $key][0]{   'id': _key,  heading,  description,    faqList[]{      question,      answer,      'id': _key    }  },}
-export type FAQ_QUERYResult = null;
+// Variable: ACCORDION_QUERY
+// Query: *[_type == "page-builder"][0]{  '':pageBuilder[_type == "accordion" && _key == $key][0]{   'id': _key,  heading,  description,    accordionList[]{      heading,      body,      'id': _key    }  },}
+export type ACCORDION_QUERYResult = {
+  : {
+    id: string;
+    heading: string | null;
+    description: string | null;
+    accordionList: Array<{
+      heading: string | null;
+      body: string | null;
+      id: string;
+    }> | null;
+  } | null;
+} | null;
 // Variable: HERO_QUERY
 // Query: *[_type == "page-builder"][0]{  '':pageBuilder[_type == "hero"  && _key == $key][0]{    'id': _key,    heading,    description,    'ctaDescription': cta.description,    'ctaLink': cta.link,    'image':image.asset->url,    'imageAlt':image.alt  },}
-export type HERO_QUERYResult = null;
+export type HERO_QUERYResult = {
+  : {
+    id: string;
+    heading: string | null;
+    description: string | null;
+    ctaDescription: string | null;
+    ctaLink: string | null;
+    image: string | null;
+    imageAlt: string | null;
+  } | null;
+} | null;
 // Variable: RESOURCE_QUERY
 // Query: *[_type == "page-builder"][0]{  '':pageBuilder[_type == "resource" && _key == $key][0]{   'id': _key,  heading,  description,     cardList[]{       'id': _key,        title,        description,        'ctaDescription': cta.description,        'ctaLink': cta.link,        'image':image.asset->url,        'imageAlt':image.alt     }  },}
-export type RESOURCE_QUERYResult = null;
-// Variable: ABOUT_QUERY
-// Query: *[_type == "page-builder"][0]{  '':pageBuilder[_type == "about" && _key == $key][0]{    'id': _key,    heading,    description,    'ctaDescription': cta.description,    'ctaLink': cta.link,    'image':image.asset->url,    'imageAlt':image.alt  },}
-export type ABOUT_QUERYResult = null;
+export type RESOURCE_QUERYResult = {
+  : {
+    id: string;
+    heading: string | null;
+    description: string | null;
+    cardList: Array<{
+      id: string;
+      title: string | null;
+      description: string | null;
+      ctaDescription: string | null;
+      ctaLink: string | null;
+      image: string | null;
+      imageAlt: string | null;
+    }> | null;
+  } | null;
+} | null;
+// Variable: OFFSET_QUERY
+// Query: *[_type == "page-builder"][0]{  '':pageBuilder[_type == "offset-section" && _key == $key][0]{    'id': _key,    heading,    description,    'ctaDescription': cta.description,    'ctaLink': cta.link,    'image':image.asset->url,    'imageAlt':image.alt  },}
+export type OFFSET_QUERYResult = {
+  : {
+    id: string;
+    heading: string | null;
+    description: string | null;
+    ctaDescription: string | null;
+    ctaLink: string | null;
+    image: string | null;
+    imageAlt: string | null;
+  } | null;
+} | null;
 // Variable: PAGEBUILDER_QUERY
 // Query: *[_type == "page-builder"][0]{  title,    pageBuilder{    'id': _key,    'componentName':_type    }[]}
-export type PAGEBUILDER_QUERYResult = null;
+export type PAGEBUILDER_QUERYResult = {
+  title: string | null;
+  pageBuilder: Array<{
+    id: string;
+    componentName: "accordion";
+  } | {
+    id: string;
+    componentName: "hero";
+  } | {
+    id: string;
+    componentName: "offset-section";
+  } | {
+    id: string;
+    componentName: "resource";
+  }> | null;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -270,10 +397,10 @@ declare module "@sanity/client" {
     "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage\n}": POST_QUERYResult;
     "*[_type == \"generalConfig\"][0]{\n  eventName, \n  'logo':logo.asset->url,\n  description,\n  eventColors,\n  roundingOfComponents,\n  baseColor,\n  textColor\n}": GENERAL_CONFIG_QUERYResult;
-    "*[_type == \"page-builder\"][0]{\n  '':pageBuilder[_type == \"faq\" && _key == $key][0]{\n   'id': _key,\n  heading,\n  description,\n    faqList[]{\n      question,\n      answer,\n      'id': _key\n    }\n  },\n}": FAQ_QUERYResult;
+    "*[_type == \"page-builder\"][0]{\n  '':pageBuilder[_type == \"accordion\" && _key == $key][0]{\n   'id': _key,\n  heading,\n  description,\n    accordionList[]{\n      heading,\n      body,\n      'id': _key\n    }\n  },\n}": ACCORDION_QUERYResult;
     "*[_type == \"page-builder\"][0]{\n  '':pageBuilder[_type == \"hero\"  && _key == $key][0]{\n    'id': _key,\n    heading,\n    description,\n    'ctaDescription': cta.description,\n    'ctaLink': cta.link,\n    'image':image.asset->url,\n    'imageAlt':image.alt\n  },\n}": HERO_QUERYResult;
     "*[_type == \"page-builder\"][0]{\n  '':pageBuilder[_type == \"resource\" && _key == $key][0]{\n   'id': _key,\n  heading,\n  description,\n     cardList[]{\n       'id': _key,\n        title,\n        description,\n        'ctaDescription': cta.description,\n        'ctaLink': cta.link,\n        'image':image.asset->url,\n        'imageAlt':image.alt\n     }\n  },\n}": RESOURCE_QUERYResult;
-    "*[_type == \"page-builder\"][0]{\n  '':pageBuilder[_type == \"about\" && _key == $key][0]{\n    'id': _key,\n    heading,\n    description,\n    'ctaDescription': cta.description,\n    'ctaLink': cta.link,\n    'image':image.asset->url,\n    'imageAlt':image.alt\n  },\n}": ABOUT_QUERYResult;
+    "*[_type == \"page-builder\"][0]{\n  '':pageBuilder[_type == \"offset-section\" && _key == $key][0]{\n    'id': _key,\n    heading,\n    description,\n    'ctaDescription': cta.description,\n    'ctaLink': cta.link,\n    'image':image.asset->url,\n    'imageAlt':image.alt\n  },\n}": OFFSET_QUERYResult;
     "*[_type == \"page-builder\"][0]{\n  title,\n    pageBuilder{\n    'id': _key,\n    'componentName':_type\n    }[]\n}": PAGEBUILDER_QUERYResult;
   }
 }
