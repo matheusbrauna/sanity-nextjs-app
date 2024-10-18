@@ -58,14 +58,19 @@ async function generateTWColors() {
   })
 
   return {
-    primaryColor: generalConfig?.primaryColor,
+    eventColors: generalConfig?.eventColors,
+    baseColor: generalConfig?.baseColor,
+    textColor: generalConfig?.textColor,
     radius: generalConfig?.roundingOfComponents,
   }
 }
 
 export const generateStyleObject = async () => {
-  const { primaryColor, radius } = await generateTWColors()
-  const primary = hexToHsl(primaryColor?.hex!)
+  const { eventColors, radius, baseColor, textColor } = await generateTWColors()
+  const base = hexToHsl(baseColor!)
+  const text = hexToHsl(textColor!)
+  const primary = hexToHsl(eventColors?.primaryColor?.hex!)
+  const secondary = hexToHsl(eventColors?.secondaryColor?.hex!)
   const borderRadius = radius!
 
   const textMap: Record<typeof borderRadius, string> = {
@@ -75,7 +80,26 @@ export const generateStyleObject = async () => {
   }
 
   const style = {
+    '--background': `${base.h} ${base.s}% ${base.l}%`,
+    '--card': `${base.h} ${base.s}% ${base.l}%`,
+    '--popover': `${base.h} ${base.s}% ${base.l}%`,
+    '--primary-foreground': `${base.h} ${base.s}% ${base.l}%`,
+    '--destructive-foreground': `${base.h} ${base.s}% ${base.l}%`,
+
     '--primary': `${primary.h} ${primary.s}% ${primary.l}%`,
+
+    '--muted-foreground': `${text.h} ${text.s}% 45%`,
+
+    '--secondary': `${secondary.h} ${secondary.s}% 93%`,
+    '--muted': `${secondary.h} ${secondary.s}% 93%`,
+    '--accent': `${secondary.h} ${secondary.s}% 93%`,
+
+    '--foreground': `${text.h} ${text.s}% ${text.l}%`,
+    '--card-foreground': `${text.h} ${text.s}% ${text.l}%`,
+    '--popover-foreground': `${text.h} ${text.s}% ${text.l}%`,
+    '--secondary-foreground': `${text.h} ${text.s}% ${text.l}%`,
+    '--accent-foreground': `${text.h} ${text.s}% ${text.l}%`,
+
     '--radius': textMap[borderRadius],
   }
 

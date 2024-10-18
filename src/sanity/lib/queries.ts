@@ -12,9 +12,10 @@ export const GENERAL_CONFIG_QUERY = defineQuery(`*[_type == "generalConfig"][0]{
   eventName, 
   'logo':logo.asset->url,
   description,
-  primaryColor,
+  eventColors,
   roundingOfComponents,
-  darkMode
+  baseColor,
+  textColor
 }`)
 
 export const ACCORDION_QUERY = defineQuery(`*[_type == "page-builder"][0]{
