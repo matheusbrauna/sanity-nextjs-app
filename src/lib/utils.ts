@@ -68,7 +68,6 @@ async function generateTWColors() {
 
 export const generateStyleObject = async () => {
   const { radius, primaryColor } = await generateTWColors()
-  console.log(primaryColor?.hex)
   const primary = hexToHsl(primaryColor?.hex)
   const borderRadius = radius!
 

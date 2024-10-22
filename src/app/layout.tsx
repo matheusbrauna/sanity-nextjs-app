@@ -7,6 +7,7 @@ import { VisualEditing } from 'next-sanity'
 import { sanityFetch } from '@/sanity/lib/client'
 import { GENERAL_CONFIG_QUERY } from '@/sanity/lib/queries'
 import { notFound } from 'next/navigation'
+import { ThemeProvider } from '@/components/theme-provider'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -55,7 +56,14 @@ export default async function RootLayout({
             Disable preview mode
           </a>
         )}
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
         {draftMode().isEnabled && <VisualEditing />}
       </body>
     </html>
