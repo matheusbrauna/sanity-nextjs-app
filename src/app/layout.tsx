@@ -7,15 +7,11 @@ import { VisualEditing } from 'next-sanity'
 import { sanityFetch } from '@/sanity/lib/client'
 import { GENERAL_CONFIG_QUERY } from '@/sanity/lib/queries'
 import { notFound } from 'next/navigation'
+import { ThemeProvider } from '@/components/theme-provider'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
   variable: '--font-geist-sans',
-  weight: '100 900',
-})
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
   weight: '100 900',
 })
 
@@ -42,9 +38,9 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <title>{generalConfig.eventName}</title>
-        <link rel="icon" type="image/x-icon" href={generalConfig.logo} />
-        <meta name="description" content={generalConfig.description} />
+        <title>{generalConfig.eventName ?? ''}</title>
+        <link rel="icon" type="image/x-icon" href={generalConfig.logo ?? ''} />
+        <meta name="description" content={generalConfig.description ?? ''} />
       </head>
       <body
         className={cn(
@@ -60,7 +56,14 @@ export default async function RootLayout({
             Disable preview mode
           </a>
         )}
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
         {draftMode().isEnabled && <VisualEditing />}
       </body>
     </html>

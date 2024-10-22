@@ -25,7 +25,7 @@ export default async function AccordionSection(props: {
   const { heading, description, accordionList } = data
 
   return (
-    <section className="w-full flex justify-center py-12 md:py-24 lg:py-32 bg-gray-100">
+    <section className="w-full flex justify-center py-12 md:py-24 lg:py-32 bg-secondary">
       <div className="container gap-6 items-center px-6 md:px-28 justify-center">
         <div className="space-y-6 mb-8 md:mb-16">
           <h2 className="text-5xl font-light tracking-tighter leading-tight">
@@ -45,7 +45,7 @@ export default async function AccordionSection(props: {
               return (
                 <AccordionItem
                   value={id}
-                  className="bg-zinc-200 p-2 px-4"
+                  className="p-2 px-4 bg-muted"
                   key={id}
                 >
                   <AccordionTrigger className="text-xl font-normal tracking-normal">

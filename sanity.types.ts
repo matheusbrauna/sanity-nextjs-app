@@ -111,12 +111,7 @@ export type GeneralConfig = {
     _type: "image";
   };
   description?: string;
-  eventColors?: {
-    primaryColor?: Color;
-    secondaryColor?: Color;
-  };
-  baseColor?: "#ffffff" | "#fafafa" | "#f3f2f1" | "#000000" | "#0c0d0d" | "#0f0f10";
-  textColor?: "#ffffff" | "#fafafa" | "#f3f2f1" | "#000000" | "#0c0d0d" | "#0f0f10";
+  primaryColor?: Color;
   roundingOfComponents?: "square" | "rounded" | "pill";
 };
 
