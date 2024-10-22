@@ -1,9 +1,9 @@
 import { InlineElementIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
-export const resourceType = defineType({
+export const cardType = defineType({
   type: 'object',
-  name: 'resource',
+  name: 'card',
   title: 'Cards',
   icon: InlineElementIcon,
   description:

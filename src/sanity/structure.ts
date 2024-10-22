@@ -1,11 +1,13 @@
 import type { StructureResolver } from 'sanity/structure'
+import { singleton } from './utils'
 
 export const structure: StructureResolver = S =>
   S.list()
-    .title('Geral')
+    .title('Conteúdo Geral')
     .items([
-      S.documentTypeListItem('page-builder').title('Layout da Página'),
+      S.documentTypeListItem('page-builder').title('Páginas'),
       S.divider(),
-      S.documentTypeListItem('generalConfig').title('Configurações gerais'),
+      S.documentTypeListItem('navigation').title('Navegação/Links'),
+      singleton(S, 'site').title('Configurações gerais do Site'),
       S.divider(),
     ])

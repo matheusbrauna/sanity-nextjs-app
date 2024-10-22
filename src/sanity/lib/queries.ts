@@ -8,14 +8,12 @@ export const POST_QUERY = defineQuery(`*[_type == "post" && slug.current == $slu
   title, body, mainImage
 }`)
 
-export const GENERAL_CONFIG_QUERY = defineQuery(`*[_type == "generalConfig"][0]{
+export const GENERAL_CONFIG_QUERY = defineQuery(`*[_type == "site"][0]{
   eventName, 
   'logo':logo.asset->url,
   description,
-  eventColors,
+  primaryColor,
   roundingOfComponents,
-  baseColor,
-  textColor
 }`)
 
 export const ACCORDION_QUERY = defineQuery(`*[_type == "page-builder"][0]{

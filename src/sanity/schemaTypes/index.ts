@@ -1,21 +1,23 @@
-import type { SchemaTypeDefinition } from 'sanity'
+import { siteConfig } from '@/sanity/schemaTypes/documents/site-config'
+import { accordionType } from '@/sanity/schemaTypes/modules/accordionType'
+import { heroType } from '@/sanity/schemaTypes/modules/heroType'
+import { cardType } from '@/sanity/schemaTypes/modules/cardType'
+import { offsetType } from './modules/offsetType'
+import { pageType } from './documents/page-builder'
+import { ctaType } from './objects/ctaType'
+import navigation from './documents/navigation'
+import { linkListType } from './objects/linkListType'
+import { LinkType } from './objects/linkType'
 
-import { generalConfig } from '@/sanity/schemaTypes/general-config'
-import { accordionType } from '@/sanity/schemaTypes/accordionType'
-import { heroType } from '@/sanity/schemaTypes/heroType'
-import { resourceType } from '@/sanity/schemaTypes/resourceType'
-import { offsetType } from './offsetType'
-import { pageType } from './page-builder'
-import { ctaType } from './ctaType'
-
-export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [
-    heroType,
-    resourceType,
-    offsetType,
-    accordionType,
-    generalConfig,
-    pageType,
-    ctaType,
-  ],
-}
+export const schemaTypes = [
+  heroType,
+  cardType,
+  offsetType,
+  accordionType,
+  siteConfig,
+  pageType,
+  ctaType,
+  navigation,
+  LinkType,
+  linkListType,
+]

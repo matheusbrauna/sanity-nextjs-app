@@ -16,7 +16,7 @@ export const pageType = defineType({
     defineField({
       name: 'pageBuilder',
       type: 'array',
-      title: 'Page builder',
+      title: 'Módulos da página',
       options: {
         insertMenu: {
           views: [
@@ -40,8 +40,8 @@ export const pageType = defineType({
           type: 'offset-section',
         }),
         defineArrayMember({
-          name: 'resource',
-          type: 'resource',
+          name: 'cards',
+          type: 'card',
         }),
         defineArrayMember({
           name: 'accordion',
