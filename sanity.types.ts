@@ -111,12 +111,7 @@ export type GeneralConfig = {
     _type: "image";
   };
   description?: string;
-  eventColors?: {
-    primaryColor?: Color;
-    secondaryColor?: Color;
-  };
-  baseColor?: "#ffffff" | "#fafafa" | "#f3f2f1" | "#000000" | "#0c0d0d" | "#0f0f10";
-  textColor?: "#ffffff" | "#fafafa" | "#f3f2f1" | "#000000" | "#0c0d0d" | "#0f0f10";
+  primaryColor?: Color;
   roundingOfComponents?: "square" | "rounded" | "pill";
 };
 
@@ -300,18 +295,13 @@ export type POSTS_QUERYResult = Array<never>;
 // Query: *[_type == "post" && slug.current == $slug][0]{  title, body, mainImage}
 export type POST_QUERYResult = null;
 // Variable: GENERAL_CONFIG_QUERY
-// Query: *[_type == "generalConfig"][0]{  eventName,   'logo':logo.asset->url,  description,  eventColors,  roundingOfComponents,  baseColor,  textColor}
+// Query: *[_type == "generalConfig"][0]{  eventName,   'logo':logo.asset->url,  description,  primaryColor,  roundingOfComponents,}
 export type GENERAL_CONFIG_QUERYResult = {
   eventName: string | null;
   logo: string | null;
   description: string | null;
-  eventColors: {
-    primaryColor?: Color;
-    secondaryColor?: Color;
-  } | null;
+  primaryColor: Color | null;
   roundingOfComponents: "pill" | "rounded" | "square" | null;
-  baseColor: "#000000" | "#0c0d0d" | "#0f0f10" | "#f3f2f1" | "#fafafa" | "#ffffff" | null;
-  textColor: "#000000" | "#0c0d0d" | "#0f0f10" | "#f3f2f1" | "#fafafa" | "#ffffff" | null;
 } | null;
 // Variable: ACCORDION_QUERY
 // Query: *[_type == "page-builder"][0]{  '':pageBuilder[_type == "accordion" && _key == $key][0]{   'id': _key,  heading,  description,    accordionList[]{      heading,      body,      'id': _key    }  },}
@@ -396,7 +386,7 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage\n}": POST_QUERYResult;
-    "*[_type == \"generalConfig\"][0]{\n  eventName, \n  'logo':logo.asset->url,\n  description,\n  eventColors,\n  roundingOfComponents,\n  baseColor,\n  textColor\n}": GENERAL_CONFIG_QUERYResult;
+    "*[_type == \"generalConfig\"][0]{\n  eventName, \n  'logo':logo.asset->url,\n  description,\n  primaryColor,\n  roundingOfComponents,\n}": GENERAL_CONFIG_QUERYResult;
     "*[_type == \"page-builder\"][0]{\n  '':pageBuilder[_type == \"accordion\" && _key == $key][0]{\n   'id': _key,\n  heading,\n  description,\n    accordionList[]{\n      heading,\n      body,\n      'id': _key\n    }\n  },\n}": ACCORDION_QUERYResult;
     "*[_type == \"page-builder\"][0]{\n  '':pageBuilder[_type == \"hero\"  && _key == $key][0]{\n    'id': _key,\n    heading,\n    description,\n    'ctaDescription': cta.description,\n    'ctaLink': cta.link,\n    'image':image.asset->url,\n    'imageAlt':image.alt\n  },\n}": HERO_QUERYResult;
     "*[_type == \"page-builder\"][0]{\n  '':pageBuilder[_type == \"resource\" && _key == $key][0]{\n   'id': _key,\n  heading,\n  description,\n     cardList[]{\n       'id': _key,\n        title,\n        description,\n        'ctaDescription': cta.description,\n        'ctaLink': cta.link,\n        'image':image.asset->url,\n        'imageAlt':image.alt\n     }\n  },\n}": RESOURCE_QUERYResult;

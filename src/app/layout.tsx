@@ -13,11 +13,6 @@ const geistSans = localFont({
   variable: '--font-geist-sans',
   weight: '100 900',
 })
-const geistMono = localFont({
-  src: './fonts/GeistMonoVF.woff',
-  variable: '--font-geist-mono',
-  weight: '100 900',
-})
 
 export default async function RootLayout({
   children,
@@ -42,9 +37,9 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <title>{generalConfig.eventName}</title>
-        <link rel="icon" type="image/x-icon" href={generalConfig.logo} />
-        <meta name="description" content={generalConfig.description} />
+        <title>{generalConfig.eventName ?? ''}</title>
+        <link rel="icon" type="image/x-icon" href={generalConfig.logo ?? ''} />
+        <meta name="description" content={generalConfig.description ?? ''} />
       </head>
       <body
         className={cn(
