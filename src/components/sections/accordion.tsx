@@ -22,10 +22,13 @@ export default async function AccordionSection(props: {
     return notFound()
   }
 
-  const { heading, description, accordionList } = data
+  const { idSection, heading, description, accordionList } = data
 
   return (
-    <section className="w-full flex justify-center py-12 md:py-24 lg:py-32 bg-secondary">
+    <section
+      className="w-full flex justify-center py-12 md:py-24 lg:py-32 bg-secondary"
+      id={String(idSection).slice(1)}
+    >
       <div className="container gap-6 items-center px-6 md:px-28 justify-center">
         <div className="space-y-6 mb-8 md:mb-16">
           <h2 className="text-5xl font-light tracking-tighter leading-tight">

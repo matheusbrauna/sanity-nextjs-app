@@ -30,12 +30,6 @@ export const LinkType = defineType({
       },
     }),
     defineField({
-      name: 'internal',
-      type: 'reference',
-      to: [{ type: 'page-builder' }],
-      hidden: ({ parent }) => parent?.type !== 'internal',
-    }),
-    defineField({
       name: 'external',
       placeholder: 'https://www.exemplo.com.br',
       type: 'url',
@@ -48,20 +42,12 @@ export const LinkType = defineType({
     }),
     defineField({
       name: 'params',
-      title: 'Parâmetro URL',
-      placeholder: 'e.g. #seção ou ?foo=bar',
+      title: 'Referência para seção',
+      placeholder: '#seção',
       type: 'string',
+      description: 'Utilize o símbolo "#" para referenciar uma seção na página',
       hidden: ({ parent }) => parent?.type !== 'internal',
     }),
   ],
-  preview: {
-    select: {
-      label: 'label',
-      _type: 'internal._type',
-      title: 'internal.title',
-      slug: 'internal.metadata.slug.current',
-      external: 'externo',
-      params: 'params',
-    },
-  },
+  
 })

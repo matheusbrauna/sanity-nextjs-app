@@ -21,11 +21,21 @@ export default async function OffsetSection(props: {
     return notFound()
   }
 
-  const { heading, description, ctaDescription, ctaLink, image, imageAlt } =
-    data
+  const {
+    heading,
+    description,
+    ctaDescription,
+    ctaLink,
+    image,
+    imageAlt,
+    idSection,
+  } = data
 
   return (
-    <section className="w-full flex justify-center py-12">
+    <section
+      className="w-full flex justify-center py-12"
+      id={String(idSection).slice(1)}
+    >
       <div className="container">
         <div className="grid gap-6 md:gap-16 w-11/12 items-center px-6 py-6 md:px-28 lg:grid-cols-2 justify-center relative after:content-[''] after:absolute after:top-0 after:right-0 after:h-full after:w-[400%] after:bg-secondary after:-z-[1]">
           <AspectRatio ratio={400 / 400}>

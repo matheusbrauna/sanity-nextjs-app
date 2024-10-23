@@ -29,10 +29,13 @@ export default async function ResourceSection(props: {
     return notFound()
   }
 
-  const { heading, description, cardList } = resource
-
+  const { idSection, heading, description, cardList } = resource
+  
   return (
-    <section className="w-full flex justify-center py-12 md:py-24 lg:py-32">
+    <section
+      className="w-full flex justify-center py-12 md:py-24 lg:py-32"
+      id={String(idSection).slice(1)}
+    >
       <div className="container gap-6 items-center px-6 md:px-28 justify-center">
         <div className="space-y-6 mb-8 md:mb-16">
           <h2 className="text-5xl font-light tracking-tighter leading-tight">

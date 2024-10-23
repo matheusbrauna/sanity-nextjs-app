@@ -21,11 +21,21 @@ export default async function HeroSection(props: {
     return notFound()
   }
 
-  const { heading, description, ctaDescription, ctaLink, image, imageAlt } =
-    hero
+  const {
+    idSection,
+    heading,
+    description,
+    ctaDescription,
+    ctaLink,
+    image,
+    imageAlt,
+  } = hero
 
   return (
-    <section className="w-full flex justify-center py-12 md:py-24 lg:py-32">
+    <section
+      className="w-full flex justify-center py-12 md:py-24 lg:py-32"
+      id={String(idSection).slice(1)}
+    >
       <div className="container grid items-center gap-6 px-6 md:px-28 lg:grid-cols-2 lg:gap-10">
         <div className="space-y-4">
           <div className="space-y-6">
