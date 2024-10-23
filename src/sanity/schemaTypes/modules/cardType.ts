@@ -17,6 +17,13 @@ export const cardType = defineType({
       validation: e => e.required(),
     }),
     defineField({
+      name: 'idSection',
+      type: 'string',
+      title: 'ID seção',
+      description:
+        'Utilize o símbolo "#" e de um nome para esse seção. e.g: #sobre-nos',
+    }),
+    defineField({
       type: 'string',
       name: 'description',
       title: 'Descrição',

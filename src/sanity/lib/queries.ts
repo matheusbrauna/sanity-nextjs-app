@@ -1,12 +1,18 @@
 import { defineQuery } from 'next-sanity'
 
-export const POSTS_QUERY = defineQuery(`*[_type == "post" && defined(slug.current)][0...12]{
-  _id, title, slug
-}`)
+export const LINK_QUERY = `
+  ...,
+	internal->{ _type, title }
+`
 
-export const POST_QUERY = defineQuery(`*[_type == "post" && slug.current == $slug][0]{
-  title, body, mainImage
-}`)
+export const NAVIGATION_QUERY = `
+  title,
+	items[]{
+		${LINK_QUERY},
+		link{ ${LINK_QUERY} },
+		links[]{ ${LINK_QUERY} }
+	}
+`
 
 export const GENERAL_CONFIG_QUERY = defineQuery(`*[_type == "site"][0]{
   eventName, 
@@ -14,11 +20,15 @@ export const GENERAL_CONFIG_QUERY = defineQuery(`*[_type == "site"][0]{
   description,
   primaryColor,
   roundingOfComponents,
+  headerMenu->{
+    ${NAVIGATION_QUERY}
+  }
 }`)
 
 export const ACCORDION_QUERY = defineQuery(`*[_type == "page-builder"][0]{
   '':pageBuilder[_type == "accordion" && _key == $key][0]{
    'id': _key,
+   idSection,
   heading,
   description,
     accordionList[]{
@@ -32,6 +42,7 @@ export const ACCORDION_QUERY = defineQuery(`*[_type == "page-builder"][0]{
 export const HERO_QUERY = defineQuery(`*[_type == "page-builder"][0]{
   '':pageBuilder[_type == "hero"  && _key == $key][0]{
     'id': _key,
+    idSection,
     heading,
     description,
     'ctaDescription': cta.description,
@@ -44,6 +55,7 @@ export const HERO_QUERY = defineQuery(`*[_type == "page-builder"][0]{
 export const RESOURCE_QUERY = defineQuery(`*[_type == "page-builder"][0]{
   '':pageBuilder[_type == "resource" && _key == $key][0]{
    'id': _key,
+   idSection,
   heading,
   description,
      cardList[]{
@@ -61,6 +73,7 @@ export const RESOURCE_QUERY = defineQuery(`*[_type == "page-builder"][0]{
 export const OFFSET_QUERY = defineQuery(`*[_type == "page-builder"][0]{
   '':pageBuilder[_type == "offset-section" && _key == $key][0]{
     'id': _key,
+    idSection,
     heading,
     description,
     'ctaDescription': cta.description,

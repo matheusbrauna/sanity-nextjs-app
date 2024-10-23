@@ -288,14 +288,8 @@ export type HslaColor = {
 export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Slug | PageBuilder | GeneralConfig | Accordion | OffsetSection | Resource | Hero | Cta | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Color | RgbaColor | HsvaColor | HslaColor;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
-// Variable: POSTS_QUERY
-// Query: *[_type == "post" && defined(slug.current)][0...12]{  _id, title, slug}
-export type POSTS_QUERYResult = Array<never>;
-// Variable: POST_QUERY
-// Query: *[_type == "post" && slug.current == $slug][0]{  title, body, mainImage}
-export type POST_QUERYResult = null;
 // Variable: GENERAL_CONFIG_QUERY
-// Query: *[_type == "site"][0]{  eventName,   'logo':logo.asset->url,  description,  eventColors,  roundingOfComponents,  baseColor,  textColor}
+// Query: *[_type == "site"][0]{  eventName,   'logo':logo.asset->url,  description,  primaryColor,  roundingOfComponents,  headerMenu->{      title,	items[]{		  ...,	internal->{ _type, title, metadata },		link{   ...,	internal->{ _type, title, metadata } },		links[]{   ...,	internal->{ _type, title, metadata } }	}  }}
 export type GENERAL_CONFIG_QUERYResult = null;
 // Variable: ACCORDION_QUERY
 // Query: *[_type == "page-builder"][0]{  '':pageBuilder[_type == "accordion" && _key == $key][0]{   'id': _key,  heading,  description,    accordionList[]{      heading,      body,      'id': _key    }  },}
@@ -378,9 +372,7 @@ export type PAGEBUILDER_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug\n}": POSTS_QUERYResult;
-    "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage\n}": POST_QUERYResult;
-    "*[_type == \"site\"][0]{\n  eventName, \n  'logo':logo.asset->url,\n  description,\n  eventColors,\n  roundingOfComponents,\n  baseColor,\n  textColor\n}": GENERAL_CONFIG_QUERYResult;
+    "*[_type == \"site\"][0]{\n  eventName, \n  'logo':logo.asset->url,\n  description,\n  primaryColor,\n  roundingOfComponents,\n  headerMenu->{\n    \n  title,\n\titems[]{\n\t\t\n  ...,\n\tinternal->{ _type, title, metadata }\n,\n\t\tlink{ \n  ...,\n\tinternal->{ _type, title, metadata }\n },\n\t\tlinks[]{ \n  ...,\n\tinternal->{ _type, title, metadata }\n }\n\t}\n\n  }\n}": GENERAL_CONFIG_QUERYResult;
     "*[_type == \"page-builder\"][0]{\n  '':pageBuilder[_type == \"accordion\" && _key == $key][0]{\n   'id': _key,\n  heading,\n  description,\n    accordionList[]{\n      heading,\n      body,\n      'id': _key\n    }\n  },\n}": ACCORDION_QUERYResult;
     "*[_type == \"page-builder\"][0]{\n  '':pageBuilder[_type == \"hero\"  && _key == $key][0]{\n    'id': _key,\n    heading,\n    description,\n    'ctaDescription': cta.description,\n    'ctaLink': cta.link,\n    'image':image.asset->url,\n    'imageAlt':image.alt\n  },\n}": HERO_QUERYResult;
     "*[_type == \"page-builder\"][0]{\n  '':pageBuilder[_type == \"resource\" && _key == $key][0]{\n   'id': _key,\n  heading,\n  description,\n     cardList[]{\n       'id': _key,\n        title,\n        description,\n        'ctaDescription': cta.description,\n        'ctaLink': cta.link,\n        'image':image.asset->url,\n        'imageAlt':image.alt\n     }\n  },\n}": RESOURCE_QUERYResult;
