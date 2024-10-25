@@ -57,13 +57,15 @@ export async function Footer() {
             </p>
           </div>
 
-          <NavigationFooter />
+          <div className="flex justify-center">
+            <NavigationFooter />
+          </div>
         </div>
 
-        <p className="mt-12 text-center text-sm text-muted-foreground lg:text-right">
-          Copyright &copy; {new Date().getFullYear()}.{' '}
+        <div className="mt-12 text-center text-sm text-muted-foreground lg:text-right">
+          <p> Copyright &copy; {new Date().getFullYear()}.</p>
           {copyright ? <PortableText value={copyright} /> : eventName}
-        </p>
+        </div>
       </div>
     </footer>
   )
