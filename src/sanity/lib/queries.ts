@@ -34,8 +34,7 @@ export const ACCORDION_QUERY = defineQuery(`*[_type == "page-builder"][0]{
   '':pageBuilder[_type == "accordion" && _key == $key][0]{
    'id': _key,
    idSection,
-  heading,
-  description,
+  content,
     accordionList[]{
       heading,
       body,
@@ -48,8 +47,7 @@ export const HERO_QUERY = defineQuery(`*[_type == "page-builder"][0]{
   '':pageBuilder[_type == "hero"  && _key == $key][0]{
     'id': _key,
     idSection,
-    heading,
-    description,
+   content,
     'ctaDescription': cta.description,
     'ctaLink': cta.link,
     'image':image.asset->url,
@@ -57,12 +55,11 @@ export const HERO_QUERY = defineQuery(`*[_type == "page-builder"][0]{
   },
 }`)
 
-export const RESOURCE_QUERY = defineQuery(`*[_type == "page-builder"][0]{
-  '':pageBuilder[_type == "resource" && _key == $key][0]{
+export const CARD_QUERY = defineQuery(`*[_type == "page-builder"][0]{
+  '':pageBuilder[_type == "card" && _key == $key][0]{
    'id': _key,
    idSection,
-  heading,
-  description,
+  content,
      cardList[]{
        'id': _key,
         title,
@@ -79,8 +76,7 @@ export const OFFSET_QUERY = defineQuery(`*[_type == "page-builder"][0]{
   '':pageBuilder[_type == "offset-section" && _key == $key][0]{
     'id': _key,
     idSection,
-    heading,
-    description,
+    content,
     'ctaDescription': cta.description,
     'ctaLink': cta.link,
     'image':image.asset->url,

@@ -1,3 +1,4 @@
+import { getBlockText } from '@/sanity/utils'
 import { InlineElementIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
@@ -10,10 +11,15 @@ export const cardType = defineType({
     'Cards podem ser usados para agregar informações pequenas e isoladas.',
   fields: [
     defineField({
-      type: 'string',
-      name: 'heading',
-      title: 'Título',
-      description: 'Título da seção',
+      name: 'content',
+      title: 'Conteúdo',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'block',
+        }),
+      ],
+      description: 'Conteúdo da seção',
       validation: e => e.required(),
     }),
     defineField({
@@ -22,12 +28,6 @@ export const cardType = defineType({
       title: 'ID seção',
       description:
         'Utilize o símbolo "#" e de um nome para esse seção. e.g: #sobre-nos',
-    }),
-    defineField({
-      type: 'string',
-      name: 'description',
-      title: 'Descrição',
-      description: 'Descrição opcional para esta seção',
     }),
     defineField({
       name: 'cardList',
@@ -79,4 +79,13 @@ export const cardType = defineType({
       ],
     }),
   ],
+  preview: {
+    select: {
+      content: 'content',
+    },
+    prepare: ({ content }) => ({
+      title: getBlockText(content),
+      subtitle: 'Card',
+    }),
+  },
 })

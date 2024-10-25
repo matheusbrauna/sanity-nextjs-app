@@ -40,7 +40,7 @@ export const pageType = defineType({
           type: 'offset-section',
         }),
         defineArrayMember({
-          name: 'cards',
+          name: 'card',
           type: 'card',
         }),
         defineArrayMember({

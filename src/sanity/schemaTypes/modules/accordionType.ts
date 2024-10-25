@@ -1,3 +1,4 @@
+import { getBlockText } from '@/sanity/utils'
 import { UlistIcon } from '@sanity/icons'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
@@ -8,9 +9,14 @@ export const accordionType = defineType({
   icon: UlistIcon,
   fields: [
     defineField({
-      type: 'string',
-      name: 'heading',
+      name: 'content',
       title: 'Título',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'block',
+        }),
+      ],
       description: 'Título da seção',
       validation: e => e.required(),
     }),
@@ -20,12 +26,6 @@ export const accordionType = defineType({
       title: 'ID seção',
       description:
         'Utilize o símbolo "#" e de um nome para esse seção. e.g: #sobre-nos',
-    }),
-    defineField({
-      type: 'string',
-      name: 'description',
-      title: 'Descrição',
-      description: 'Descrição opcional para esta seção',
     }),
     defineField({
       name: 'accordionList',
@@ -54,4 +54,15 @@ export const accordionType = defineType({
       ],
     }),
   ],
+  preview: {
+    select: {
+      content: 'content',
+      image: 'image',
+    },
+    prepare: ({ content, image }) => ({
+      title: getBlockText(content),
+      subtitle: 'Accordion',
+      image,
+    }),
+  },
 })

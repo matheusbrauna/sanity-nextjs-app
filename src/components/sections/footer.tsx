@@ -9,15 +9,15 @@ import { cn } from '@/lib/utils'
 import NavigationFooter from '../ui/navigation-footer'
 
 export async function Footer() {
-  const footer = await sanityFetch({
+  const data = await sanityFetch({
     query: GENERAL_CONFIG_QUERY,
   })
 
-  if (!footer) {
+  if (!data) {
     return notFound()
   }
 
-  const { eventName, logo, description, copyright } = footer
+  const { eventName, logo, description, copyright } = data
 
   return (
     <footer>

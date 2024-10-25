@@ -1,3 +1,4 @@
+import { getBlockText } from '@/sanity/utils'
 import { MasterDetailIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
@@ -8,9 +9,15 @@ export const offsetType = defineType({
   icon: MasterDetailIcon,
   fields: [
     defineField({
-      name: 'heading',
-      type: 'string',
-      title: 'Título',
+      name: 'content',
+      type: 'array',
+      of: [
+        {
+          type: 'block',
+        },
+      ],
+      title: 'Conteúdo',
+      description: 'Conteúdo da seção',
       validation: e => e.required(),
     }),
     defineField({
@@ -19,15 +26,6 @@ export const offsetType = defineType({
       title: 'ID seção',
       description:
         'Utilize o símbolo "#" e de um nome para esse seção. e.g: #sobre-nos',
-    }),
-    defineField({
-      name: 'description',
-      type: 'text',
-      title: 'Descrição',
-      validation: Rule =>
-        Rule.max(524).warning(
-          'O corpo do texto deve ter no máximo 524 caracteres'
-        ),
     }),
     defineField({
       name: 'image',
@@ -47,4 +45,13 @@ export const offsetType = defineType({
       type: 'cta',
     }),
   ],
+  preview: {
+    select: {
+      content: 'content',
+    },
+    prepare: ({ content }) => ({
+      title: getBlockText(content),
+      subtitle: 'Offset',
+    }),
+  },
 })

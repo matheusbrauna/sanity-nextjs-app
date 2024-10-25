@@ -6,15 +6,15 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import NavigationHeader from '../ui/navigation-header'
 export default async function Header() {
-  const header = await sanityFetch({
+  const data = await sanityFetch({
     query: GENERAL_CONFIG_QUERY,
   })
 
-  if (!header) {
+  if (!data) {
     return notFound()
   }
 
-  const { eventName, logo } = header
+  const { eventName, logo } = data
 
   return (
     <header className="bg-background w-full flex justify-center shadow-sm">

@@ -6,6 +6,7 @@ import { OFFSET_QUERY } from '@/sanity/lib/queries'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowTopRightIcon } from '@sanity/icons'
+import { PortableText } from 'next-sanity'
 
 export default async function OffsetSection(props: {
   id: string
@@ -21,15 +22,7 @@ export default async function OffsetSection(props: {
     return notFound()
   }
 
-  const {
-    heading,
-    description,
-    ctaDescription,
-    ctaLink,
-    image,
-    imageAlt,
-    idSection,
-  } = data
+  const { content, ctaDescription, ctaLink, image, imageAlt, idSection } = data
 
   return (
     <section
@@ -43,12 +36,17 @@ export default async function OffsetSection(props: {
           </AspectRatio>
           <div className="space-y-4">
             <div className="space-y-6">
-              <h2 className="text-5xl font-light tracking-tighter leading-tight">
-                {heading}
-              </h2>
-              <p className="text-muted-foreground text-base w-4/5">
-                {description}
-              </p>
+              <div
+                className="prose
+              prose-h1:text-5xl prose-h1:xl:text-7xl prose-h1:font-semibold prose-h1:tracking-tighter prose-h1:leading-tight
+              prose-h2:text-5xl prose-h2:font-light prose-h2:tracking-tighter prose-h2:leading-tight
+              prose-h3:text-4xl prose-h3:font-light prose-h3:tracking-tighter prose-h3:leading-tight
+              prose-h4:text-3xl prose-h4:font-light prose-h4:tracking-tighter prose-h4:leading-tight
+              prose-p:text-muted-foreground prose-p:md:text-xl/relaxed prose-p:lg:text-base/relaxed prose-p:xl:text-xl/relaxed
+            "
+              >
+                <PortableText value={content} />
+              </div>
             </div>
             {ctaLink && (
               <Button asChild>

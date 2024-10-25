@@ -1,5 +1,6 @@
+import { getBlockText } from '@/sanity/utils'
 import { InlineIcon } from '@sanity/icons'
-import { defineField, defineType } from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
 export const heroType = defineType({
   name: 'hero',
@@ -8,9 +9,15 @@ export const heroType = defineType({
   icon: InlineIcon,
   fields: [
     defineField({
-      name: 'heading',
-      type: 'string',
-      title: 'Título',
+      name: 'content',
+      type: 'array',
+      of: [
+        defineArrayMember({
+          type: 'block',
+        }),
+      ],
+      title: 'Conteúdo',
+      description: 'Conteúdo da seção',
       validation: e => e.required(),
     }),
     defineField({
@@ -19,15 +26,6 @@ export const heroType = defineType({
       title: 'ID seção',
       description:
         'Utilize o símbolo "#" e de um nome para esse seção. e.g: #sobre-nos',
-    }),
-    defineField({
-      name: 'description',
-      type: 'text',
-      title: 'Descrição',
-      validation: Rule =>
-        Rule.max(256).warning(
-          'O corpo do texto deve ter no máximo 256 caracteres'
-        ),
     }),
     defineField({
       name: 'image',
@@ -47,4 +45,13 @@ export const heroType = defineType({
       type: 'cta',
     }),
   ],
+  preview: {
+    select: {
+      content: 'content',
+    },
+    prepare: ({ content }) => ({
+      title: getBlockText(content),
+      subtitle: 'Hero',
+    }),
+  },
 })
