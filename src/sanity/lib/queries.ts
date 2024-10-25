@@ -22,7 +22,9 @@ export const GENERAL_CONFIG_QUERY = defineQuery(`*[_type == "site"][0]{
   roundingOfComponents,
   headerMenu->{
     ${NAVIGATION_QUERY}
-  }
+  },
+  copyright,
+  'ogimage':ogimage.asset->url
 }`)
 
 export const ACCORDION_QUERY = defineQuery(`*[_type == "page-builder"][0]{

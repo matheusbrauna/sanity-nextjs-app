@@ -49,5 +49,16 @@ export const LinkType = defineType({
       hidden: ({ parent }) => parent?.type !== 'internal',
     }),
   ],
-  
+  preview: {
+    select: {
+      title: 'label',
+      _type: 'type',
+      params: 'params',
+      external: 'external',
+    },
+    prepare: ({ _type, title, params, external }) => ({
+      title: title,
+      subtitle: _type === 'internal' ? params : external,
+    }),
+  },
 })

@@ -16,8 +16,6 @@ export default async function NavigationHeader() {
 
   const { headerMenu } = header
 
-  console.log(headerMenu)
-
   return (
     <NavigationMenu>
       <NavigationMenuList>
