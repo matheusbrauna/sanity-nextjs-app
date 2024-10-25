@@ -1,6 +1,6 @@
 import localFont from 'next/font/local'
 import './globals.css'
-import { cn, generateStyleObject } from '@/lib/utils'
+import { generateStyleObject } from '@/lib/generate-style-object'
 import type { CSSProperties } from 'react'
 import { draftMode } from 'next/headers'
 import { VisualEditing } from 'next-sanity'
@@ -8,6 +8,7 @@ import { sanityFetch } from '@/sanity/lib/client'
 import { GENERAL_CONFIG_QUERY } from '@/sanity/lib/queries'
 import { notFound } from 'next/navigation'
 import { ThemeProvider } from '@/components/theme-provider'
+import { cn } from '@/lib/utils'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',

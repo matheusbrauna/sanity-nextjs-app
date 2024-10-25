@@ -3,7 +3,14 @@ import { GENERAL_CONFIG_QUERY } from '@/sanity/lib/queries'
 import { notFound } from 'next/navigation'
 import MenuLinkItem from './menu-link-item'
 import LinkList from './menu-link-list'
-import { NavigationMenu, NavigationMenuList } from './navigation-menu'
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+} from './navigation-menu'
+import Link from 'next/link'
+import { ThemeToggle } from '../theme-toggle'
 
 export default async function NavigationHeader() {
   const header = await sanityFetch({
@@ -31,6 +38,9 @@ export default async function NavigationHeader() {
               return null
           }
         })}
+        <NavigationMenuItem>
+          <ThemeToggle />
+        </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
   )
