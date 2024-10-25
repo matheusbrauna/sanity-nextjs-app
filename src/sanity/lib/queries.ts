@@ -23,6 +23,9 @@ export const GENERAL_CONFIG_QUERY = defineQuery(`*[_type == "site"][0]{
   headerMenu->{
     ${NAVIGATION_QUERY}
   },
+  footerMenu->{
+    ${NAVIGATION_QUERY}
+  },
   copyright,
   'ogimage':ogimage.asset->url
 }`)

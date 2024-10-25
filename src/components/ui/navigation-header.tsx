@@ -19,13 +19,13 @@ export default async function NavigationHeader() {
   return (
     <NavigationMenu>
       <NavigationMenuList>
-        {headerMenu?.items?.map((item, key) => {
+        {headerMenu?.items?.map(item => {
           switch (item._type) {
             case 'link':
-              return <MenuLinkItem link={item} key={key} />
+              return <MenuLinkItem link={item} key={item._key} />
 
             case 'linkList':
-              return <LinkList {...item} key={key} />
+              return <LinkList {...item} key={item._key} />
 
             default:
               return null

@@ -289,7 +289,7 @@ export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: GENERAL_CONFIG_QUERY
-// Query: *[_type == "site"][0]{  eventName,   'logo':logo.asset->url,  description,  primaryColor,  roundingOfComponents,  headerMenu->{      title,	items[]{		  ...,	internal->{ _type, title },		link{   ...,	internal->{ _type, title } },		links[]{   ...,	internal->{ _type, title } }	}  },  copyright,  'ogimage':ogimage.asset->url}
+// Query: *[_type == "site"][0]{  eventName,   'logo':logo.asset->url,  description,  primaryColor,  roundingOfComponents,  headerMenu->{      title,	items[]{		  ...,	internal->{ _type, title },		link{   ...,	internal->{ _type, title } },		links[]{   ...,	internal->{ _type, title } }	}  },  footerMenu->{      title,	items[]{		  ...,	internal->{ _type, title },		link{   ...,	internal->{ _type, title } },		links[]{   ...,	internal->{ _type, title } }	}  },  copyright,  'ogimage':ogimage.asset->url}
 export type GENERAL_CONFIG_QUERYResult = null;
 // Variable: ACCORDION_QUERY
 // Query: *[_type == "page-builder"][0]{  '':pageBuilder[_type == "accordion" && _key == $key][0]{   'id': _key,   idSection,  heading,  description,    accordionList[]{      heading,      body,      'id': _key    }  },}
@@ -376,7 +376,7 @@ export type PAGEBUILDER_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"site\"][0]{\n  eventName, \n  'logo':logo.asset->url,\n  description,\n  primaryColor,\n  roundingOfComponents,\n  headerMenu->{\n    \n  title,\n\titems[]{\n\t\t\n  ...,\n\tinternal->{ _type, title }\n,\n\t\tlink{ \n  ...,\n\tinternal->{ _type, title }\n },\n\t\tlinks[]{ \n  ...,\n\tinternal->{ _type, title }\n }\n\t}\n\n  },\n  copyright,\n  'ogimage':ogimage.asset->url\n}": GENERAL_CONFIG_QUERYResult;
+    "*[_type == \"site\"][0]{\n  eventName, \n  'logo':logo.asset->url,\n  description,\n  primaryColor,\n  roundingOfComponents,\n  headerMenu->{\n    \n  title,\n\titems[]{\n\t\t\n  ...,\n\tinternal->{ _type, title }\n,\n\t\tlink{ \n  ...,\n\tinternal->{ _type, title }\n },\n\t\tlinks[]{ \n  ...,\n\tinternal->{ _type, title }\n }\n\t}\n\n  },\n  footerMenu->{\n    \n  title,\n\titems[]{\n\t\t\n  ...,\n\tinternal->{ _type, title }\n,\n\t\tlink{ \n  ...,\n\tinternal->{ _type, title }\n },\n\t\tlinks[]{ \n  ...,\n\tinternal->{ _type, title }\n }\n\t}\n\n  },\n  copyright,\n  'ogimage':ogimage.asset->url\n}": GENERAL_CONFIG_QUERYResult;
     "*[_type == \"page-builder\"][0]{\n  '':pageBuilder[_type == \"accordion\" && _key == $key][0]{\n   'id': _key,\n   idSection,\n  heading,\n  description,\n    accordionList[]{\n      heading,\n      body,\n      'id': _key\n    }\n  },\n}": ACCORDION_QUERYResult;
     "*[_type == \"page-builder\"][0]{\n  '':pageBuilder[_type == \"hero\"  && _key == $key][0]{\n    'id': _key,\n    idSection,\n    heading,\n    description,\n    'ctaDescription': cta.description,\n    'ctaLink': cta.link,\n    'image':image.asset->url,\n    'imageAlt':image.alt\n  },\n}": HERO_QUERYResult;
     "*[_type == \"page-builder\"][0]{\n  '':pageBuilder[_type == \"resource\" && _key == $key][0]{\n   'id': _key,\n   idSection,\n  heading,\n  description,\n     cardList[]{\n       'id': _key,\n        title,\n        description,\n        'ctaDescription': cta.description,\n        'ctaLink': cta.link,\n        'image':image.asset->url,\n        'imageAlt':image.alt\n     }\n  },\n}": RESOURCE_QUERYResult;

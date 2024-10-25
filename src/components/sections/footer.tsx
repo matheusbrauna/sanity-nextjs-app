@@ -1,16 +1,23 @@
-import { client, sanityFetch } from '@/sanity/lib/client'
+import { sanityFetch } from '@/sanity/lib/client'
 import { GENERAL_CONFIG_QUERY } from '@/sanity/lib/queries'
-import { LogoJsIcon } from '@sanity/icons'
+import { PortableText } from 'next-sanity'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { BackToTop } from '../back-to-top'
+import Image from 'next/image'
+import { cn } from '@/lib/utils'
+import NavigationFooter from '../ui/navigation-footer'
 
 export async function Footer() {
-  const data = await sanityFetch({ query: GENERAL_CONFIG_QUERY })
+  const footer = await sanityFetch({
+    query: GENERAL_CONFIG_QUERY,
+  })
 
-  if (!data) {
+  if (!footer) {
     return notFound()
   }
+
+  const { eventName, logo, description, copyright } = footer
 
   return (
     <footer>
@@ -22,64 +29,40 @@ export async function Footer() {
         <div className="lg:flex lg:items-end lg:justify-between">
           <div>
             <div className="flex justify-center text-primary lg:justify-start">
-              <Link href="#" className="flex items-center" prefetch={false}>
-                <LogoJsIcon fontSize={50} />
-                <span className="sr-only">Empresa XPTO</span>
+              <Link
+                href="#"
+                className={cn('inline-block', logo && 'max-w-[250px]')}
+                prefetch={false}
+              >
+                {logo ? (
+                  <div className="relative w-12 h-12">
+                    <Image
+                      className="inline-block"
+                      src={logo}
+                      alt={eventName}
+                      fill
+                    />
+                  </div>
+                ) : (
+                  <span className="text-gradient text-lg font-medium">
+                    {eventName}
+                  </span>
+                )}
+                <span className="sr-only">{eventName}</span>
               </Link>
             </div>
 
             <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-muted-foreground lg:text-left">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Incidunt
-              consequuntur amet culpa cum itaque neque.
+              {description}
             </p>
           </div>
 
-          <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:mt-0 lg:justify-end lg:gap-12">
-            <li>
-              <a
-                className="text-muted-foreground transition hover:text-muted-foreground/75"
-                href="#services"
-              >
-                {' '}
-                About{' '}
-              </a>
-            </li>
-
-            <li>
-              <a
-                className="text-muted-foreground transition hover:text-muted-foreground/75"
-                href="#services"
-              >
-                {' '}
-                Services{' '}
-              </a>
-            </li>
-
-            <li>
-              <a
-                className="text-muted-foreground transition hover:text-muted-foreground/75"
-                href="#services"
-              >
-                {' '}
-                Projects{' '}
-              </a>
-            </li>
-
-            <li>
-              <a
-                className="text-muted-foreground transition hover:text-muted-foreground/75"
-                href="#services"
-              >
-                {' '}
-                Blog{' '}
-              </a>
-            </li>
-          </ul>
+          <NavigationFooter />
         </div>
 
         <p className="mt-12 text-center text-sm text-muted-foreground lg:text-right">
-          Copyright &copy; {new Date().getFullYear()}. Todos os direitos
-          reservados.
+          Copyright &copy; {new Date().getFullYear()}.{' '}
+          {copyright ? <PortableText value={copyright} /> : eventName}
         </p>
       </div>
     </footer>
