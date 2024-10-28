@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation'
 import { ArrowTopRightIcon } from '@sanity/icons'
 import Link from 'next/link'
 import { PortableText } from 'next-sanity'
+import { cn } from '@/lib/utils'
 
 export default async function HeroSection(props: {
   id: string
@@ -22,7 +23,16 @@ export default async function HeroSection(props: {
     return notFound()
   }
 
-  const { idSection, content, ctaDescription, ctaLink, image, imageAlt } = data
+  const {
+    idSection,
+    content,
+    ctaDescription,
+    ctaLink,
+    image,
+    imageAlt,
+    imageOnRight,
+    imageOnBottom,
+  } = data
 
   return (
     <section
@@ -30,7 +40,13 @@ export default async function HeroSection(props: {
       id={String(idSection).slice(1)}
     >
       <div className="container grid items-center gap-6 px-6 md:px-28 lg:grid-cols-2 lg:gap-10">
-        <div className="space-y-4">
+        <div
+          className={cn(
+            'space-y-4',
+            imageOnRight ? 'lg:order-0' : 'lg:order-1',
+            imageOnBottom ? 'max-lg:order-first' : 'max-lg:order-last'
+          )}
+        >
           <div className="space-y-6">
             <div
               className="prose

@@ -37,6 +37,20 @@ export const heroType = defineType({
           type: 'string',
           title: 'Texto alternativo',
         }),
+        defineField({
+          name: 'onRight',
+          title: 'Exibir à direita',
+          type: 'boolean',
+          description: 'Exibir à direita do conteúdo no computador.',
+          initialValue: true,
+        }),
+        defineField({
+          name: 'onBottom',
+          title: 'Exibir abaixo',
+          type: 'boolean',
+          description: 'Exibir abaixo do conteúdo no celular',
+          initialValue: true,
+        }),
       ],
     }),
     defineField({

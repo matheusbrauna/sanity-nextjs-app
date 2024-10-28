@@ -37,6 +37,20 @@ export const offsetType = defineType({
           type: 'string',
           title: 'Texto alternativo',
         }),
+        defineField({
+          name: 'onRight',
+          title: 'Exibir à direita',
+          type: 'boolean',
+          description: 'Exibir à direita do conteúdo no computador.',
+          initialValue: false,
+        }),
+        defineField({
+          name: 'onBottom',
+          title: 'Exibir abaixo',
+          type: 'boolean',
+          description: 'Exibir abaixo do conteúdo no celular',
+          initialValue: false,
+        }),
       ],
     }),
     defineField({

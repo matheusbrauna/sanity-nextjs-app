@@ -7,6 +7,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { ArrowTopRightIcon } from '@sanity/icons'
 import { PortableText } from 'next-sanity'
+import { cn } from '@/lib/utils'
 
 export default async function OffsetSection(props: {
   id: string
@@ -22,7 +23,16 @@ export default async function OffsetSection(props: {
     return notFound()
   }
 
-  const { content, ctaDescription, ctaLink, image, imageAlt, idSection } = data
+  const {
+    content,
+    ctaDescription,
+    ctaLink,
+    image,
+    imageAlt,
+    idSection,
+    imageOnRight,
+    imageOnBottom,
+  } = data
 
   return (
     <section
@@ -34,7 +44,13 @@ export default async function OffsetSection(props: {
           <AspectRatio ratio={400 / 400}>
             <Image src={image ?? ''} alt={imageAlt} fill />
           </AspectRatio>
-          <div className="space-y-4">
+          <div
+            className={cn(
+              'space-y-4',
+              imageOnRight ? 'lg:-order-1' : 'lg:order-0',
+              imageOnBottom ? 'max-lg:order-first' : 'max-lg:order-last'
+            )}
+          >
             <div className="space-y-6">
               <div
                 className="prose

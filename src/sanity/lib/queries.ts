@@ -51,7 +51,9 @@ export const HERO_QUERY = defineQuery(`*[_type == "page-builder"][0]{
     'ctaDescription': cta.description,
     'ctaLink': cta.link,
     'image':image.asset->url,
-    'imageAlt':image.alt
+    'imageAlt':image.alt,
+    'imageOnRight':image.onRight,
+    'imageOnBottom':image.onBottom,
   },
 }`)
 
@@ -80,7 +82,9 @@ export const OFFSET_QUERY = defineQuery(`*[_type == "page-builder"][0]{
     'ctaDescription': cta.description,
     'ctaLink': cta.link,
     'image':image.asset->url,
-    'imageAlt':image.alt
+    'imageAlt':image.alt,
+    'imageOnRight':image.onRight,
+    'imageOnBottom':image.onBottom,
   },
 }`)
 
