@@ -39,7 +39,7 @@ export async function Footer() {
                     <Image
                       className="inline-block"
                       src={logo}
-                      alt={eventName}
+                      alt={eventName!}
                       fill
                     />
                   </div>

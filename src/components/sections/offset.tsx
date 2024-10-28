@@ -19,7 +19,7 @@ export default async function OffsetSection(props: {
     },
   })
 
-  if (!data) {
+  if (!data?.data) {
     return notFound()
   }
 
@@ -32,17 +32,17 @@ export default async function OffsetSection(props: {
     idSection,
     imageOnRight,
     imageOnBottom,
-  } = data
+  } = data.data
 
   return (
     <section
-      className="w-full flex justify-center py-12"
+      className="w-full flex justify-center overflow-hidden py-12"
       id={String(idSection).slice(1)}
     >
       <div className="container">
-        <div className="grid gap-6 md:gap-16 w-11/12 items-center px-6 py-6 md:px-28 lg:grid-cols-2 justify-center relative after:content-[''] after:absolute after:top-0 after:right-0 after:h-full after:w-[400%] after:bg-secondary after:-z-[1]">
+        <div className="grid gap-6 md:gap-16 w-11/12 items-center py-6 sm:grid-cols-2 justify-center relative after:content-[''] after:absolute after:top-0 after:right-0 after:h-full after:w-[400%] after:bg-secondary after:-z-[1]">
           <AspectRatio ratio={400 / 400}>
-            <Image src={image ?? ''} alt={imageAlt} fill />
+            <Image src={image ?? ''} alt={imageAlt ?? ''} fill />
           </AspectRatio>
           <div
             className={cn(
@@ -61,7 +61,7 @@ export default async function OffsetSection(props: {
               prose-p:text-muted-foreground prose-p:md:text-xl/relaxed prose-p:lg:text-base/relaxed prose-p:xl:text-xl/relaxed
             "
               >
-                <PortableText value={content} />
+                <PortableText value={content!} />
               </div>
             </div>
             {ctaLink && (

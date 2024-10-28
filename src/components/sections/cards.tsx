@@ -26,18 +26,18 @@ export default async function CardSection(props: {
     },
   })
 
-  if (!data) {
+  if (!data?.data) {
     return notFound()
   }
 
-  const { idSection, content, cardList } = data
+  const { idSection, content, cardList } = data.data
 
   return (
     <section
       className="w-full flex justify-center py-12 md:py-24 lg:py-32"
       id={String(idSection).slice(1)}
     >
-      <div className="container gap-6 items-center px-6 md:px-28 justify-center">
+      <div className="container gap-6 items-center justify-center">
         <div className="space-y-6 mb-8 md:mb-16">
           <div
             className="
@@ -49,11 +49,11 @@ export default async function CardSection(props: {
               prose-p:text-muted-foreground prose-p:md:text-xl/relaxed prose-p:lg:text-base/relaxed prose-p:xl:text-xl/relaxed
             "
           >
-            <PortableText value={content} />
+            <PortableText value={content!} />
           </div>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 justify-center">
-          {cardList.map(card => {
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
+          {cardList?.map(card => {
             const {
               id,
               image,
@@ -64,34 +64,64 @@ export default async function CardSection(props: {
               ctaLink,
             } = card
             return (
-              <Card key={id}>
-                <CardHeader className="space-y-4">
-                  <AspectRatio ratio={365 / 200}>
-                    <Image
-                      src={image ?? ''}
-                      alt={imageAlt ?? ''}
-                      fill
-                      className="absolute inset-0 object-cover object-center rounded-md"
-                    />
-                  </AspectRatio>
-                  <CardTitle className="text-2xl font-medium">
-                    {title}
-                  </CardTitle>
-                  <CardDescription className="text-muted-foreground text-base">
-                    {description}
-                  </CardDescription>
-                </CardHeader>
-                <CardFooter>
-                  {ctaLink && (
-                    <Button asChild>
-                      <Link href={ctaLink} target="_blank">
-                        {ctaDescription}
-                        <ArrowTopRightIcon style={{ fontSize: 23 }} />
-                      </Link>
-                    </Button>
-                  )}
-                </CardFooter>
-              </Card>
+              <>
+                <Card key={id}>
+                  <CardHeader className="space-y-4">
+                    <AspectRatio ratio={365 / 200}>
+                      <Image
+                        src={image ?? ''}
+                        alt={imageAlt ?? ''}
+                        fill
+                        className="absolute inset-0 object-cover object-center rounded-md"
+                      />
+                    </AspectRatio>
+                    <CardTitle className="text-2xl font-medium">
+                      {title}
+                    </CardTitle>
+                    <CardDescription className="text-muted-foreground text-base">
+                      {description}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardFooter>
+                    {ctaLink && (
+                      <Button asChild>
+                        <Link href={ctaLink} target="_blank">
+                          {ctaDescription}
+                          <ArrowTopRightIcon style={{ fontSize: 23 }} />
+                        </Link>
+                      </Button>
+                    )}
+                  </CardFooter>
+                </Card>
+                <Card key={id}>
+                  <CardHeader className="space-y-4">
+                    <AspectRatio ratio={365 / 200}>
+                      <Image
+                        src={image ?? ''}
+                        alt={imageAlt ?? ''}
+                        fill
+                        className="absolute inset-0 object-cover object-center rounded-md"
+                      />
+                    </AspectRatio>
+                    <CardTitle className="text-2xl font-medium">
+                      {title}
+                    </CardTitle>
+                    <CardDescription className="text-muted-foreground text-base">
+                      {description}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardFooter>
+                    {ctaLink && (
+                      <Button asChild>
+                        <Link href={ctaLink} target="_blank">
+                          {ctaDescription}
+                          <ArrowTopRightIcon style={{ fontSize: 23 }} />
+                        </Link>
+                      </Button>
+                    )}
+                  </CardFooter>
+                </Card>
+              </>
             )
           })}
         </div>

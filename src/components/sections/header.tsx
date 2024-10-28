@@ -18,7 +18,7 @@ export default async function Header() {
 
   return (
     <header className="bg-background w-full flex justify-center shadow-sm">
-      <div className="flex h-16 items-center justify-between px-4 md:px-6 container">
+      <div className="flex h-16 items-center justify-between container">
         <Link
           href="#"
           className={cn('inline-block', logo && 'max-w-[250px]')}
@@ -26,7 +26,12 @@ export default async function Header() {
         >
           {logo ? (
             <div className="relative w-12 h-12">
-              <Image className="inline-block" src={logo} alt={eventName} fill />
+              <Image
+                className="inline-block"
+                src={logo}
+                alt={eventName!}
+                fill
+              />
             </div>
           ) : (
             <span className="text-gradient text-lg font-medium">

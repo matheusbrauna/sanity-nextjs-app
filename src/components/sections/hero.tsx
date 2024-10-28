@@ -19,7 +19,7 @@ export default async function HeroSection(props: {
     },
   })
 
-  if (!data) {
+  if (!data?.data) {
     return notFound()
   }
 
@@ -32,14 +32,14 @@ export default async function HeroSection(props: {
     imageAlt,
     imageOnRight,
     imageOnBottom,
-  } = data
+  } = data.data
 
   return (
     <section
       className="w-full flex justify-center py-12 md:py-24 lg:py-32"
       id={String(idSection).slice(1)}
     >
-      <div className="container grid items-center gap-6 px-6 md:px-28 lg:grid-cols-2 lg:gap-10">
+      <div className="container grid items-center gap-6 lg:grid-cols-2 lg:gap-10">
         <div
           className={cn(
             'space-y-4',
@@ -57,7 +57,7 @@ export default async function HeroSection(props: {
               prose-p:text-muted-foreground prose-p:md:text-xl/relaxed prose-p:lg:text-base/relaxed prose-p:xl:text-xl/relaxed
             "
             >
-              <PortableText value={content} />
+              <PortableText value={content!} />
             </div>
           </div>
           {ctaLink && (
@@ -72,7 +72,7 @@ export default async function HeroSection(props: {
         <AspectRatio ratio={600 / 600}>
           <Image
             src={image ?? ''}
-            alt={imageAlt}
+            alt={imageAlt ?? ''}
             fill
             className="absolute inset-0 object-cover object-center rounded-md"
           />

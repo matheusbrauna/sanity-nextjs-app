@@ -31,7 +31,7 @@ export const GENERAL_CONFIG_QUERY = defineQuery(`*[_type == "site"][0]{
 }`)
 
 export const ACCORDION_QUERY = defineQuery(`*[_type == "page-builder"][0]{
-  '':pageBuilder[_type == "accordion" && _key == $key][0]{
+  'data':pageBuilder[_type == "accordion" && _key == $key][0]{
    'id': _key,
    idSection,
   content,
@@ -44,7 +44,7 @@ export const ACCORDION_QUERY = defineQuery(`*[_type == "page-builder"][0]{
 }`)
 
 export const HERO_QUERY = defineQuery(`*[_type == "page-builder"][0]{
-  '':pageBuilder[_type == "hero"  && _key == $key][0]{
+  'data':pageBuilder[_type == "hero"  && _key == $key][0]{
     'id': _key,
     idSection,
    content,
@@ -58,7 +58,7 @@ export const HERO_QUERY = defineQuery(`*[_type == "page-builder"][0]{
 }`)
 
 export const CARD_QUERY = defineQuery(`*[_type == "page-builder"][0]{
-  '':pageBuilder[_type == "card" && _key == $key][0]{
+  'data':pageBuilder[_type == "card" && _key == $key][0]{
    'id': _key,
    idSection,
   content,
@@ -75,7 +75,7 @@ export const CARD_QUERY = defineQuery(`*[_type == "page-builder"][0]{
 }`)
 
 export const OFFSET_QUERY = defineQuery(`*[_type == "page-builder"][0]{
-  '':pageBuilder[_type == "offset-section" && _key == $key][0]{
+  'data':pageBuilder[_type == "offset-section" && _key == $key][0]{
     'id': _key,
     idSection,
     content,

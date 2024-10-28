@@ -19,18 +19,18 @@ export default async function AccordionSection(props: {
     },
   })
 
-  if (!data) {
+  if (!data?.data) {
     return notFound()
   }
 
-  const { idSection, content, accordionList } = data
+  const { idSection, content, accordionList } = data.data
 
   return (
     <section
       className="w-full flex justify-center py-12 md:py-24 lg:py-32 bg-secondary"
       id={String(idSection).slice(1)}
     >
-      <div className="container gap-6 items-center px-6 md:px-28 justify-center">
+      <div className="container gap-6 items-center justify-center">
         <div className="space-y-6 mb-8 md:mb-16">
           <div
             className="prose
@@ -41,7 +41,7 @@ export default async function AccordionSection(props: {
               prose-p:text-muted-foreground prose-p:md:text-xl/relaxed prose-p:lg:text-base/relaxed prose-p:xl:text-xl/relaxed
             "
           >
-            <PortableText value={content} />
+            <PortableText value={content!} />
           </div>
         </div>
         <div>
