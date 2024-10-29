@@ -1,7 +1,4 @@
-export function hexToHsl(hex?: string | null) {
-  if (!hex) {
-    throw new Error('Invalid HEX value!')
-  }
+export function hexToHsl(hex = '') {
   // Remove o símbolo '#' se presente
   const hexWithoutHash = hex.replace(/^#/, '')
 

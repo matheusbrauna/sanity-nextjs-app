@@ -50,7 +50,7 @@ export default async function RootLayout({
       </head>
       <body
         className={cn(
-          'bg-background font-sans antialiased flex flex-col justify-center',
+          'min-h-screen bg-background font-sans antialiased',
           geistSans.variable
         )}
       >
