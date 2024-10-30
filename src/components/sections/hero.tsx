@@ -49,8 +49,7 @@ export default async function HeroSection(props: {
         >
           <div className="space-y-6">
             <div
-              className="prose
-              prose-h1:text-foreground prose-strong:text-foreground prose-h1:text-5xl prose-h1:xl:text-7xl prose-h1:font-semibold prose-h1:tracking-tighter prose-h1:leading-tight
+              className="prose prose-h1:text-foreground prose-h2:text-foreground prose-strong:text-foreground prose-h1:text-5xl prose-h1:xl:text-7xl prose-h1:font-semibold prose-h1:tracking-tighter prose-h1:leading-tight
               prose-h2:text-5xl prose-h2:font-light prose-h2:tracking-tighter prose-h2:leading-tight
               prose-h3:text-4xl prose-h3:font-light prose-h3:tracking-tighter prose-h3:leading-tight
               prose-h4:text-3xl prose-h4:font-light prose-h4:tracking-tighter prose-h4:leading-tight
@@ -75,6 +74,8 @@ export default async function HeroSection(props: {
             alt={imageAlt ?? ''}
             fill
             className="absolute inset-0 object-cover object-center rounded-md"
+            priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
           />
         </AspectRatio>
       </div>
