@@ -1,6 +1,5 @@
 'use client'
 
-import { useNoContentFoundModal } from '@/hooks/use-no-content-found-modal'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,13 +11,8 @@ import {
 } from '@/components/ui/alert-dialog'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
-import { buttonVariants } from './ui/button'
-import {
-  ArrowRightIcon,
-  Link1Icon,
-  LinkBreak1Icon,
-} from '@radix-ui/react-icons'
-import { ArrowRight, Link2Icon, Link2Off } from 'lucide-react'
+import { buttonVariants } from '@/components/ui/button'
+import { ArrowRight } from 'lucide-react'
 
 export function NoContentFoundModal({ isOpen }: { isOpen: boolean }) {
   return (
