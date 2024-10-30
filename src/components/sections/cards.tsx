@@ -113,8 +113,7 @@ export default async function CardSection(props: {
                         src={image ?? ''}
                         alt={imageAlt ?? ''}
                         fill
-                        className="absolute inset-0 object-cover object-center rounded-md"
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
+                        className="absolute inset-0 object-contain object-center rounded-md"
                       />
                     </AspectRatio>
                     <CardTitle className="text-2xl font-medium">
