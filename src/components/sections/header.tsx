@@ -21,12 +21,12 @@ export default async function Header() {
       <div className="flex h-16 items-center justify-between container">
         <Link
           href="#"
-          className={cn('inline-block', logo && 'max-w-[250px]')}
+          className='inline-block'
           prefetch={false}
         >
           {logo ? (
             <Image
-              className="max-w-prose max-h-10"
+              className="max-w-prose max-h-14"
               src={logo}
               alt={eventName!}
               width={96}
