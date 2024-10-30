@@ -29,18 +29,14 @@ export async function Footer() {
         <div className="lg:flex lg:items-end lg:justify-between">
           <div>
             <div className="flex justify-center text-primary lg:justify-start">
-              <Link
-                href="#"
-                className={cn('inline-block', logo && 'max-w-[250px]')}
-                prefetch={false}
-              >
+              <Link href="#" className="inline-block" prefetch={false}>
                 {logo ? (
                   <Image
-                    className="max-w-prose max-h-10"
+                    className="max-w-prose max-h-16"
                     src={logo}
                     alt={eventName!}
-                    width={80}
-                    height={80}
+                    width={96}
+                    height={96}
                   />
                 ) : (
                   <span className="text-gradient text-lg font-medium">
