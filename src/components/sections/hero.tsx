@@ -83,7 +83,13 @@ export default async function HeroSection(props: {
             src={image ?? ''}
             alt={imageAlt ?? ''}
             fill
+<<<<<<< HEAD
             className="absolute inset-0 object-contain object-center"
+=======
+            className="absolute inset-0 object-cover object-center rounded-md"
+            priority
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw"
+>>>>>>> e68912bcc81883b9c295de0da1ddf31e9b86ae09
           />
         </AspectRatio>
       </div>
