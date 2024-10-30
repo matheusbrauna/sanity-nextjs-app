@@ -35,14 +35,13 @@ export async function Footer() {
                 prefetch={false}
               >
                 {logo ? (
-                  <div className="relative w-12 h-12">
-                    <Image
-                      className="inline-block"
-                      src={logo}
-                      alt={eventName!}
-                      fill
-                    />
-                  </div>
+                  <Image
+                    className="max-w-prose max-h-10"
+                    src={logo}
+                    alt={eventName!}
+                    width={80}
+                    height={80}
+                  />
                 ) : (
                   <span className="text-gradient text-lg font-medium">
                     {eventName}
