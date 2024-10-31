@@ -1,14 +1,14 @@
 import localFont from 'next/font/local'
 import './globals.css'
+import { ThemeProvider } from '@/components/theme-provider'
 import { generateStyleObject } from '@/lib/generate-style-object'
-import type { CSSProperties } from 'react'
-import { draftMode } from 'next/headers'
-import { VisualEditing } from 'next-sanity'
+import { cn } from '@/lib/utils'
 import { sanityFetch } from '@/sanity/lib/client'
 import { GENERAL_CONFIG_QUERY } from '@/sanity/lib/queries'
+import { VisualEditing } from 'next-sanity'
+import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
-import { ThemeProvider } from '@/components/theme-provider'
-import { cn } from '@/lib/utils'
+import type { CSSProperties } from 'react'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',

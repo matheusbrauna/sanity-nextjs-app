@@ -1,20 +1,20 @@
 'use client'
 
 import { useMediaQuery } from '@/hooks/use-media-query'
-import { useState } from 'react'
-import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet'
-import { Button } from '../ui/button'
-import { Icons } from '../icons'
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
+import { Icons } from '../icons'
+import { ThemeToggle } from '../theme-toggle'
+import { Button } from '../ui/button'
+import MenuLinkItem from '../ui/menu-link-item'
+import LinkList from '../ui/menu-link-list'
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
 } from '../ui/navigation-menu'
-import { ThemeToggle } from '../theme-toggle'
-import MenuLinkItem from '../ui/menu-link-item'
-import LinkList from '../ui/menu-link-list'
+import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet'
 
 type Props = {
   logo: string
@@ -28,9 +28,6 @@ type Props = {
       type?: 'external' | 'internal'
       external?: string
       params?: string
-      internal: null
-      link: null
-      links: null
     }> | null
   }
 }
@@ -73,18 +70,19 @@ export function MobileNav({ logo, eventName, headerMenu }: Props) {
           </div>
           <NavigationMenu>
             <NavigationMenuList className="flex-col w-full">
-              {headerMenu?.items?.map(item => {
-                switch (item._type) {
-                  case 'link':
-                    return <MenuLinkItem link={item} key={item._key} />
-
-                  case 'linkList':
-                    return <LinkList {...item} key={item._key} />
-
-                  default:
-                    return null
-                }
-              })}
+              {headerMenu?.items?.map(item =>
+                item._type === 'link' ? (
+                  <MenuLinkItem link={item} key={item._key} />
+                ) : (
+                  <LinkList
+                    key={item._key}
+                    link={{
+                      label: item.label ?? '',
+                    }}
+                    links={headerMenu.items ?? []}
+                  />
+                )
+              )}
             </NavigationMenuList>
           </NavigationMenu>
         </SheetContent>

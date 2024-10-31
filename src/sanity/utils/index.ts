@@ -28,12 +28,10 @@ export const group = (
 ): ListItemBuilder =>
   S.listItem().title(title).child(S.list().title(title).items(items))
 
-export function count(
-  arr: Array<any>,
-  singular: string = 'item',
-  plural?: string
-) {
-  return `${arr?.length || 0} ${arr?.length === 1 ? singular : plural || singular + 's'}`
+export function count(arr: Array<string>, singular = 'item', plural?: string) {
+  return `${arr?.length || 0} ${
+    arr?.length === 1 ? singular : plural || `${singular}s`
+  }`
 }
 
 export function getBlockText(
@@ -42,7 +40,7 @@ export function getBlockText(
       text: string
     }[]
   }[],
-  lineBreakChar: string = '↵ '
+  lineBreakChar = '↵ '
 ) {
   return (
     block?.reduce((a, c, i) => {

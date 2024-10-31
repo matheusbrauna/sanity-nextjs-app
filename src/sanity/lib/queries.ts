@@ -7,11 +7,9 @@ export const LINK_QUERY = `
 
 export const NAVIGATION_QUERY = `
   title,
-	items[]{
-		${LINK_QUERY},
-		link{ ${LINK_QUERY} },
-		links[]{ ${LINK_QUERY} }
-	}
+  items[]{
+    ...
+  }
 `
 
 export const GENERAL_CONFIG_QUERY = defineQuery(`*[_type == "site"][0]{
@@ -90,7 +88,7 @@ export const OFFSET_QUERY = defineQuery(`*[_type == "page-builder"][0]{
 
 export const PAGEBUILDER_QUERY = defineQuery(`*[_type == "page-builder"][0]{
   title,
-    pageBuilder{
+    'data':pageBuilder{
     'id': _key,
     'componentName':_type
     }[]

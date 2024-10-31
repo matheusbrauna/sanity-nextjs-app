@@ -1,6 +1,6 @@
-import { defineField, defineType } from 'sanity'
-import { LinkIcon } from '@sanity/icons'
 import { count } from '@/sanity/utils'
+import { LinkIcon } from '@sanity/icons'
+import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'navigation',

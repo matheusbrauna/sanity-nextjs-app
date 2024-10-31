@@ -1,13 +1,13 @@
+import { cn } from '@/lib/utils'
+import { sanityFetch } from '@/sanity/lib/client'
+import { HERO_QUERY } from '@/sanity/lib/queries'
+import { ArrowTopRightIcon } from '@sanity/icons'
+import { PortableText } from 'next-sanity'
 import Image from 'next/image'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import { AspectRatio } from '../ui/aspect-ratio'
 import { Button } from '../ui/button'
-import { HERO_QUERY } from '@/sanity/lib/queries'
-import { sanityFetch } from '@/sanity/lib/client'
-import { notFound } from 'next/navigation'
-import { ArrowTopRightIcon } from '@sanity/icons'
-import Link from 'next/link'
-import { PortableText } from 'next-sanity'
-import { cn } from '@/lib/utils'
 
 export default async function HeroSection(props: {
   id: string

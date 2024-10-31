@@ -1,4 +1,11 @@
+import { sanityFetch } from '@/sanity/lib/client'
+import { CARD_QUERY } from '@/sanity/lib/queries'
+import { ArrowTopRightIcon } from '@sanity/icons'
+import { PortableText } from 'next-sanity'
 import Image from 'next/image'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import { AspectRatio } from '../ui/aspect-ratio'
 import { Button } from '../ui/button'
 import {
   Card,
@@ -8,13 +15,6 @@ import {
   CardHeader,
   CardTitle,
 } from '../ui/card'
-import { AspectRatio } from '../ui/aspect-ratio'
-import { sanityFetch } from '@/sanity/lib/client'
-import { CARD_QUERY } from '@/sanity/lib/queries'
-import { notFound } from 'next/navigation'
-import Link from 'next/link'
-import { ArrowTopRightIcon } from '@sanity/icons'
-import { PortableText } from 'next-sanity'
 
 export default async function CardSection(props: {
   id: string

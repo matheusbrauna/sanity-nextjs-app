@@ -8,11 +8,11 @@ export default async function CMSSectionRender() {
     query: PAGEBUILDER_QUERY,
   })
 
-  if (!page?.pageBuilder) {
-    return <NoContentFoundModal isOpen={!page?.pageBuilder} />
+  if (!page?.data) {
+    return <NoContentFoundModal isOpen={!page?.data} />
   }
 
-  return page.pageBuilder.map(section => {
+  return page.data.map(section => {
     const { id, componentName } = section
     const Component = CMSSection[componentName]
 

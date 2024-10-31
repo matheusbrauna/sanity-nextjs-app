@@ -1,7 +1,7 @@
-import OffsetSection from '../sections/offset'
 import AccordionSection from '../sections/accordion'
-import HeroSection from '../sections/hero'
 import CardSection from '../sections/cards'
+import HeroSection from '../sections/hero'
+import OffsetSection from '../sections/offset'
 
 export const CMSSection: Record<
   string,

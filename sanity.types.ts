@@ -436,7 +436,7 @@ export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: GENERAL_CONFIG_QUERY
-// Query: *[_type == "site"][0]{  eventName,   'logo':logo.asset->url,  description,  primaryColor,  roundingOfComponents,  headerMenu->{      title,	items[]{		  ...,	internal->{ _type, title },		link{   ...,	internal->{ _type, title } },		links[]{   ...,	internal->{ _type, title } }	}  },  footerMenu->{      title,	items[]{		  ...,	internal->{ _type, title },		link{   ...,	internal->{ _type, title } },		links[]{   ...,	internal->{ _type, title } }	}  },  copyright,  'ogimage':ogimage.asset->url}
+// Query: *[_type == "site"][0]{  eventName,   'logo':logo.asset->url,  description,  primaryColor,  roundingOfComponents,  headerMenu->{      title,  items[]{    ...  }  },  footerMenu->{      title,  items[]{    ...  }  },  copyright,  'ogimage':ogimage.asset->url}
 export type GENERAL_CONFIG_QUERYResult = {
   eventName: string | null;
   logo: string | null;
@@ -452,9 +452,6 @@ export type GENERAL_CONFIG_QUERYResult = {
       type?: "external" | "internal";
       external?: string;
       params?: string;
-      internal: null;
-      link: null;
-      links: null;
     }> | null;
   } | null;
   footerMenu: {
@@ -466,9 +463,6 @@ export type GENERAL_CONFIG_QUERYResult = {
       type?: "external" | "internal";
       external?: string;
       params?: string;
-      internal: null;
-      link: null;
-      links: null;
     }> | null;
   } | null;
   copyright: Array<{
@@ -622,10 +616,10 @@ export type OFFSET_QUERYResult = {
   } | null;
 } | null;
 // Variable: PAGEBUILDER_QUERY
-// Query: *[_type == "page-builder"][0]{  title,    pageBuilder{    'id': _key,    'componentName':_type    }[]}
+// Query: *[_type == "page-builder"][0]{  title,    'data':pageBuilder{    'id': _key,    'componentName':_type    }[]}
 export type PAGEBUILDER_QUERYResult = {
   title: string | null;
-  pageBuilder: Array<{
+  data: Array<{
     id: string;
     componentName: "accordion";
   } | {
@@ -644,11 +638,11 @@ export type PAGEBUILDER_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"site\"][0]{\n  eventName, \n  'logo':logo.asset->url,\n  description,\n  primaryColor,\n  roundingOfComponents,\n  headerMenu->{\n    \n  title,\n\titems[]{\n\t\t\n  ...,\n\tinternal->{ _type, title }\n,\n\t\tlink{ \n  ...,\n\tinternal->{ _type, title }\n },\n\t\tlinks[]{ \n  ...,\n\tinternal->{ _type, title }\n }\n\t}\n\n  },\n  footerMenu->{\n    \n  title,\n\titems[]{\n\t\t\n  ...,\n\tinternal->{ _type, title }\n,\n\t\tlink{ \n  ...,\n\tinternal->{ _type, title }\n },\n\t\tlinks[]{ \n  ...,\n\tinternal->{ _type, title }\n }\n\t}\n\n  },\n  copyright,\n  'ogimage':ogimage.asset->url\n}": GENERAL_CONFIG_QUERYResult;
+    "*[_type == \"site\"][0]{\n  eventName, \n  'logo':logo.asset->url,\n  description,\n  primaryColor,\n  roundingOfComponents,\n  headerMenu->{\n    \n  title,\n  items[]{\n    ...\n  }\n\n  },\n  footerMenu->{\n    \n  title,\n  items[]{\n    ...\n  }\n\n  },\n  copyright,\n  'ogimage':ogimage.asset->url\n}": GENERAL_CONFIG_QUERYResult;
     "*[_type == \"page-builder\"][0]{\n  'data':pageBuilder[_type == \"accordion\" && _key == $key][0]{\n   'id': _key,\n   idSection,\n  content,\n    accordionList[]{\n      heading,\n      body,\n      'id': _key\n    }\n  },\n}": ACCORDION_QUERYResult;
     "*[_type == \"page-builder\"][0]{\n  'data':pageBuilder[_type == \"hero\"  && _key == $key][0]{\n    'id': _key,\n    idSection,\n   content,\n    'ctaDescription': cta.description,\n    'ctaLink': cta.link,\n    'image':image.asset->url,\n    'imageAlt':image.alt,\n    'imageOnRight':image.onRight,\n    'imageOnBottom':image.onBottom,\n  },\n}": HERO_QUERYResult;
     "*[_type == \"page-builder\"][0]{\n  'data':pageBuilder[_type == \"card\" && _key == $key][0]{\n   'id': _key,\n   idSection,\n  content,\n     cardList[]{\n       'id': _key,\n        title,\n        description,\n        'ctaDescription': cta.description,\n        'ctaLink': cta.link,\n        'image':image.asset->url,\n        'imageAlt':image.alt\n     }\n  },\n}": CARD_QUERYResult;
     "*[_type == \"page-builder\"][0]{\n  'data':pageBuilder[_type == \"offset-section\" && _key == $key][0]{\n    'id': _key,\n    idSection,\n    content,\n    'ctaDescription': cta.description,\n    'ctaLink': cta.link,\n    'image':image.asset->url,\n    'imageAlt':image.alt,\n    'imageOnRight':image.onRight,\n    'imageOnBottom':image.onBottom,\n  },\n}": OFFSET_QUERYResult;
-    "*[_type == \"page-builder\"][0]{\n  title,\n    pageBuilder{\n    'id': _key,\n    'componentName':_type\n    }[]\n}": PAGEBUILDER_QUERYResult;
+    "*[_type == \"page-builder\"][0]{\n  title,\n    'data':pageBuilder{\n    'id': _key,\n    'componentName':_type\n    }[]\n}": PAGEBUILDER_QUERYResult;
   }
 }

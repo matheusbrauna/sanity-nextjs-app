@@ -1,13 +1,13 @@
-import Image from 'next/image'
-import { AspectRatio } from '../ui/aspect-ratio'
-import { Button } from '../ui/button'
+import { cn } from '@/lib/utils'
 import { sanityFetch } from '@/sanity/lib/client'
 import { OFFSET_QUERY } from '@/sanity/lib/queries'
-import { notFound } from 'next/navigation'
-import Link from 'next/link'
 import { ArrowTopRightIcon } from '@sanity/icons'
 import { PortableText } from 'next-sanity'
-import { cn } from '@/lib/utils'
+import Image from 'next/image'
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import { AspectRatio } from '../ui/aspect-ratio'
+import { Button } from '../ui/button'
 
 export default async function OffsetSection(props: {
   id: string

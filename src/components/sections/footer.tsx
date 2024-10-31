@@ -1,11 +1,11 @@
+import { cn } from '@/lib/utils'
 import { sanityFetch } from '@/sanity/lib/client'
 import { GENERAL_CONFIG_QUERY } from '@/sanity/lib/queries'
 import { PortableText } from 'next-sanity'
+import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { BackToTop } from '../back-to-top'
-import Image from 'next/image'
-import { cn } from '@/lib/utils'
 import NavigationFooter from '../ui/navigation-footer'
 
 export async function Footer() {

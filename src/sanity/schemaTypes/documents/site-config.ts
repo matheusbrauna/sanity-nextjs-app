@@ -31,27 +31,27 @@ export const siteConfig = defineType({
       group: 'general',
     }),
     defineField({
-			name: 'copyright',
-			type: 'array',
-			of: [
-				{
-					type: 'block',
-					styles: [{ title: 'Normal', value: 'normal' }],
-				},
-			],
-			group: 'general',
-		}),
+      name: 'copyright',
+      type: 'array',
+      of: [
+        {
+          type: 'block',
+          styles: [{ title: 'Normal', value: 'normal' }],
+        },
+      ],
+      group: 'general',
+    }),
     defineField({
-			name: 'ogimage',
-			title: 'Open Graph Image',
-			description:
-				'Imagem Open Graph: serve para enriquecer a prévia do seu link nas redes sociais.',
-			type: 'image',
-			options: {
-				hotspot: true,
-			},
-			group: 'general',
-		}),
+      name: 'ogimage',
+      title: 'Open Graph Image',
+      description:
+        'Imagem Open Graph: serve para enriquecer a prévia do seu link nas redes sociais.',
+      type: 'image',
+      options: {
+        hotspot: true,
+      },
+      group: 'general',
+    }),
     defineField({
       name: 'primaryColor',
       type: 'color',

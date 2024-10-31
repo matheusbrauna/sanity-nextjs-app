@@ -19,11 +19,7 @@ export default async function Header() {
   return (
     <header className="bg-background w-full hidden lg:flex justify-center shadow-sm">
       <div className="flex h-16 items-center justify-between container">
-        <Link
-          href="#"
-          className='inline-block'
-          prefetch={false}
-        >
+        <Link href="#" className="inline-block" prefetch={false}>
           {logo ? (
             <Image
               className="max-w-prose max-h-14"

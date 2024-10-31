@@ -1,6 +1,6 @@
 import 'server-only'
 
-import { createClient, type QueryOptions, type QueryParams } from 'next-sanity'
+import { type QueryOptions, type QueryParams, createClient } from 'next-sanity'
 import { draftMode } from 'next/headers'
 
 import { apiVersion, dataset, projectId } from '../env'
