@@ -6,15 +6,14 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { Icons } from '../icons'
 import { ThemeToggle } from '../theme-toggle'
-import { Button } from '../ui/button'
-import MenuLinkItem from '../ui/menu-link-item'
-import LinkList from '../ui/menu-link-list'
+import { Button } from './button'
+import MenuLinkItem from './menu-link-item'
+import LinkList from './menu-link-list'
 import {
   NavigationMenu,
-  NavigationMenuItem,
   NavigationMenuList,
-} from '../ui/navigation-menu'
-import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet'
+} from './navigation-menu'
+import { Sheet, SheetContent, SheetTrigger } from './sheet'
 
 type Props = {
   logo: string
@@ -69,21 +68,23 @@ export function MobileNav({ logo, eventName, headerMenu }: Props) {
             </Link>
           </div>
           <NavigationMenu>
-            <NavigationMenuList className="flex-col w-full">
-              {headerMenu?.items?.map(item =>
-                item._type === 'link' ? (
-                  <MenuLinkItem link={item} key={item._key} />
-                ) : (
-                  <LinkList
-                    key={item._key}
-                    link={{
-                      label: item.label ?? '',
-                    }}
-                    links={headerMenu.items ?? []}
-                  />
-                )
-              )}
-            </NavigationMenuList>
+            <div className="w-full">
+              <NavigationMenuList className="flex-col w-full">
+                {headerMenu?.items?.map(item =>
+                  item._type === 'link' ? (
+                    <MenuLinkItem link={item} key={item._key} />
+                  ) : (
+                    <LinkList
+                      key={item._key}
+                      link={{
+                        label: item.label ?? '',
+                      }}
+                      links={headerMenu.items ?? []}
+                    />
+                  )
+                )}
+              </NavigationMenuList>
+            </div>
           </NavigationMenu>
         </SheetContent>
       </Sheet>

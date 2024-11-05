@@ -1,7 +1,7 @@
 import CMSSectionRender from '@/components/cms-render'
 import { Footer } from '@/components/sections/footer'
 import Header from '@/components/sections/header'
-import { MobileNav } from '@/components/sections/mobile-nav'
+import { MobileNav } from '@/components/ui/mobile-nav'
 import { sanityFetch } from '@/sanity/lib/client'
 import { GENERAL_CONFIG_QUERY } from '@/sanity/lib/queries'
 import NotFound from './not-found'
