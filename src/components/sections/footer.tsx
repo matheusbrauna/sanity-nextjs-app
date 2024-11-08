@@ -1,9 +1,12 @@
+'use client'
 import { PortableText } from 'next-sanity'
 import Image from 'next/image'
 import Link from 'next/link'
 import { BackToTop } from '../back-to-top'
 import NavigationFooter from '../ui/navigation-footer'
 import type { IFooter } from '@/types/footerType'
+import { useTheme } from 'next-themes'
+import { getCroppedImageSrc } from '@/sanity/lib/image'
 
 export function Footer({
   eventName,
@@ -12,6 +15,12 @@ export function Footer({
   copyright,
   footerMenu,
 }: IFooter) {
+  const { theme } = useTheme()
+
+  const logoImage = getCroppedImageSrc(
+    theme === 'dark' ? logo.dark : logo.default
+  )
+
   return (
     <footer>
       <div className="relative mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 lg:pt-24">
@@ -25,8 +34,8 @@ export function Footer({
               <Link href="#" className="inline-block" prefetch={false}>
                 {logo ? (
                   <Image
-                    className="max-w-prose max-h-16"
-                    src={logo}
+                    className="max-w-prose max-h-14"
+                    src={logoImage}
                     alt={eventName!}
                     width={96}
                     height={96}

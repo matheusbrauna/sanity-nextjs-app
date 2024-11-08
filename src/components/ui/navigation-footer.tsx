@@ -2,7 +2,7 @@ import LinkList from './menu-link-list'
 import { NavigationMenu, NavigationMenuList } from './navigation-menu'
 import type { IFooter } from '@/types/footerType'
 
-export default async function NavigationFooter({
+export default function NavigationFooter({
   footerMenu,
 }: Pick<IFooter, 'footerMenu'>) {
   return (

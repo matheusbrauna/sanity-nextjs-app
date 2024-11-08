@@ -8,7 +8,7 @@ import {
 import LinkList from './menu-link-list'
 import type { IHeader } from '@/types/headerType'
 
-export default async function NavigationHeader({
+export default function NavigationHeader({
   headerMenu,
 }: Pick<IHeader, 'headerMenu'>) {
   return (

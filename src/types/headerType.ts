@@ -1,5 +1,10 @@
+import type { SanityImageQueryResult } from "./sanityImageQueryResult"
+
 export type IHeader = {
-  logo: string
+  logo: {
+    dark: SanityImageQueryResult
+    default: SanityImageQueryResult
+  }
   eventName: string
   headerMenu: {
     title: string | null

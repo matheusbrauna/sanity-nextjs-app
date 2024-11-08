@@ -12,8 +12,15 @@ import LinkList from './menu-link-list'
 import { NavigationMenu, NavigationMenuList } from './navigation-menu'
 import { Sheet, SheetContent, SheetTrigger } from './sheet'
 import type { IHeader } from '@/types/headerType'
+import { useTheme } from 'next-themes'
+import { getCroppedImageSrc } from '@/sanity/lib/image'
 
 export function MobileNav({ logo, eventName, headerMenu }: IHeader) {
+  const { theme } = useTheme()
+
+  const logoImage = getCroppedImageSrc(
+    theme === 'dark' ? logo.dark : logo.default
+  )
   const isDesktop = useMediaQuery('(min-width: 1024px)')
   const [open, setOpen] = useState(false)
 
@@ -41,7 +48,7 @@ export function MobileNav({ logo, eventName, headerMenu }: IHeader) {
             >
               <Image
                 className="max-w-prose max-h-10"
-                src={logo}
+                src={logoImage}
                 alt={eventName!}
                 width={96}
                 height={96}

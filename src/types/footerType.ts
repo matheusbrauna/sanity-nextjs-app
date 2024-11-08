@@ -1,5 +1,10 @@
+import type { SanityImageQueryResult } from './sanityImageQueryResult'
+
 export type IFooter = {
-  logo: string
+  logo: {
+    dark: SanityImageQueryResult
+    default: SanityImageQueryResult
+  }
   eventName: string
   footerMenu: {
     title: string | null
