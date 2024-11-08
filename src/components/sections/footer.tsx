@@ -1,24 +1,17 @@
-import { cn } from '@/lib/utils'
-import { sanityFetch } from '@/sanity/lib/client'
-import { GENERAL_CONFIG_QUERY } from '@/sanity/lib/queries'
 import { PortableText } from 'next-sanity'
 import Image from 'next/image'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
 import { BackToTop } from '../back-to-top'
 import NavigationFooter from '../ui/navigation-footer'
+import type { IFooter } from '@/types/footerType'
 
-export async function Footer() {
-  const data = await sanityFetch({
-    query: GENERAL_CONFIG_QUERY,
-  })
-
-  if (!data) {
-    return notFound()
-  }
-
-  const { eventName, logo, description, copyright } = data
-
+export function Footer({
+  eventName,
+  logo,
+  description,
+  copyright,
+  footerMenu,
+}: IFooter) {
   return (
     <footer>
       <div className="relative mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 lg:pt-24">
@@ -53,7 +46,7 @@ export async function Footer() {
           </div>
 
           <div className="flex justify-center">
-            <NavigationFooter />
+            <NavigationFooter footerMenu={footerMenu} />
           </div>
         </div>
 

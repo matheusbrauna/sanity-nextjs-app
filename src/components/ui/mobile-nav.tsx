@@ -9,29 +9,11 @@ import { ThemeToggle } from '../theme-toggle'
 import { Button } from './button'
 import MenuLinkItem from './menu-link-item'
 import LinkList from './menu-link-list'
-import {
-  NavigationMenu,
-  NavigationMenuList,
-} from './navigation-menu'
+import { NavigationMenu, NavigationMenuList } from './navigation-menu'
 import { Sheet, SheetContent, SheetTrigger } from './sheet'
+import type { IHeader } from '@/types/headerType'
 
-type Props = {
-  logo: string
-  eventName: string
-  headerMenu: {
-    title: string | null
-    items: Array<{
-      _key: string
-      _type: 'link'
-      label?: string
-      type?: 'external' | 'internal'
-      external?: string
-      params?: string
-    }> | null
-  }
-}
-
-export function MobileNav({ logo, eventName, headerMenu }: Props) {
+export function MobileNav({ logo, eventName, headerMenu }: IHeader) {
   const isDesktop = useMediaQuery('(min-width: 1024px)')
   const [open, setOpen] = useState(false)
 

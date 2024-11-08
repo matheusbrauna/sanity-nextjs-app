@@ -16,6 +16,7 @@ import {
   CardTitle,
 } from '../ui/card'
 import ProseText from '../prose'
+import { getCroppedImageSrc } from '@/sanity/lib/image'
 
 export default async function CardSection(props: {
   id: string
@@ -40,7 +41,7 @@ export default async function CardSection(props: {
     >
       <div className="container gap-6 items-center justify-center">
         <div className="space-y-6 mb-8 md:mb-16">
-        <ProseText>
+          <ProseText>
             <PortableText value={content!} />
           </ProseText>
         </div>
@@ -55,41 +56,14 @@ export default async function CardSection(props: {
               ctaDescription,
               ctaLink,
             } = card
+            const imageUrl = getCroppedImageSrc(image!)
             return (
               <>
                 <Card key={id}>
                   <CardHeader className="space-y-4">
                     <AspectRatio ratio={365 / 200}>
                       <Image
-                        src={image ?? ''}
-                        alt={imageAlt ?? ''}
-                        fill
-                        className="absolute inset-0 object-contain object-center rounded-md"
-                      />
-                    </AspectRatio>
-                    <CardTitle className="text-2xl font-medium">
-                      {title}
-                    </CardTitle>
-                    <CardDescription className="text-muted-foreground text-base">
-                      {description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardFooter>
-                    {ctaLink && (
-                      <Button asChild>
-                        <Link href={ctaLink} target="_blank">
-                          {ctaDescription}
-                          <ArrowTopRightIcon style={{ fontSize: 23 }} />
-                        </Link>
-                      </Button>
-                    )}
-                  </CardFooter>
-                </Card>
-                <Card key={id}>
-                  <CardHeader className="space-y-4">
-                    <AspectRatio ratio={365 / 200}>
-                      <Image
-                        src={image ?? ''}
+                        src={imageUrl ?? ''}
                         alt={imageAlt ?? ''}
                         fill
                         className="absolute inset-0 object-contain object-center rounded-md"

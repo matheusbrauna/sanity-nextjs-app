@@ -20,9 +20,40 @@ export const siteConfig = defineType({
     }),
     defineField({
       name: 'logo',
-      type: 'image',
-      title: 'Logo',
+      type: 'object',
       group: 'general',
+      options: {
+        columns: 3,
+      },
+      fields: [
+        defineField({
+          name: 'favicon',
+          title: 'Favicon',
+          description:
+            'Ícone pequeno associado ao site, exibido na aba do navegador.',
+          type: 'image',
+          options: {
+            hotspot: true,
+          },
+        }),
+        defineField({
+          name: 'default',
+          title: 'Padrão',
+          description: 'Padrão, também será usado no modo light.',
+          type: 'image',
+          options: {
+            hotspot: true,
+          },
+        }),
+        defineField({
+          name: 'dark',
+          description: 'Variação da logo para o modo escuro.',
+          type: 'image',
+          options: {
+            hotspot: true,
+          },
+        }),
+      ],
     }),
     defineField({
       name: 'description',

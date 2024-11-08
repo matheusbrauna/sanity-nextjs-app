@@ -6,9 +6,10 @@ import { PortableText } from 'next-sanity'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { AspectRatio } from '../ui/aspect-ratio'
 import { Button } from '../ui/button'
 import ProseText from '../prose'
+import { getCroppedImageSrc } from '@/sanity/lib/image'
+import { getImageDimensions } from '@sanity/asset-utils'
 
 export default async function HeroSection(props: {
   id: string
@@ -35,12 +36,15 @@ export default async function HeroSection(props: {
     imageOnBottom,
   } = data.data
 
+  const imageUrl = await getCroppedImageSrc(image!)
+  const { width, height } = await getImageDimensions(imageUrl)
+
   return (
     <section
       className="w-full flex justify-center py-12 md:py-24 lg:py-32"
       id={String(idSection).slice(1)}
     >
-      <div className="container grid items-center gap-6 lg:grid-cols-2 lg:gap-10">
+      <div className="container grid items-center gap-16 lg:grid-cols-2 lg:gap-10">
         <div
           className={cn(
             'space-y-4',
@@ -62,15 +66,15 @@ export default async function HeroSection(props: {
             </Button>
           )}
         </div>
-        <AspectRatio ratio={600 / 600}>
+        <div className="flex items-center justify-center">
           <Image
-            src={image ?? ''}
+            src={imageUrl}
             alt={imageAlt ?? ''}
-            fill
-            className="absolute inset-0 object-contain object-center"
+            width={width}
+            height={height}
             priority
           />
-        </AspectRatio>
+        </div>
       </div>
     </section>
   )

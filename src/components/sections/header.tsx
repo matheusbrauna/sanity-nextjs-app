@@ -1,21 +1,9 @@
-import { cn } from '@/lib/utils'
-import { sanityFetch } from '@/sanity/lib/client'
-import { GENERAL_CONFIG_QUERY } from '@/sanity/lib/queries'
 import Image from 'next/image'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
 import NavigationHeader from '../ui/navigation-header'
-export default async function Header() {
-  const data = await sanityFetch({
-    query: GENERAL_CONFIG_QUERY,
-  })
+import type { IHeader } from '@/types/headerType'
 
-  if (!data) {
-    return notFound()
-  }
-
-  const { eventName, logo } = data
-
+export function Header({ logo, eventName, headerMenu }: IHeader) {
   return (
     <header className="bg-background w-full hidden lg:flex justify-center shadow-sm">
       <div className="flex h-16 items-center justify-between container">
@@ -36,7 +24,7 @@ export default async function Header() {
           <span className="sr-only">{eventName}</span>
         </Link>
 
-        <NavigationHeader />
+        <NavigationHeader headerMenu={headerMenu} />
       </div>
     </header>
   )
