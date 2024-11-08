@@ -17,9 +17,10 @@ export function Footer({
 }: IFooter) {
   const { theme } = useTheme()
 
-  const logoImage = getCroppedImageSrc(
-    theme === 'dark' ? logo.dark : logo.default
-  )
+  const currentLogo =
+    theme === 'dark' ? (logo && logo?.dark!) || logo.default : logo.default
+
+  const logoImage = getCroppedImageSrc(currentLogo)
 
   return (
     <footer>

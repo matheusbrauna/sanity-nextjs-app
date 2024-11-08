@@ -18,9 +18,11 @@ import { getCroppedImageSrc } from '@/sanity/lib/image'
 export function MobileNav({ logo, eventName, headerMenu }: IHeader) {
   const { theme } = useTheme()
 
-  const logoImage = getCroppedImageSrc(
-    theme === 'dark' ? logo.dark : logo.default
-  )
+  const currentLogo =
+    theme === 'dark' ? (logo && logo?.dark!) || logo.default : logo.default
+
+  const logoImage = getCroppedImageSrc(currentLogo)
+
   const isDesktop = useMediaQuery('(min-width: 1024px)')
   const [open, setOpen] = useState(false)
 

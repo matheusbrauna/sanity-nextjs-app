@@ -9,9 +9,11 @@ import { getCroppedImageSrc } from '@/sanity/lib/image'
 export function Header({ logo, eventName, headerMenu }: IHeader) {
   const { theme } = useTheme()
 
-  const logoImage = getCroppedImageSrc(
-    theme === 'dark' ? logo.dark : logo.default
-  )
+  const currentLogo =
+    theme === 'dark' ? (logo && logo?.dark!) || logo.default : logo.default
+
+  const logoImage = getCroppedImageSrc(currentLogo)
+
   return (
     <header className="bg-background w-full hidden lg:flex justify-center shadow-sm">
       <div className="flex h-16 items-center justify-between container">
