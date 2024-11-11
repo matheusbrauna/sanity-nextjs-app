@@ -6,8 +6,10 @@ import { PortableText } from 'next-sanity'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { AspectRatio } from '../ui/aspect-ratio'
 import { Button } from '../ui/button'
+import ProseText from '../prose'
+import { getImageDimensions } from '@sanity/asset-utils'
+import { getCroppedImageSrc } from '@/sanity/lib/image'
 
 export default async function OffsetSection(props: {
   id: string
@@ -34,22 +36,25 @@ export default async function OffsetSection(props: {
     imageOnBottom,
   } = data.data
 
+  const imageUrl = await getCroppedImageSrc(image!)
+  const { width, height } = await getImageDimensions(imageUrl)
+
   return (
     <section
-      className="w-full flex justify-center overflow-hidden py-12"
+      className="w-full flex justify-center py-12 md:py-24 lg:py-32 overflow-hidden"
       id={String(idSection).slice(1)}
     >
       <div className="container">
-        <div className="grid gap-6 md:gap-16 w-11/12 items-center py-6 sm:grid-cols-2 justify-center relative after:rounded-md after:content-[''] after:absolute after:top-0 after:right-0 after:h-full after:w-[400%] after:bg-secondary after:-z-[1]">
-          <AspectRatio ratio={400 / 400}>
+        <div className="grid gap-16 md:gap-16 w-full items-center py-6 sm:grid-cols-2 justify-center relative after:rounded-md after:content-[''] after:absolute after:top-0 after:right-0 after:h-full after:w-[400%] after:bg-secondary after:-z-[1]">
+          <div className="flex items-center justify-center">
             <Image
-              src={image ?? ''}
+              src={imageUrl}
               alt={imageAlt ?? ''}
-              fill
-              className="absolute inset-0 object-contain object-center"
+              width={width}
+              height={height}
               priority
             />
-          </AspectRatio>
+          </div>
           <div
             className={cn(
               'space-y-4',
@@ -58,27 +63,9 @@ export default async function OffsetSection(props: {
             )}
           >
             <div className="space-y-6">
-              <div
-                className="
-                prose
-                prose-h1:text-foreground
-                prose-h2:text-foreground
-                prose-h3:text-foreground
-                prose-h4:text-foreground
-                prose-h5:text-foreground
-                prose-h6:text-foreground
-                prose-strong:text-foreground
-                prose-h1:text-5xl prose-h1:xl:text-7xl prose-h1:font-semibold prose-h1:tracking-tighter prose-h1:leading-tight
-                prose-h2:text-5xl prose-h2:font-light prose-h2:tracking-tighter prose-h2:leading-tight
-                prose-h3:text-4xl prose-h3:font-light prose-h3:tracking-tighter prose-h3:leading-tight
-                prose-h4:text-3xl prose-h4:font-light prose-h4:tracking-tighter prose-h4:leading-tight
-                prose-h5:text-3xl prose-h5:font-light prose-h5:tracking-tighter prose-h5:leading-tight
-                prose-h6:text-3xl prose-h6:font-light prose-h6:tracking-tighter prose-h6:leading-tight
-                prose-p:text-muted-foreground prose-p:md:text-xl/relaxed prose-p:lg:text-base/relaxed prose-p:xl:text-xl/relaxed
-                "
-              >
+              <ProseText>
                 <PortableText value={content!} />
-              </div>
+              </ProseText>
             </div>
             {ctaLink && (
               <Button asChild>

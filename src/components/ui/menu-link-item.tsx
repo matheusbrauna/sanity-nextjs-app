@@ -4,6 +4,7 @@ import {
   NavigationMenuLink,
   navigationMenuTriggerStyle,
 } from './navigation-menu'
+import { cn } from '@/lib/utils'
 
 type Props = {
   link: {
@@ -19,9 +20,14 @@ type Props = {
 export default function MenuLinkItem({ link }: Props) {
   if (link?.type === 'internal')
     return (
-      <NavigationMenuItem>
+      <NavigationMenuItem className="w-full lg:max-w-fit">
         <Link href={link?.params ?? ''} legacyBehavior passHref>
-          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+          <NavigationMenuLink
+            className={cn(
+              navigationMenuTriggerStyle(),
+              'w-full lg:max-w-fit justify-start'
+            )}
+          >
             {link?.label}
           </NavigationMenuLink>
         </Link>
@@ -30,10 +36,13 @@ export default function MenuLinkItem({ link }: Props) {
 
   if (link?.type === 'external' && link.external)
     return (
-      <NavigationMenuItem>
+      <NavigationMenuItem className="w-full lg:max-w-fit">
         <Link href={link.external} legacyBehavior passHref>
           <NavigationMenuLink
-            className={navigationMenuTriggerStyle()}
+            className={cn(
+              navigationMenuTriggerStyle(),
+              'w-full lg:max-w-fit justify-start'
+            )}
             target="_blank"
           >
             {link?.label}

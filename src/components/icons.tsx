@@ -5,7 +5,8 @@ export type IconProps = HTMLAttributes<SVGElement>
 export const Icons = {
   Facebook: ({ ...props }: IconProps) => (
     <svg
-      className="size-6"
+      width={50}
+      height={50}
       fill="currentColor"
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -20,7 +21,8 @@ export const Icons = {
   ),
   Instagram: ({ ...props }: IconProps) => (
     <svg
-      className="size-6"
+      width={50}
+      height={50}
       fill="currentColor"
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -35,7 +37,8 @@ export const Icons = {
   ),
   Twitter: ({ ...props }: IconProps) => (
     <svg
-      className="size-6"
+      width={50}
+      height={50}
       fill="currentColor"
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -46,7 +49,8 @@ export const Icons = {
   ),
   GitHub: ({ ...props }: IconProps) => (
     <svg
-      className="size-6"
+      width={50}
+      height={50}
       fill="currentColor"
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -61,7 +65,8 @@ export const Icons = {
   ),
   Dribbble: ({ ...props }: IconProps) => (
     <svg
-      className="size-6"
+      width={50}
+      height={50}
       fill="currentColor"
       viewBox="0 0 24 24"
       aria-hidden="true"
@@ -76,6 +81,8 @@ export const Icons = {
   ),
   menu: ({ ...props }: IconProps) => (
     <svg
+      width={50}
+      height={50}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 24 24"
       fill="none"

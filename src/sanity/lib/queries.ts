@@ -14,7 +14,11 @@ export const NAVIGATION_QUERY = `
 
 export const GENERAL_CONFIG_QUERY = defineQuery(`*[_type == "site"][0]{
   eventName, 
-  'logo':logo.asset->url,
+  logo{
+    favicon,
+    default,
+    dark,
+  },
   description,
   primaryColor,
   roundingOfComponents,
@@ -25,7 +29,7 @@ export const GENERAL_CONFIG_QUERY = defineQuery(`*[_type == "site"][0]{
     ${NAVIGATION_QUERY}
   },
   copyright,
-  'ogimage':ogimage.asset->url
+  ogimage
 }`)
 
 export const ACCORDION_QUERY = defineQuery(`*[_type == "page-builder"][0]{
@@ -48,7 +52,7 @@ export const HERO_QUERY = defineQuery(`*[_type == "page-builder"][0]{
    content,
     'ctaDescription': cta.description,
     'ctaLink': cta.link,
-    'image':image.asset->url,
+    'image':image,
     'imageAlt':image.alt,
     'imageOnRight':image.onRight,
     'imageOnBottom':image.onBottom,
@@ -66,7 +70,7 @@ export const CARD_QUERY = defineQuery(`*[_type == "page-builder"][0]{
         description,
         'ctaDescription': cta.description,
         'ctaLink': cta.link,
-        'image':image.asset->url,
+        'image':image,
         'imageAlt':image.alt
      }
   },
@@ -79,7 +83,7 @@ export const OFFSET_QUERY = defineQuery(`*[_type == "page-builder"][0]{
     content,
     'ctaDescription': cta.description,
     'ctaLink': cta.link,
-    'image':image.asset->url,
+    'image':image,
     'imageAlt':image.alt,
     'imageOnRight':image.onRight,
     'imageOnBottom':image.onBottom,

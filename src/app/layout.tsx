@@ -9,6 +9,7 @@ import { VisualEditing } from 'next-sanity'
 import { draftMode } from 'next/headers'
 import { notFound } from 'next/navigation'
 import type { CSSProperties } from 'react'
+import { getCroppedImageSrc } from '@/sanity/lib/image'
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -29,7 +30,11 @@ export default async function RootLayout({
     return notFound()
   }
 
+  const { eventName, description, logo, ogimage } = generalConfig
+
   const style = (await generateStyleObject()) as CSSProperties
+  const favicon = getCroppedImageSrc(logo?.favicon!)
+  const ogImage = getCroppedImageSrc(ogimage)
 
   return (
     <html
@@ -39,13 +44,30 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <title>{generalConfig.eventName ?? ''}</title>
-        <link rel="icon" type="image/x-icon" href={generalConfig.logo ?? ''} />
-        <meta name="description" content={generalConfig.description ?? ''} />
-        <meta property="og:title" content={generalConfig.eventName ?? ''} />
-        <meta name="og:description" content={generalConfig.description ?? ''} />
+        <title>{eventName ?? ''}</title>
+        <link
+          rel="icon"
+          href={favicon ?? ''}
+          type="image/x-icon"
+          sizes="32x32"
+        />
+        <link
+          rel="icon"
+          href={favicon ?? ''}
+          type="image/x-icon"
+          sizes="16x16"
+        />
+        <link
+          rel="apple-touch-icon"
+          href={favicon ?? ''}
+          type="image/x-icon"
+          sizes="180x180"
+        />
+        <meta name="description" content={description ?? ''} />
+        <meta property="og:title" content={eventName ?? ''} />
+        <meta name="og:description" content={description ?? ''} />
         <meta property="og:type" content="website" />
-        <meta name="og:image" content={generalConfig.ogimage ?? ''} />
+        <meta name="og:image" content={ogImage ?? ''} />
         <meta name="og:url" content={process.env.NEXT_PUBLIC_BASE_URL!} />
       </head>
       <body

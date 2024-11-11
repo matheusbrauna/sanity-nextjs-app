@@ -6,33 +6,23 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { Icons } from '../icons'
 import { ThemeToggle } from '../theme-toggle'
-import { Button } from '../ui/button'
-import MenuLinkItem from '../ui/menu-link-item'
-import LinkList from '../ui/menu-link-list'
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuList,
-} from '../ui/navigation-menu'
-import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet'
+import { Button } from './button'
+import MenuLinkItem from './menu-link-item'
+import LinkList from './menu-link-list'
+import { NavigationMenu, NavigationMenuList } from './navigation-menu'
+import { Sheet, SheetContent, SheetTrigger } from './sheet'
+import type { IHeader } from '@/types/headerType'
+import { useTheme } from 'next-themes'
+import { getCroppedImageSrc } from '@/sanity/lib/image'
 
-type Props = {
-  logo: string
-  eventName: string
-  headerMenu: {
-    title: string | null
-    items: Array<{
-      _key: string
-      _type: 'link'
-      label?: string
-      type?: 'external' | 'internal'
-      external?: string
-      params?: string
-    }> | null
-  }
-}
+export function MobileNav({ logo, eventName, headerMenu }: IHeader) {
+  const { theme } = useTheme()
 
-export function MobileNav({ logo, eventName, headerMenu }: Props) {
+  const currentLogo =
+    theme === 'dark' ? (logo && logo?.dark!) || logo.default : logo.default
+
+  const logoImage = getCroppedImageSrc(currentLogo)
+
   const isDesktop = useMediaQuery('(min-width: 1024px)')
   const [open, setOpen] = useState(false)
 
@@ -60,7 +50,7 @@ export function MobileNav({ logo, eventName, headerMenu }: Props) {
             >
               <Image
                 className="max-w-prose max-h-10"
-                src={logo}
+                src={logoImage}
                 alt={eventName!}
                 width={96}
                 height={96}
@@ -69,21 +59,23 @@ export function MobileNav({ logo, eventName, headerMenu }: Props) {
             </Link>
           </div>
           <NavigationMenu>
-            <NavigationMenuList className="flex-col w-full">
-              {headerMenu?.items?.map(item =>
-                item._type === 'link' ? (
-                  <MenuLinkItem link={item} key={item._key} />
-                ) : (
-                  <LinkList
-                    key={item._key}
-                    link={{
-                      label: item.label ?? '',
-                    }}
-                    links={headerMenu.items ?? []}
-                  />
-                )
-              )}
-            </NavigationMenuList>
+            <div className="w-full">
+              <NavigationMenuList className="flex-col w-full">
+                {headerMenu?.items?.map(item =>
+                  item._type === 'link' ? (
+                    <MenuLinkItem link={item} key={item._key} />
+                  ) : (
+                    <LinkList
+                      key={item._key}
+                      link={{
+                        label: item.label ?? '',
+                      }}
+                      links={headerMenu.items ?? []}
+                    />
+                  )
+                )}
+              </NavigationMenuList>
+            </div>
           </NavigationMenu>
         </SheetContent>
       </Sheet>

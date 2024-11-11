@@ -1,20 +1,10 @@
-import { sanityFetch } from '@/sanity/lib/client'
-import { GENERAL_CONFIG_QUERY } from '@/sanity/lib/queries'
-import { notFound } from 'next/navigation'
 import LinkList from './menu-link-list'
 import { NavigationMenu, NavigationMenuList } from './navigation-menu'
+import type { IFooter } from '@/types/footerType'
 
-export default async function NavigationFooter() {
-  const footer = await sanityFetch({
-    query: GENERAL_CONFIG_QUERY,
-  })
-
-  if (!footer) {
-    return notFound()
-  }
-
-  const { footerMenu } = footer
-
+export default function NavigationFooter({
+  footerMenu,
+}: Pick<IFooter, 'footerMenu'>) {
   return (
     <NavigationMenu>
       <NavigationMenuList className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:mt-0 lg:justify-end lg:gap-12">

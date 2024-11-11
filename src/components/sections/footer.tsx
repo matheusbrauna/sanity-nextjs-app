@@ -1,23 +1,26 @@
-import { cn } from '@/lib/utils'
-import { sanityFetch } from '@/sanity/lib/client'
-import { GENERAL_CONFIG_QUERY } from '@/sanity/lib/queries'
+'use client'
 import { PortableText } from 'next-sanity'
 import Image from 'next/image'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
 import { BackToTop } from '../back-to-top'
 import NavigationFooter from '../ui/navigation-footer'
+import type { IFooter } from '@/types/footerType'
+import { useTheme } from 'next-themes'
+import { getCroppedImageSrc } from '@/sanity/lib/image'
 
-export async function Footer() {
-  const data = await sanityFetch({
-    query: GENERAL_CONFIG_QUERY,
-  })
+export function Footer({
+  eventName,
+  logo,
+  description,
+  copyright,
+  footerMenu,
+}: IFooter) {
+  const { theme } = useTheme()
 
-  if (!data) {
-    return notFound()
-  }
+  const currentLogo =
+    theme === 'dark' ? (logo && logo?.dark!) || logo.default : logo.default
 
-  const { eventName, logo, description, copyright } = data
+  const logoImage = getCroppedImageSrc(currentLogo)
 
   return (
     <footer>
@@ -32,8 +35,8 @@ export async function Footer() {
               <Link href="#" className="inline-block" prefetch={false}>
                 {logo ? (
                   <Image
-                    className="max-w-prose max-h-16"
-                    src={logo}
+                    className="max-w-prose max-h-14"
+                    src={logoImage}
                     alt={eventName!}
                     width={96}
                     height={96}
@@ -53,7 +56,7 @@ export async function Footer() {
           </div>
 
           <div className="flex justify-center">
-            <NavigationFooter />
+            <NavigationFooter footerMenu={footerMenu} />
           </div>
         </div>
 

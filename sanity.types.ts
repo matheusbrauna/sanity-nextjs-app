@@ -436,10 +436,14 @@ export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: GENERAL_CONFIG_QUERY
-// Query: *[_type == "site"][0]{  eventName,   'logo':logo.asset->url,  description,  primaryColor,  roundingOfComponents,  headerMenu->{      title,  items[]{    ...  }  },  footerMenu->{      title,  items[]{    ...  }  },  copyright,  'ogimage':ogimage.asset->url}
+// Query: *[_type == "site"][0]{  eventName,   logo{    favicon,    default,    dark,  },  description,  primaryColor,  roundingOfComponents,  headerMenu->{      title,  items[]{    ...  }  },  footerMenu->{      title,  items[]{    ...  }  },  copyright,  'ogimage':ogimage}
 export type GENERAL_CONFIG_QUERYResult = {
   eventName: string | null;
-  logo: string | null;
+  logo: {
+    favicon: SanityImageQueryResult | null;
+    default: SanityImageQueryResult | null;
+    dark: SanityImageQueryResult | null;
+  } | null;
   description: string | null;
   primaryColor: Color | null;
   roundingOfComponents: "pill" | "rounded" | "square" | null;
@@ -483,7 +487,7 @@ export type GENERAL_CONFIG_QUERYResult = {
     _type: "block";
     _key: string;
   }> | null;
-  ogimage: string | null;
+  ogimage: SanityImageQueryResult | null;
 } | null;
 // Variable: ACCORDION_QUERY
 // Query: *[_type == "page-builder"][0]{  'data':pageBuilder[_type == "accordion" && _key == $key][0]{   'id': _key,   idSection,  content,    accordionList[]{      heading,      body,      'id': _key    }  },}
@@ -517,7 +521,7 @@ export type ACCORDION_QUERYResult = {
   } | null;
 } | null;
 // Variable: HERO_QUERY
-// Query: *[_type == "page-builder"][0]{  'data':pageBuilder[_type == "hero"  && _key == $key][0]{    'id': _key,    idSection,   content,    'ctaDescription': cta.description,    'ctaLink': cta.link,    'image':image.asset->url,    'imageAlt':image.alt,    'imageOnRight':image.onRight,    'imageOnBottom':image.onBottom,  },}
+// Query: *[_type == "page-builder"][0]{  'data':pageBuilder[_type == "hero"  && _key == $key][0]{    'id': _key,    idSection,   content,    'ctaDescription': cta.description,    'ctaLink': cta.link,    'image':image,    'imageAlt':image.alt,    'imageOnRight':image.onRight,    'imageOnBottom':image.onBottom,  },}
 export type HERO_QUERYResult = {
   data: {
     id: string;
@@ -542,14 +546,14 @@ export type HERO_QUERYResult = {
     }> | null;
     ctaDescription: string | null;
     ctaLink: string | null;
-    image: string | null;
+    image:SanityImageQueryResult| null;
     imageAlt: string | null;
     imageOnRight: boolean | null;
     imageOnBottom: boolean | null;
   } | null;
 } | null;
 // Variable: CARD_QUERY
-// Query: *[_type == "page-builder"][0]{  'data':pageBuilder[_type == "card" && _key == $key][0]{   'id': _key,   idSection,  content,     cardList[]{       'id': _key,        title,        description,        'ctaDescription': cta.description,        'ctaLink': cta.link,        'image':image.asset->url,        'imageAlt':image.alt     }  },}
+// Query: *[_type == "page-builder"][0]{  'data':pageBuilder[_type == "card" && _key == $key][0]{   'id': _key,   idSection,  content,     cardList[]{       'id': _key,        title,        description,        'ctaDescription': cta.description,        'ctaLink': cta.link,        'image':image,        'imageAlt':image.alt     }  },}
 export type CARD_QUERYResult = {
   data: {
     id: string;
@@ -578,13 +582,13 @@ export type CARD_QUERYResult = {
       description: string | null;
       ctaDescription: string | null;
       ctaLink: string | null;
-      image: string | null;
+      image: SanityImageQueryResult | null;
       imageAlt: string | null;
     }> | null;
   } | null;
 } | null;
 // Variable: OFFSET_QUERY
-// Query: *[_type == "page-builder"][0]{  'data':pageBuilder[_type == "offset-section" && _key == $key][0]{    'id': _key,    idSection,    content,    'ctaDescription': cta.description,    'ctaLink': cta.link,    'image':image.asset->url,    'imageAlt':image.alt,    'imageOnRight':image.onRight,    'imageOnBottom':image.onBottom,  },}
+// Query: *[_type == "page-builder"][0]{  'data':pageBuilder[_type == "offset-section" && _key == $key][0]{    'id': _key,    idSection,    content,    'ctaDescription': cta.description,    'ctaLink': cta.link,    'image':image,    'imageAlt':image.alt,    'imageOnRight':image.onRight,    'imageOnBottom':image.onBottom,  },}
 export type OFFSET_QUERYResult = {
   data: {
     id: string;
@@ -609,7 +613,7 @@ export type OFFSET_QUERYResult = {
     }> | null;
     ctaDescription: string | null;
     ctaLink: string | null;
-    image: string | null;
+    image: SanityImageQueryResult | null;
     imageAlt: string | null;
     imageOnRight: boolean | null;
     imageOnBottom: boolean | null;
@@ -634,15 +638,16 @@ export type PAGEBUILDER_QUERYResult = {
   }> | null;
 } | null;
 
+import { SanityImageQueryResult } from "@/types/sanityImageQueryResult";
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"site\"][0]{\n  eventName, \n  'logo':logo.asset->url,\n  description,\n  primaryColor,\n  roundingOfComponents,\n  headerMenu->{\n    \n  title,\n  items[]{\n    ...\n  }\n\n  },\n  footerMenu->{\n    \n  title,\n  items[]{\n    ...\n  }\n\n  },\n  copyright,\n  'ogimage':ogimage.asset->url\n}": GENERAL_CONFIG_QUERYResult;
+    "*[_type == \"site\"][0]{\n  eventName, \n  logo{\n    favicon,\n    default,\n    dark,\n  },\n  description,\n  primaryColor,\n  roundingOfComponents,\n  headerMenu->{\n    \n  title,\n  items[]{\n    ...\n  }\n\n  },\n  footerMenu->{\n    \n  title,\n  items[]{\n    ...\n  }\n\n  },\n  copyright,\n  'ogimage':ogimage\n}": GENERAL_CONFIG_QUERYResult;
     "*[_type == \"page-builder\"][0]{\n  'data':pageBuilder[_type == \"accordion\" && _key == $key][0]{\n   'id': _key,\n   idSection,\n  content,\n    accordionList[]{\n      heading,\n      body,\n      'id': _key\n    }\n  },\n}": ACCORDION_QUERYResult;
-    "*[_type == \"page-builder\"][0]{\n  'data':pageBuilder[_type == \"hero\"  && _key == $key][0]{\n    'id': _key,\n    idSection,\n   content,\n    'ctaDescription': cta.description,\n    'ctaLink': cta.link,\n    'image':image.asset->url,\n    'imageAlt':image.alt,\n    'imageOnRight':image.onRight,\n    'imageOnBottom':image.onBottom,\n  },\n}": HERO_QUERYResult;
-    "*[_type == \"page-builder\"][0]{\n  'data':pageBuilder[_type == \"card\" && _key == $key][0]{\n   'id': _key,\n   idSection,\n  content,\n     cardList[]{\n       'id': _key,\n        title,\n        description,\n        'ctaDescription': cta.description,\n        'ctaLink': cta.link,\n        'image':image.asset->url,\n        'imageAlt':image.alt\n     }\n  },\n}": CARD_QUERYResult;
-    "*[_type == \"page-builder\"][0]{\n  'data':pageBuilder[_type == \"offset-section\" && _key == $key][0]{\n    'id': _key,\n    idSection,\n    content,\n    'ctaDescription': cta.description,\n    'ctaLink': cta.link,\n    'image':image.asset->url,\n    'imageAlt':image.alt,\n    'imageOnRight':image.onRight,\n    'imageOnBottom':image.onBottom,\n  },\n}": OFFSET_QUERYResult;
+    "*[_type == \"page-builder\"][0]{\n  'data':pageBuilder[_type == \"hero\"  && _key == $key][0]{\n    'id': _key,\n    idSection,\n   content,\n    'ctaDescription': cta.description,\n    'ctaLink': cta.link,\n    'image':image,\n    'imageAlt':image.alt,\n    'imageOnRight':image.onRight,\n    'imageOnBottom':image.onBottom,\n  },\n}": HERO_QUERYResult;
+    "*[_type == \"page-builder\"][0]{\n  'data':pageBuilder[_type == \"card\" && _key == $key][0]{\n   'id': _key,\n   idSection,\n  content,\n     cardList[]{\n       'id': _key,\n        title,\n        description,\n        'ctaDescription': cta.description,\n        'ctaLink': cta.link,\n        'image':image,\n        'imageAlt':image.alt\n     }\n  },\n}": CARD_QUERYResult;
+    "*[_type == \"page-builder\"][0]{\n  'data':pageBuilder[_type == \"offset-section\" && _key == $key][0]{\n    'id': _key,\n    idSection,\n    content,\n    'ctaDescription': cta.description,\n    'ctaLink': cta.link,\n    'image':image,\n    'imageAlt':image.alt,\n    'imageOnRight':image.onRight,\n    'imageOnBottom':image.onBottom,\n  },\n}": OFFSET_QUERYResult;
     "*[_type == \"page-builder\"][0]{\n  title,\n    'data':pageBuilder{\n    'id': _key,\n    'componentName':_type\n    }[]\n}": PAGEBUILDER_QUERYResult;
   }
 }

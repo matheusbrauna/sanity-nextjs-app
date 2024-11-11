@@ -1,20 +1,18 @@
-import { cn } from '@/lib/utils'
-import { sanityFetch } from '@/sanity/lib/client'
-import { GENERAL_CONFIG_QUERY } from '@/sanity/lib/queries'
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
 import NavigationHeader from '../ui/navigation-header'
-export default async function Header() {
-  const data = await sanityFetch({
-    query: GENERAL_CONFIG_QUERY,
-  })
+import type { IHeader } from '@/types/headerType'
+import { useTheme } from 'next-themes'
+import { getCroppedImageSrc } from '@/sanity/lib/image'
 
-  if (!data) {
-    return notFound()
-  }
+export function Header({ logo, eventName, headerMenu }: IHeader) {
+  const { theme } = useTheme()
 
-  const { eventName, logo } = data
+  const currentLogo =
+    theme === 'dark' ? (logo && logo?.dark!) || logo.default : logo.default
+
+  const logoImage = getCroppedImageSrc(currentLogo)
 
   return (
     <header className="bg-background w-full hidden lg:flex justify-center shadow-sm">
@@ -23,7 +21,7 @@ export default async function Header() {
           {logo ? (
             <Image
               className="max-w-prose max-h-14"
-              src={logo}
+              src={logoImage}
               alt={eventName!}
               width={96}
               height={96}
@@ -36,7 +34,7 @@ export default async function Header() {
           <span className="sr-only">{eventName}</span>
         </Link>
 
-        <NavigationHeader />
+        <NavigationHeader headerMenu={headerMenu} />
       </div>
     </header>
   )
