@@ -3,7 +3,7 @@
 import { useMediaQuery } from '@/hooks/use-media-query'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Icons } from '../icons'
 import { ThemeToggle } from '../theme-toggle'
 import { Button } from './button'
@@ -16,12 +16,18 @@ import { useTheme } from 'next-themes'
 import { getCroppedImageSrc } from '@/sanity/lib/image'
 
 export function MobileNav({ logo, eventName, headerMenu }: IHeader) {
+  const [logoImage, setLogoImage] = useState('')
   const { theme } = useTheme()
 
-  const currentLogo =
-    theme === 'dark' ? (logo && logo?.dark!) || logo.default : logo.default
+  useEffect(() => {
+    if (logo && logo?.default != null) {
+      const currentLogo =
+        theme === 'dark' ? (logo && logo?.dark!) || logo.default : logo.default
 
-  const logoImage = getCroppedImageSrc(currentLogo)
+      const logoImage = getCroppedImageSrc(currentLogo)
+      setLogoImage(logoImage)
+    }
+  }, [theme, logo])
 
   const isDesktop = useMediaQuery('(min-width: 1024px)')
   const [open, setOpen] = useState(false)
@@ -48,14 +54,20 @@ export function MobileNav({ logo, eventName, headerMenu }: IHeader) {
               className="flex items-center"
               onClick={() => setOpen(false)}
             >
-              <Image
-                className="max-w-prose max-h-10"
-                src={logoImage}
-                alt={eventName!}
-                width={96}
-                height={96}
-              />
-              <span className="sr-only">Home</span>
+              {logo && logo?.default != null ? (
+                <Image
+                  className="max-w-prose max-h-14"
+                  src={logoImage}
+                  alt={eventName!}
+                  width={96}
+                  height={96}
+                />
+              ) : (
+                <span className="text-gradient text-lg font-medium">
+                  {eventName}
+                </span>
+              )}
+              <span className="sr-only">{eventName}</span>
             </Link>
           </div>
           <NavigationMenu>

@@ -7,6 +7,7 @@ import NavigationFooter from '../ui/navigation-footer'
 import type { IFooter } from '@/types/footerType'
 import { useTheme } from 'next-themes'
 import { getCroppedImageSrc } from '@/sanity/lib/image'
+import { useEffect, useState } from 'react'
 
 export function Footer({
   eventName,
@@ -15,12 +16,18 @@ export function Footer({
   copyright,
   footerMenu,
 }: IFooter) {
+  const [logoImage, setLogoImage] = useState('')
   const { theme } = useTheme()
 
-  const currentLogo =
-    theme === 'dark' ? (logo && logo?.dark!) || logo.default : logo.default
+  useEffect(() => {
+    if (logo && logo?.default != null) {
+      const currentLogo =
+        theme === 'dark' ? (logo && logo?.dark!) || logo.default : logo.default
 
-  const logoImage = getCroppedImageSrc(currentLogo)
+      const logoImage = getCroppedImageSrc(currentLogo)
+      setLogoImage(logoImage)
+    }
+  }, [theme, logo])
 
   return (
     <footer>
@@ -33,7 +40,7 @@ export function Footer({
           <div>
             <div className="flex justify-center text-primary lg:justify-start">
               <Link href="#" className="inline-block" prefetch={false}>
-                {logo ? (
+                {logo && logo?.default != null ? (
                   <Image
                     className="max-w-prose max-h-14"
                     src={logoImage}
