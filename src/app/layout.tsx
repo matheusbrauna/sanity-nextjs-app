@@ -3,13 +3,47 @@ import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import { generateStyleObject } from '@/lib/generate-style-object'
 import { cn } from '@/lib/utils'
-import { sanityFetch } from '@/sanity/lib/client'
-import { GENERAL_CONFIG_QUERY } from '@/sanity/lib/queries'
 import { VisualEditing } from 'next-sanity'
 import { draftMode } from 'next/headers'
-import { notFound } from 'next/navigation'
 import type { CSSProperties } from 'react'
+import { sanityFetch } from '@/sanity/lib/client'
+import { GENERAL_CONFIG_QUERY } from '@/sanity/lib/queries'
 import { getCroppedImageSrc } from '@/sanity/lib/image'
+
+export async function generateMetadata() {
+  const generalConfig = await sanityFetch({
+    query: GENERAL_CONFIG_QUERY,
+  })
+
+  const { eventName, description, logo, ogimage } = generalConfig
+
+  const favicon = logo ? getCroppedImageSrc(logo?.favicon) : ''
+  const ogImage = ogimage ? getCroppedImageSrc(ogimage) : ''
+
+  return {
+    title: eventName,
+    icons: favicon,
+    description: description,
+    keywords: ['Next.js'],
+    openGraph: {
+      type: 'website',
+      url: process.env.NEXT_PUBLIC_BASE_URL!,
+      title: eventName,
+      siteName: eventName,
+      description,
+      images: [{ url: ogImage, width: 1200, height: 630 }],
+      locale: 'pt_BR',
+    },
+    authors: [
+      {
+        name: 'CRIA<DIGI>',
+        url: 'https://criadigi.com.br',
+      },
+    ],
+    creator: 'CRIA<DIGI>',
+    publisher: 'CRIA<DIGI>',
+  }
+}
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -22,19 +56,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const generalConfig = await sanityFetch({
-    query: GENERAL_CONFIG_QUERY,
-  })
-
-  if (!generalConfig) {
-    return notFound()
-  }
-
-  const { eventName, description, logo, ogimage } = generalConfig
-
   const style = (await generateStyleObject()) as CSSProperties
-  const favicon = getCroppedImageSrc(logo?.favicon!)
-  const ogImage = getCroppedImageSrc(ogimage)
 
   return (
     <html
@@ -43,33 +65,6 @@ export default async function RootLayout({
       className="scroll-smooth"
       suppressHydrationWarning
     >
-      <head>
-        <title>{eventName ?? ''}</title>
-        <link
-          rel="icon"
-          href={favicon ?? ''}
-          type="image/x-icon"
-          sizes="32x32"
-        />
-        <link
-          rel="icon"
-          href={favicon ?? ''}
-          type="image/x-icon"
-          sizes="16x16"
-        />
-        <link
-          rel="apple-touch-icon"
-          href={favicon ?? ''}
-          type="image/x-icon"
-          sizes="180x180"
-        />
-        <meta name="description" content={description ?? ''} />
-        <meta property="og:title" content={eventName ?? ''} />
-        <meta name="og:description" content={description ?? ''} />
-        <meta property="og:type" content="website" />
-        <meta name="og:image" content={ogImage ?? ''} />
-        <meta name="og:url" content={process.env.NEXT_PUBLIC_BASE_URL!} />
-      </head>
       <body
         className={cn(
           'min-h-screen bg-background font-sans antialiased',

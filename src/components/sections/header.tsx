@@ -5,20 +5,27 @@ import NavigationHeader from '../ui/navigation-header'
 import type { IHeader } from '@/types/headerType'
 import { useTheme } from 'next-themes'
 import { getCroppedImageSrc } from '@/sanity/lib/image'
+import { useEffect, useState } from 'react'
 
 export function Header({ logo, eventName, headerMenu }: IHeader) {
+  const [logoImage, setLogoImage] = useState('')
   const { theme } = useTheme()
 
-  const currentLogo =
-    theme === 'dark' ? (logo && logo?.dark!) || logo.default : logo.default
+  useEffect(() => {
+    if (logo && logo?.default != null) {
+      const currentLogo =
+        theme === 'dark' ? (logo && logo?.dark!) || logo.default : logo.default
 
-  const logoImage = getCroppedImageSrc(currentLogo)
+      const logoImage = getCroppedImageSrc(currentLogo)
+      setLogoImage(logoImage)
+    }
+  }, [theme, logo])
 
   return (
     <header className="bg-background w-full hidden lg:flex justify-center shadow-sm">
       <div className="flex h-16 items-center justify-between container">
         <Link href="#" className="inline-block" prefetch={false}>
-          {logo ? (
+          {logo && logo?.default != null ? (
             <Image
               className="max-w-prose max-h-14"
               src={logoImage}
